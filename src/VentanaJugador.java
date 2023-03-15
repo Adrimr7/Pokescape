@@ -498,11 +498,8 @@ public class VentanaJugador extends JFrame {
 			
 		pokemon.add(estadisticas);
 		
-		
-		return pokemon;
-		
+		return pokemon;	
 	}
-	
 	
 	private JProgressBar barraEstatt(int stat, Color color) 
 	{

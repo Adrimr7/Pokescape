@@ -18,6 +18,7 @@ import java.awt.FlowLayout;
 import javax.swing.Action;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -26,10 +27,10 @@ public class VentanaInicio extends JFrame {
 	private JPanel contentPane;
 	private JPanel Imagen;
 	private JPanel Botones;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JButton btnNewButton;
+	private static JTextField textFieldBots;
+	private static JTextField textFieldJugadores;
+	private static JTextField textFieldPokemons;
+	private static JButton btnNewButton;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -46,26 +47,6 @@ public class VentanaInicio extends JFrame {
 	private JLabel lblNewLabel_11;
 	private JLabel lblNewLabel_12;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaInicio frame = new VentanaInicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaInicio() {
 		setTitle("Pokescape");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,48 +73,47 @@ public class VentanaInicio extends JFrame {
 		if (Botones == null) {
 			Botones = new JPanel();
 			Botones.setLayout(new BoxLayout(Botones, BoxLayout.Y_AXIS));
-			Botones.add(getLblNewLabel_1());
-			Botones.add(getTextField());
-			Botones.add(getLblNewLabel_2());
-			Botones.add(getTextField_1());
-			Botones.add(getLblNewLabel_3());
-			Botones.add(getTextField_2());
+			Botones.add(getLblLabelBots());
+			Botones.add(getTextBots());
+			Botones.add(getLblLabelJugadores());
+			Botones.add(getTextJugadores());
+			Botones.add(getLblLabelPokemons());
+			Botones.add(getTextPokemons());
 			Botones.add(getBtnNewButton());
 			Botones.add(getLblNewLabel());
 		}
 		return Botones;
 	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setColumns(10);
+	private JTextField getTextBots() {
+		if (textFieldBots == null) {
+			textFieldBots = new JTextField();
+			textFieldBots.setColumns(10);
+			textFieldBots.setText("2");
 		}
-		return textField;
+		return textFieldBots;
 	}
-	private JTextField getTextField_1() {
-		if (textField_1 == null) {
-			textField_1 = new JTextField();
-			textField_1.setColumns(10);
+	private JTextField getTextJugadores() {
+		if (textFieldJugadores == null) {
+			textFieldJugadores = new JTextField();
+			textFieldJugadores.setColumns(10);
+			textFieldJugadores.setText("1");
 		}
-		return textField_1;
+		return textFieldJugadores;
 	}
-	private JTextField getTextField_2() {
-		if (textField_2 == null) {
-			textField_2 = new JTextField();
-			textField_2.setColumns(10);
+	private JTextField getTextPokemons() {
+		if (textFieldPokemons == null) {
+			textFieldPokemons = new JTextField();
+			textFieldPokemons.setColumns(10);
+			textFieldPokemons.setText("3");
 		}
-		return textField_2;
+		return textFieldPokemons;
 	}
 	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
+		if (btnNewButton == null) 
+		{
 			btnNewButton = new JButton("Jugar");
-			btnNewButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					ControladorInicio.hola();
-				}
-			});
 		}
+		btnNewButton.addActionListener(ControladorInicio.getControladorInicio());
 		return btnNewButton;
 	}
 	private JLabel getLblNewLabel() {
@@ -147,19 +127,19 @@ public class VentanaInicio extends JFrame {
 		}
 		return lblNewLabel;
 	}
-	private JLabel getLblNewLabel_1() {
+	private JLabel getLblLabelBots() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("Nº Bots");
 		}
 		return lblNewLabel_1;
 	}
-	private JLabel getLblNewLabel_2() {
+	private JLabel getLblLabelJugadores() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("Nº Jugadores");
 		}
 		return lblNewLabel_2;
 	}
-	private JLabel getLblNewLabel_3() {
+	private JLabel getLblLabelPokemons() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("Nº Pokemon");
 		}
@@ -289,24 +269,56 @@ public class VentanaInicio extends JFrame {
 	}
 
 
-	private class ControladorInicio
-	{
+		static private class ControladorInicio implements ActionListener 
+		{
+			private static ControladorInicio miControladorInicio;
 		
-		public static void hola() {
-			System.out.println("hola");
+			private ControladorInicio() {}
+		
+			public static ControladorInicio getControladorInicio()
+			{
+				if(miControladorInicio == null) 
+				{
+					miControladorInicio = new ControladorInicio();
+				}
+				return miControladorInicio;
+			}
+			
 
-			VentanaJugador jug1 = new VentanaJugador("jug1");
-			jug1.setVisible(true);
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
 			
-			VentanaJugador bot1 = new VentanaJugador("bot1");
-			bot1.setVisible(true);
-			
-			VentanaJugador bot2 = new VentanaJugador("bot2");
-			bot2.setVisible(true);
-			
+				if (e.getSource().equals(btnNewButton))
+				{
+					//modelo.comenzar();
+					String strb = textFieldBots.getText();
+					String strj = textFieldJugadores.getText();
+					String strp = textFieldPokemons.getText();
+					
+					int numb;
+					int numj;
+					int nump;
+					
+					try 
+					{
+						numb = Integer.parseInt(strb);
+						numj = Integer.parseInt(strj);
+						nump = Integer.parseInt(strp);
+					
+						System.out.println(numb + " " + numj + " " + nump);
+						// TODO ******************************
+						if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
+						else
+						{
+							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
+						}
+					}
+					catch(Exception ex) 
+					{
+						System.out.println("Valores no validos");
+					}	
+				}	
+			}
 		}
-		
-	}
-	
-	
 	}
