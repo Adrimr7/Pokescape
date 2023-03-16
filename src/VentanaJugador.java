@@ -69,7 +69,11 @@ public class VentanaJugador extends JFrame {
 	public VentanaJugador(String nomVentana) {
 		setTitle(nomVentana);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 240);
+		
+		//Cambiando esta variable cambia el tamaño de la ventana para cuadrar los pokemon
+		int numPokemon = 4;
+		//-------------------------------------------------------------------------------
+		setBounds(100, 100, 155*numPokemon + 155, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -101,7 +105,8 @@ public class VentanaJugador extends JFrame {
 			//panel_1.add(getPanelPokemon());
 			pokemons.add(getNuevoPokemon(151, "Mew", "Psíquico", 200, 50));
 			pokemons.add(getNuevoPokemon(348, "Makuhita", "Lucha", 250, 100));
-			pokemons.add(getNuevoPokemon(428, "Amongus", "Lucha", 100, 200));
+			pokemons.add(getNuevoPokemon(591, "Amongus", "Hierba", 100, 200));
+			pokemons.add(getNuevoPokemon(222, "Corsola", "Agua", 10, 5));
 
 			
 		}
@@ -424,6 +429,8 @@ public class VentanaJugador extends JFrame {
 		
 		// Panel general pokemon
 		JPanel pokemon = new JPanel();
+		pokemon.setPreferredSize(new Dimension(155, 240));
+		pokemon.setMaximumSize(new Dimension(155, 240));
 		pokemon.setLayout(new BoxLayout(pokemon, BoxLayout.Y_AXIS));
 		
 			// Panel cabezera : Nombre / Tipo1 / Tipo2 //////////////////////////////////////////////////
@@ -462,6 +469,8 @@ public class VentanaJugador extends JFrame {
 			//barraHp.setBackground(new Color(128, 255, 0));
 			barraHp.setForeground(new Color(128, 255, 0));
 			barraHp.setValue(100);
+			barraHp.setPreferredSize(new Dimension(150, 14));
+			barraHp.setMaximumSize(new Dimension(150, 14));
 			
 		pokemon.add(barraHp);
 				
@@ -506,6 +515,8 @@ public class VentanaJugador extends JFrame {
 		JProgressBar barra = new JProgressBar();
 		barra.setValue((int) (stat*100/255));
 		barra.setForeground(color);
+		barra.setPreferredSize(new Dimension(120, 14));
+		barra.setMaximumSize(new Dimension(120, 14));
 		
 		return barra;
 	}

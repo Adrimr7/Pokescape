@@ -11,7 +11,8 @@ public class Pokescape
 
 	}
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() 
+		{
 			public void run()
 			{
 				crearPantallas();
@@ -21,9 +22,9 @@ public class Pokescape
     private static void crearPantallas() 
     {
     	try 
-    	{
-    		frameInicio = new VentanaInicio();
-    		frameInicio.setVisible(true);
+    	{	
+    		frameInicio = new VentanaInicio();	//Generamos la pantalla del titulo
+    		frameInicio.setVisible(true);		//Y la hacemos visible
     		System.out.println("VentanaInicio");
 		} 
     	catch (Exception e) 
@@ -34,22 +35,25 @@ public class Pokescape
     }
     public void iniciarCombate(int numBots, int numJugs, int numPokes)
     {
-    	//TODO ****************   ARRAYLIST ----> ARRAY !!!!!!!!!!!!!!!!!!!!!!
-    	ArrayList<VentanaJugador> listaVentanaJugador = new ArrayList<VentanaJugador>();
+
+    	//TODO ********************* Tiene pinta de que primero tenemos que tener los pokemon hechos para general las pantallas con los pokemon ya puestos *****
+    	//Creamos una lista para almacenar todas las ventanas de los jugadores
+    	VentanaJugador[] listaVentanaJugador = new VentanaJugador[numJugs];
     	VentanaJugador jug;
     	for (int i = 0; i<numJugs; i++)
     	{
     		jug = new VentanaJugador("Jugador "+ (i+1));
-    		listaVentanaJugador.add(jug);
+    		listaVentanaJugador[i] = jug;
     		jug.setVisible(true);
     	}
     	
-    	ArrayList<VentanaJugador> listaVentanaBots = new ArrayList<VentanaJugador>();
+    	//Y otra para los bots
+    	VentanaJugador[] listaVentanaBots = new VentanaJugador[numBots];
     	VentanaJugador bot;
     	for (int i = 0; i<numBots; i++)
     	{
     		bot = new VentanaJugador("Bot "+ (i+1));
-    		listaVentanaJugador.add(bot);
+    		listaVentanaBots[i] = bot;
     		bot.setVisible(true);
     	}
     	
