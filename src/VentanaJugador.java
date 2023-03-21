@@ -107,8 +107,6 @@ public class VentanaJugador extends JFrame {
 			pokemons.add(getNuevoPokemon(348, "Makuhita", "Lucha", 250, 100));
 			pokemons.add(getNuevoPokemon(591, "Amongus", "Hierba", 100, 200));
 			pokemons.add(getNuevoPokemon(222, "Corsola", "Agua", 10, 5));
-
-			
 		}
 		return pokemons;
 	}

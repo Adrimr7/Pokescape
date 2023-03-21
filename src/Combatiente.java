@@ -4,10 +4,14 @@ public abstract class Combatiente
 	private ListaPokemon listaPokemon;
 	private String nombre;
 	private int id;
-	public Combatiente(ListaPokemon pListaPokemon, String pNombre, int pId)
+	public Combatiente(String pNombre, int pId)
 	{
-		listaPokemon = pListaPokemon;
 		nombre = pNombre;
 		id = pId;
+	}
+	public void inicializate (int pNumComb, int pId, int pNumPoke)
+	{
+		listaPokemon = new ListaPokemon(pNumPoke);
+		listaPokemon.inicializate();
 	}
 }

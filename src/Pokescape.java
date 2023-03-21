@@ -38,25 +38,7 @@ public class Pokescape
 
     	//TODO ********************* Tiene pinta de que primero tenemos que tener los pokemon hechos para general las pantallas con los pokemon ya puestos *****
     	//Creamos una lista para almacenar todas las ventanas de los jugadores
-    	VentanaJugador[] listaVentanaJugador = new VentanaJugador[numJugs];
-    	VentanaJugador jug;
-    	for (int i = 0; i<numJugs; i++)
-    	{
-    		jug = new VentanaJugador("Jugador "+ (i+1));
-    		listaVentanaJugador[i] = jug;
-    		jug.setVisible(true);
-    	}
-    	
-    	//Y otra para los bots
-    	VentanaJugador[] listaVentanaBots = new VentanaJugador[numBots];
-    	VentanaJugador bot;
-    	for (int i = 0; i<numBots; i++)
-    	{
-    		bot = new VentanaJugador("Bot "+ (i+1));
-    		listaVentanaBots[i] = bot;
-    		bot.setVisible(true);
-    	}
-		
+    	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
     }
 	// lista Jugadores, patron observer, mvc, jugador se encarga de generar los pokemon (factory)
     

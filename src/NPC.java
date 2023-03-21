@@ -1,7 +1,12 @@
 public class NPC extends Combatiente {
 
-	public NPC(ListaPokemon pListaPokemon, String pNombre, int pId) {
-		super(pListaPokemon, pNombre, pId);
+	public NPC(String pNombre, int pId) {
+		super(pNombre, pId);
+	}
+
+	public void inicializate(int i, int pId, int numPoke) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
