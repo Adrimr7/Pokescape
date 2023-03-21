@@ -56,13 +56,6 @@ public class Pokescape
     		listaVentanaBots[i] = bot;
     		bot.setVisible(true);
     	}
-    	
-    	ListaPokemon listaPokemon = new ListaPokemon();
-    	Pokemon poke;
-    	for (int i = 0; i<numPokes; i++)
-    	{
-    		// TODO LLAMAR A POKEFACTORY
-    	}
 		
     }
 	// lista Jugadores, patron observer, mvc, jugador se encarga de generar los pokemon (factory)

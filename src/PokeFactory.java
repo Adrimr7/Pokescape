@@ -11,24 +11,24 @@ public class PokeFactory
 		}
 		return miPokeFactory;
 	}
-	public Pokemon createPokemon (String tipo)
+	public Pokemon createPokemon (String tipo, String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones)
 	{
 		Pokemon unPokemon = null;
 		if (tipo.equals("Agua"))
 		{
-			unPokemon = new Agua(tipo, 0, 0, 0);
+			unPokemon = new Agua(pNombre, pVida, pAtaque, pDefensa, pNumEvoluciones);
 		}
 		else if (tipo.equals("Planta"))
 		{
-			unPokemon = new Planta(tipo, 0, 0, 0);
+			unPokemon = new Planta(pNombre, pVida, pAtaque, pDefensa, pNumEvoluciones);
 		}
 		else if (tipo.equals("Fuego"))
 		{
-			unPokemon = new Fuego(tipo, 0, 0, 0);
+			unPokemon = new Fuego(pNombre, pVida, pAtaque, pDefensa, pNumEvoluciones);
 		}
 		else if (tipo.equals("Electrico"))
 		{
-			unPokemon = new Electrico(tipo, 0, 0, 0);
+			unPokemon = new Electrico(pNombre, pVida, pAtaque, pDefensa, pNumEvoluciones);
 		}
 		return unPokemon;
 	}

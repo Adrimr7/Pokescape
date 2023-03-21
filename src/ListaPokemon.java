@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-
 public class ListaPokemon 
 {
-	private ArrayList<Pokemon> listaPokemon;
+	private Pokemon[] listaPokemon;
 	
-	public ListaPokemon() 
+	public ListaPokemon(int pTam) 
 	{
-		if (listaPokemon == null) {listaPokemon = new ArrayList<Pokemon>();}
+		if (listaPokemon == null) {listaPokemon = new Pokemon[pTam];}
 	}
 	
 	private void cargarPokemon() {};
@@ -14,7 +12,8 @@ public class ListaPokemon
 	private void metodo2() {};
 	private void metodo3() {}
 
-	public void anadirPokemon(Pokemon poke) {
+	public void anadirPokemon(Pokemon poke) 
+	{
 		// TODO Auto-generated method stub
 		
 	};

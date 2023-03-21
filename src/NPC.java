@@ -1,7 +1,7 @@
 public class NPC extends Combatiente {
 
-	public NPC() {
-		// TODO Auto-generated constructor stub
+	public NPC(ListaPokemon pListaPokemon, String pNombre, int pId) {
+		super(pListaPokemon, pNombre, pId);
 	}
 
 }
