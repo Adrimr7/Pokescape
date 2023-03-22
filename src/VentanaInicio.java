@@ -21,8 +21,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-public class VentanaInicio extends JFrame {
+import java.util.Observable;
+import java.util.Observer;
+public class VentanaInicio extends JFrame implements Observer{
 
 	private JPanel contentPane;
 	private JPanel Imagen;
@@ -311,7 +312,9 @@ public class VentanaInicio extends JFrame {
 						if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
 						else
 						{
+							System.out.println("Antes");
 							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
+							System.out.println("Fesoues");
 						}
 					}
 					catch(Exception ex) 
@@ -320,5 +323,33 @@ public class VentanaInicio extends JFrame {
 					}	
 				}	
 			}
+		}
+
+
+		@Override
+		public void update(Observable o, Object arg) 
+		{
+			// TODO Auto-generated method stub
+			// poner los observers de las ventanas y los pokemon
+			
+			// Stream de jugadores y de pokemon 
+			
+			if (o instanceof Pokescape)
+			{
+				if (arg instanceof Object[])
+				{
+					Object[] lista = (Object[]) arg;
+					int numBots = (int) lista[0];
+					int numJugs = (int) lista[1];
+					int numPoke = (int) lista[2];
+					for (int i = 0; i< numBots+numJugs; i++)
+					{
+						VentanaJugador ventJug = new VentanaJugador("Jugador" + i);
+						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(ventJug);
+					}
+		
+				}
+			}
+			
 		}
 	}

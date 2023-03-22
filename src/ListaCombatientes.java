@@ -30,4 +30,8 @@ public class ListaCombatientes
     	}
 		
 	}
+	public Combatiente getCombatiente (int i)
+	{
+		return arrayCombatientes[i];
+	}
 }

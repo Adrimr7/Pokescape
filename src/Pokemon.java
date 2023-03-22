@@ -1,14 +1,14 @@
 import java.util.Random;
-
-public abstract class Pokemon 
+import java.util.Observable;
+public abstract class Pokemon extends Observable
 {
-	private String nombre;
-	private int vida;
-	private int ataque;
-	private int defensa;
-	private int numEvoluciones; // TODO ****************
+	protected String nombre;
+	protected int vida;
+	protected int ataque;
+	protected int defensa;
+	protected int numEvoluciones; // TODO ****************
 								// boolean Evoluciona --> Pokemon evolucion (Y cuando llegue a mitad de la vida actual cambia de pokemon)
-	
+	protected String[] arrayDebilidades;
 	public Pokemon(String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones) 
 	{
 		nombre = pNombre;
@@ -16,5 +16,9 @@ public abstract class Pokemon
 		vida = pVida + aleatorio.nextInt(1,20);
 		ataque = pAtaque + aleatorio.nextInt(1,7);
 		defensa = pDefensa + aleatorio.nextInt(1,4);
-	} 
+	}
+	public void notifyObservers()
+	{
+		  notifyObservers(null);
+	}
 }

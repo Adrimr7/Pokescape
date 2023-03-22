@@ -19,7 +19,9 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
 
-public class VentanaJugador extends JFrame {
+import java.util.Observable;
+import java.util.Observer;
+public class VentanaJugador extends JFrame implements Observer{
 
 	private JPanel contentPane;
 	private JPanel pokemons;
@@ -80,7 +82,7 @@ public class VentanaJugador extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel_1(), BorderLayout.CENTER);
-		
+
 		JPanel personaje = new JPanel();
 		contentPane.add(personaje, BorderLayout.WEST);
 		personaje.setLayout(new BoxLayout(personaje, BoxLayout.Y_AXIS));
@@ -102,13 +104,23 @@ public class VentanaJugador extends JFrame {
 		if (pokemons == null) {
 			pokemons = new JPanel();
 			pokemons.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-			//panel_1.add(getPanelPokemon());
-			pokemons.add(getNuevoPokemon(151, "Mew", "Psíquico", 200, 50));
-			pokemons.add(getNuevoPokemon(348, "Makuhita", "Lucha", 250, 100));
-			pokemons.add(getNuevoPokemon(591, "Amongus", "Hierba", 100, 200));
-			pokemons.add(getNuevoPokemon(222, "Corsola", "Agua", 10, 5));
 		}
 		return pokemons;
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		//pokemons.add(new JPokemon(151, "Mew", "Psíquico", 200, 50));
+		//pokemons.add(new JPokemon(348, "Makuhita", "Lucha", 250, 100));
+		//pokemons.add(new JPokemon(591, "Amongus", "Hierba", 100, 200));
+		//pokemons.add(new JPokemon(222, "Corsola", "Agua", 10, 5));
+		
+		// hace un bucle con el numero de pokemon y va generando los siguientes pokemon
+		// pokemon vacios y les añade el que es el observer de cada pokemon.
+		// luego mas adelante 
+		
 	}
 	
 
@@ -415,6 +427,7 @@ public class VentanaJugador extends JFrame {
 	}
 	*/
 	
+	/*
 
 	//Creador de pokemionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 	private JPanel getNuevoPokemon(int pNumPokemon, String pNombrePokemon, String pTipo1, int pAtaque, int pDefensa)
@@ -518,5 +531,5 @@ public class VentanaJugador extends JFrame {
 		
 		return barra;
 	}
-	
+	*/
 }

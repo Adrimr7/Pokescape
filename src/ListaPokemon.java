@@ -24,7 +24,7 @@ public class ListaPokemon
 			// TODO DETERMINAR EL POKEMON ALEATORIO!!!!!!!!!!
 			// TODO DETERMINAR EL POKEMON ALEATORIO!!!!!!!!!!
 			// TODO DETERMINAR EL POKEMON ALEATORIO!!!!!!!!!!
-			arrayPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon(null, null, i, i, i, i);
+			arrayPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
 		}
 	}
 }
