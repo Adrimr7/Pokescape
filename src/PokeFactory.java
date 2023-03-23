@@ -25,7 +25,7 @@ public class PokeFactory
 		{
 			// GUIA : Dicho esto se crea un Ditto con estos parametros siendo
 			// GUIA : Nombre, vida, ataque, defensa y numero de evoluciones
-			// GUIA : Auque ponga 48 en un futuro pondra 200 y otros, tal y como ordenan las sagradas leyes originales.
+			// GUIA : Auque ponga 48 en un futuro pondra 200 y sus correspondientes valores, tal y como ordenan las sagradas leyes originales.
 			// GUIA : No sera necesario entrar a Ditto para ver como funciona, en sentido metaforico claramente
 			// GUIA : Simplemente agrea un pequeño valor aleatorio a los parametros pasados para darle un poco de aleatoriedad
 			unPokemon = new Agua("Ditto", 48, 48, 48, 0);
