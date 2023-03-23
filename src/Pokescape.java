@@ -68,10 +68,18 @@ public class Pokescape extends Observable
     	// GUIA (10)
     	// GUIA : Bien, teniendo todo bien montadito, (a un euro la unidad), es hora de avisar a VentanaIncio
     	// GUIA : Os acordais del previamente añadido Observer, pues es hora de que entre en juego
+    	// GUIA : El Observable y el Observer son una pareja, en este caso Pokescape y VentanaInicio
+    	// GUIA : Trabajan juntos pero sin que se vea. El Observable hace una seña, y el Observer la recibe.
+    	// GUIA : Es una forma de pasar informacion de forma "indirecta"
+    	// GUIA : Con setChanged() Pokespace dice que algo ha cambiado, como que lo deja caer
    		setChanged();
+   		
+   		// GUIA : Y luego da cierta informacion, pero no a nadie concteto, simplenete lo suelta al aire
 		notifyObservers(new Object[] {numBots, numJugs, numPokes});
+		
+		// GUIA : Eso si, nosotros sabemos quien lo va a recibir, en este caso, VentanaInicio con su metodo "update"
+		// GUIA : Siganme ...
     }
-	// lista Jugadores, patron observer, mvc, jugador se encarga de generar los pokemon (factory)
     
 	public static Pokescape getMiPokescape() 
 	{

@@ -368,18 +368,33 @@ public class VentanaInicio extends JFrame implements Observer{
 			
 			// Stream de jugadores y de pokemon 
 			
+			
+			
+			// GUIA (11)
+			// GUIA : Bien, cuando Pokescape dice que algo ha pasado, este esta con la oreja puesta
+			
 			if (o instanceof Pokescape)
 			{
+				// GUIA : Y despues de comprobar que lo que ha recibido es de Pokescape
 				if (arg instanceof Object[])
 				{
+					// GUIA : Y que es la informacion que nos interesa, se pone manos a la obra
+					// GUIA : Lo primero es tener bien repartiditos los datos
 					Object[] lista = (Object[]) arg;
 					int numBots = (int) lista[0];
 					int numJugs = (int) lista[1];
 					int numPoke = (int) lista[2];
+					
+					// GUIA : Y lo segundo usarlos para algo
+					// GUIA : Como ya sabeis tenemos todos los combatientes y pokemon creados en el modelo, pero en el la vista
+					// GUIA : Entonces vamos a crear las diferentes ventanas para los combatientes
 					for (int i = 0; i< numBots+numJugs; i++)
 					{
 						VentanaJugador ventJug = new VentanaJugador("Jugador" + i);
+						// GUIA : Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
 						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(ventJug);
+						// GUIA : Dicho esto vamos a ver como se crean las ventanas de VentanaJugador
+						// GUIA : Por aqui...
 					}
 		
 				}

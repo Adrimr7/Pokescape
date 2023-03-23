@@ -69,8 +69,14 @@ public class VentanaJugador extends JFrame implements Observer{
 	//Create the frame.
 
 	public VentanaJugador(String nomVentana) {
+		
+		// GUIA (12)
+		// GUIA : Pues aqui estamos, creando una pantalla para mostrar nuesto luchador y nuestros pokemon (-es a sujerecia de A.)
+		
 		setTitle(nomVentana);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// GUIA : Esta pequeña variable, todavia sin colocar correctamente, se usa para ajustar el largo de la venta, no ocupan los mismo un pokemon que tres, al igual que no ocupa lo mismo un wailorde que tu ...
 		
 		//Cambiando esta variable cambia el tamaño de la ventana para cuadrar los pokemon
 		int numPokemon = 4;
@@ -98,12 +104,22 @@ public class VentanaJugador extends JFrame implements Observer{
 		imageIcon = new ImageIcon(url);
 		lblNewLabel_1.setIcon(imageIcon);
 		personaje.add(lblNewLabel_1);
+		
+		// GUIA : Tras definir los diferentes apartados, el nombre, la imagen del jugador, el panel donde estaran los pokemon... empieza otra fiesta
+		// GUIA : La fiesta de pasar los datos de los pokemon a su respectivo lugar
 	}
 	
 	private JPanel getPanel_1() {
 		if (pokemons == null) {
 			pokemons = new JPanel();
 			pokemons.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			
+			// GUIA : Como podemos ver el panel pokemon esta vacio, cosa que cambiara en un futuro cercano
+			
+			// ESPECTADOR : Porque?
+			
+			// GUIA : Buena pregunta espectador promedio
+			
 		}
 		return pokemons;
 	}
@@ -112,6 +128,41 @@ public class VentanaJugador extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) 
 	{
+		
+		// GUIA : En este apartado deveria estar la creacion de los diferentes paneles de cada pokemon
+		// GUIA : Estos paneles son de JPokemon, una clase expecial que implementa el JPanel y que debera generar  
+		
+		// GUIA : Al igual que con el notifyObservers de Pokescape, el notifyObservers de cada Combatiente hara saltar el update de su respectiva ventana jugador
+		// GUIA : Entonces es cuando sucede la magia, cada ventanaJugador accedera a su correspondiente Combatiente a traves de ListaCombatienes
+		// GUIA : y generara tantos JPokemon como Pokemon tenga cada Combatiente
+		
+		// GUIA : A la vez, ira asigando cada JPokemon como Obvserver de su correspondiente Pokemon, y entonces todo estar enlazado.
+		// GUIA : Cada pokemon con su JPokemon y cada Combatiente con su VentanaJugador
+		
+		// GUIA : Tras esto volveremos a ventanaInicio y la cerraremos, quedando unicamente ventanasJugador aparentemente vacias.
+		
+		// GUIA : En este momento, entra en juego una secuencia de notifyObservers y updates.
+		
+		// GUIA : 
+		//		Paso 1:
+		//					Cerrar ventanaJugador
+		
+		//		Paso 2:		
+		//					Recorrer cada Combatiente para que mediante notifyObservers y updates pase su respectiva ventana el numero de pokemons, su nombre ...
+		
+		//		Paso 3:
+		//					Recorrec cada Pokemon de cada Combatiente para que mediante notifyObservers y updates para toda la informacion del pokemon
+		//					y asi rellenar las ventanas vacias
+		//
+		//		Paso 4:
+		//					De vuelta en Pokescape, el combate comienza
+		
+		// GUIA : Y con esto acaba el tour, ya se que es una pena que solo llegue hasta el incio del combate pero prometo que nos veremos mas adelantes
+		
+		// GUIA : *susurra* para cualquier donacion se agradece un bizum al 688892016
+		
+		
+		
 		//pokemons.add(new JPokemon(151, "Mew", "Psíquico", 200, 50));
 		//pokemons.add(new JPokemon(348, "Makuhita", "Lucha", 250, 100));
 		//pokemons.add(new JPokemon(591, "Amongus", "Hierba", 100, 200));
