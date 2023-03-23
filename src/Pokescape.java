@@ -55,8 +55,19 @@ public class Pokescape extends Observable
     	
     	
     	// GUIA (6)  	
-    	
+      	// GUIA : Bueno bueno, parece ser que empieza la fiesta por que depues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de ListaCombatientes.
+    	// GUIA : Estad atentos por que mas adelante volveremos aqui
+    	// GUIA : Seguidme ...
     	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
+    	
+    	
+    	
+    	
+    	
+    	
+    	// GUIA (10)
+    	// GUIA : Bien, teniendo todo bien montadito, (a un euro la unidad), es hora de avisar a VentanaIncio
+    	// GUIA : Os acordais del previamente añadido Observer, pues es hora de que entre en juego
    		setChanged();
 		notifyObservers(new Object[] {numBots, numJugs, numPokes});
     }
