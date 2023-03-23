@@ -49,16 +49,31 @@ public class VentanaInicio extends JFrame implements Observer{
 	private JLabel lblNewLabel_12;
 
 	public VentanaInicio() {
+		
+		// GUIA (3)
+		// GUIA : Muy bien, como podeis ver nos encontramos en la constructora
+		// GUIA : Esta preciosidad se encarga de darle forma a la ventana que veremos y la hace "agradable" a la vista
+		// GUIA : No son entretendermos mucho pero haremos una breve explicacion
+		
+		// GUIA : Aqui definimos el titulo de la ventana, el nombre que sale arriba
 		setTitle("Pokescape");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// GUIA : Gracias a esta funcion podemos darle el tamaño adecuado
 		setBounds(100, 100, 700, 260);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		
+		// GUIA : En estas tres siguientes preparamos la disposicion, es decir, donde ira cada cosa
 		contentPane.setLayout(new BorderLayout(0, 0));
+		// GUIA : A la izquierda el titulo del juego
 		contentPane.add(getImagen(), BorderLayout.CENTER);
+		// GUIA : Y a la derecha los botones
 		contentPane.add(getBotones(), BorderLayout.EAST);
+		// GUIA : Hablando de botones, vamos a ir a la funcion "getBtnNewButton" para ver como funcionan
+		// GUIA : Siganme ...
 	}
 
 	private JPanel getImagen() {
@@ -116,6 +131,14 @@ public class VentanaInicio extends JFrame implements Observer{
 		}
 		btnNewButton.addActionListener(ControladorInicio.getControladorInicio());
 		return btnNewButton;
+		
+		// GUIA (4)
+		// GUIA : Bien, como podemos ver, añadirmos al boton un "actionLisener", que aunque suene raro es facil de entender
+		// GUIA : Es como una señora de un pequeño pueblo que se sienta al lado de la ventana del primer piso que da a la plaza del pueblo
+		// GUIA : Es decir, se entera de todo lo que pasa, en este caso se entera de si alguien ha pulsado el boton.
+		// GUIA : En este caso la vieja seria "ControladorInicio" que sera la proxima clase que investigaremos. Es facil de encontrar por que este definida en esta misma clase
+		// GUIA : Siganme...
+		
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -272,10 +295,13 @@ public class VentanaInicio extends JFrame implements Observer{
 
 		static private class ControladorInicio implements ActionListener 
 		{
+			// GUIA (5)
+			// GUIA : Pues aqui estamos, en una MAE definida dentro de VentanaInicio 
 			private static ControladorInicio miControladorInicio;
 		
 			private ControladorInicio() {}
 		
+			// GUIA : Como hemos visto antes lo que añade como ActionListener es esta clase, que como se ve en la cabezera lo implementa
 			public static ControladorInicio getControladorInicio()
 			{
 				if(miControladorInicio == null) 
@@ -285,14 +311,20 @@ public class VentanaInicio extends JFrame implements Observer{
 				return miControladorInicio;
 			}
 			
-
+			// GUIA : Pero la parte interesante esta aqui
+			// GUIA : En actionPerformed, este metodo propio de ActionListener lo mas parecido a la abuela del pueblo
+			// GUIA : Si antes hemos colocado a la vieja al lado de la plaza, este metodo hace que en cuanto note algo deje el periodico y se ponga a escuchar
+			
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-			
+				// GUIA : Como buena fuente de informacion, primero comprueba que esta cotillenado
 				if (e.getSource().equals(btnNewButton))
 				{
-					//modelo.comenzar();
+					// GUIA : Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
+					// GUIA : El objetivo del listener en este caso es que si se le da al boton, avise al modelo, en este caso a Pokescape para que comience el juego.
+					
+					// GUIA : Estos tres datos son los que nos interesa entonces se los guarda
 					String strb = textFieldBots.getText();
 					String strj = textFieldJugadores.getText();
 					String strp = textFieldPokemons.getText();
@@ -303,6 +335,8 @@ public class VentanaInicio extends JFrame implements Observer{
 					
 					try 
 					{
+						// GUIA : Como la vieja siempre dice, "El diablo es mas sabio por viejo que por diablo" y por tanto sabemos que la gente que usa aplicaciones no es muy lista
+						// GUIA : Por eso tenemos que comprobar que lo que nos han pasado es un numero y no un versiculo de la biblia
 						numb = Integer.parseInt(strb);
 						numj = Integer.parseInt(strj);
 						nump = Integer.parseInt(strp);
@@ -312,9 +346,9 @@ public class VentanaInicio extends JFrame implements Observer{
 						if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
 						else
 						{
-							System.out.println("Antes");
+							// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
 							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
-							System.out.println("Fesoues");
+							// GUIA : Siganme...
 						}
 					}
 					catch(Exception ex) 
