@@ -17,11 +17,11 @@ public class ListaCombatientes
 		// GUIA (7)
 		// GUIA : Pues la historia continua en esta bonita MAE que guardara a los diferentes luchadores de hoy
 		
-		// GUIA : Para empezar, preparamos el alojamiento, del tamapo exacto para los concursantes
+		// GUIA : Para empezar, preparamos el alojamiento, del tamaño exacto para los concursantes
 		arrayCombatientes = new Combatiente[numBots + numJugs];
 		
 		// GUIA : Empezaremos por los humanos y luego los NPC, como espero que comprendais, este orden es completamente aleatorio
-		// GUIA : y no tiene nada que ver con un tema racial
+		// GUIA : y no tiene nada que ver con un tema racial (ni nada)
 		
     	for (int i = 0; i<numJugs; i++)
     	{

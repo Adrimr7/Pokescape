@@ -32,7 +32,7 @@ public class Pokescape extends Observable
     		// GUIA : Tratamos de crear la ventana inicial 
     		frameInicio = new VentanaInicio();	//Generamos la pantalla del titulo
     		
-    		// GUIA : Y la añadimos como Obverver de la clase en la que nos encontramos, esto es importante para el patron MVC y mas adelante veremos su uso, de momento
+    		// GUIA : Y la añadimos como Observer de la clase en la que nos encontramos, esto es importante para el patron MVC y mas adelante veremos su uso, de momento
     		// GUIA : vale con entender que "frameInicio" y "Pokescape" estan unidas en el patron MVC.
     		
     		Pokescape.getMiPokescape().addObserver(frameInicio);
@@ -60,7 +60,6 @@ public class Pokescape extends Observable
     	// GUIA : Seguidme ...
     	
     	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
-    	
     	
     	
     	

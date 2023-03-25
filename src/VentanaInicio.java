@@ -53,7 +53,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		// GUIA (3)
 		// GUIA : Muy bien, como podeis ver nos encontramos en la constructora
 		// GUIA : Esta preciosidad se encarga de darle forma a la ventana que veremos y la hace "agradable" a la vista
-		// GUIA : No son entretendermos mucho pero haremos una breve explicacion
+		// GUIA : No son entretendremos mucho pero haremos una breve explicacion
 		
 		// GUIA : Aqui definimos el titulo de la ventana, el nombre que sale arriba
 		setTitle("Pokescape");
@@ -133,7 +133,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		return btnNewButton;
 		
 		// GUIA (4)
-		// GUIA : Bien, como podemos ver, añadirmos al boton un "actionLisener", que aunque suene raro es facil de entender
+		// GUIA : Bien, como podemos ver, añadirmos al boton un "actionListener", que aunque suene raro es facil de entender
 		// GUIA : Es como una señora de un pequeño pueblo que se sienta al lado de la ventana del primer piso que da a la plaza del pueblo
 		// GUIA : Es decir, se entera de todo lo que pasa, en este caso se entera de si alguien ha pulsado el boton.
 		// GUIA : En este caso la vieja seria "ControladorInicio" que sera la proxima clase que investigaremos. Es facil de encontrar por que este definida en esta misma clase

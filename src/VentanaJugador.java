@@ -129,15 +129,15 @@ public class VentanaJugador extends JFrame implements Observer{
 	public void update(Observable o, Object arg) 
 	{
 		
-		// GUIA : En este apartado deveria estar la creacion de los diferentes paneles de cada pokemon
+		// GUIA : En este apartado deberia estar la creacion de los diferentes paneles de cada pokemon
 		// GUIA : Estos paneles son de JPokemon, una clase expecial que implementa el JPanel y que debera generar  
 		
 		// GUIA : Al igual que con el notifyObservers de Pokescape, el notifyObservers de cada Combatiente hara saltar el update de su respectiva ventana jugador
 		// GUIA : Entonces es cuando sucede la magia, cada ventanaJugador accedera a su correspondiente Combatiente a traves de ListaCombatienes
 		// GUIA : y generara tantos JPokemon como Pokemon tenga cada Combatiente
 		
-		// GUIA : A la vez, ira asigando cada JPokemon como Obvserver de su correspondiente Pokemon, y entonces todo estar enlazado.
-		// GUIA : Cada pokemon con su JPokemon y cada Combatiente con su VentanaJugador
+		// GUIA : A la vez, ira asigando cada JPokemon como Observer de su correspondiente Pokemon, y entonces todo estar enlazado.
+		// GUIA : Cada pokemon con su JPokemon y cada Combatiente con su VentanaJugador.
 		
 		// GUIA : Tras esto volveremos a ventanaInicio y la cerraremos, quedando unicamente ventanasJugador aparentemente vacias.
 		
@@ -148,7 +148,7 @@ public class VentanaJugador extends JFrame implements Observer{
 		//					Cerrar ventanaInicio
 		
 		//		Paso 2:		
-		//					Recorrer cada Combatiente para que mediante notifyObservers y updates pase su respectiva ventana el numero de pokemons, su nombre ...
+		//					Recorrer cada Combatiente para que mediante notifyObservers y updates pase su respectiva ventana el numero de pokemon, su nombre ...
 		
 		//		Paso 3:
 		//					Recorrer cada Pokemon de cada Combatiente para que mediante notifyObservers y updates para toda la informacion del pokemon
@@ -157,7 +157,7 @@ public class VentanaJugador extends JFrame implements Observer{
 		//		Paso 4:
 		//					De vuelta en Pokescape, el combate comienza
 		
-		// GUIA : Y con esto acaba el tour, ya se que es una pena que solo llegue hasta el incio del combate pero prometo que nos veremos mas adelantes
+		// GUIA : Y con esto acaba el tour, ya se que es una pena que solo llegue hasta el inicio del combate pero prometo que nos veremos mas adelantes
 		
 		// GUIA : *susurra* para cualquier donacion se agradece un bizum al 688892016
 		
