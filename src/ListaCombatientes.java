@@ -26,15 +26,16 @@ public class ListaCombatientes
     	for (int i = 0; i<numJugs; i++)
     	{
     		// GUIA : Creamos un nuevo humano
-    		Humano comb = new Humano(null, 0);
+    		Humano comb = new Humano("NombreHumano", i);
     		arrayCombatientes[i] = comb;
     		
     		// GUIA : Y le pedimos que se prepare, este se encargara de todo lo que necesite
     		// GUIA : Dicho esto, vamos a ver como funciona "inicializate" de la clase Combatiente
     		// GUIA : Antes de nada, cabe recalacar que Humano y NPC son dos clases que heredan de combatiente.
     		// GUIA : Seguidme ... 
-    		System.out.println("Entramos a inicializar a un Humano");
-    		comb.inicializate(i, i, numPoke);
+ 
+    		arrayCombatientes[i].inicializate(i, i, numPoke);
+    	
     	}
     	
 		// GUIA (10)
@@ -43,10 +44,10 @@ public class ListaCombatientes
 		// GUIA : Seguidme...
     	for (int i = 0; i<numBots; i++)
     	{
-    		NPC comb = new NPC(null, 0);
+    		NPC comb = new NPC("NombreNPC", i + numJugs);
     		arrayCombatientes[i + numJugs] = comb;
-    		System.out.println("Entramos a inicializar a un NPC");
-    		comb.inicializate(i, i+numJugs, numPoke);
+    	
+    		arrayCombatientes[i + numJugs].inicializate(i, i+numJugs, numPoke);
     	}
 		
 	}

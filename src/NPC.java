@@ -4,9 +4,11 @@ public class NPC extends Combatiente {
 		super(pNombre, pId);
 	}
 
+	/*
 	public void inicializate(int i, int pId, int numPoke) {
 		// TODO Auto-generated method stub
 		
 	}
+	*/
 
 }

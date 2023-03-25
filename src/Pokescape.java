@@ -58,7 +58,7 @@ public class Pokescape extends Observable
       	// GUIA : Bueno bueno, parece ser que empieza la fiesta por que depues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de ListaCombatientes.
     	// GUIA : Estad atentos por que mas adelante volveremos aqui
     	// GUIA : Seguidme ...
-    	System.out.println("Entramos a ListaCombatientes.getMiListaCombatientes().iniciarCombate");
+    	
     	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
     	
     	
@@ -74,22 +74,28 @@ public class Pokescape extends Observable
     	// GUIA : Es una forma de pasar informacion de forma "indirecta"
     	// GUIA : Con setChanged() Pokespace dice que algo ha cambiado, como que lo deja caer
     	
-    	System.out.println("Set changed de pokescape");
-   		setChanged();
-   		
-   		// GUIA : Y luego da cierta informacion, pero no a nadie concteto, simplenete lo suelta al aire
-    	System.out.println("notifyObservers de pokescape");
-		notifyObservers(new Object[] {numBots, numJugs, numPokes});
-		
-		// GUIA : Eso si, nosotros sabemos quien lo va a recibir, en este caso, VentanaInicio con su metodo "update"
-		// GUIA : Siganme ...
-		
+    	
+    	avisarInicio(numBots, numJugs, numPokes);
 		
 		
 		// GUIA (13 xd)
 		// GUIA : Una vez esten todas las ventanas de combatientes preparaddas, es hora de llenarlas
 		ListaCombatientes.getMiListaCombatientes().daAvisos();
 		
+    }
+    
+    public void avisarInicio(int numBots, int numJugs, int numPokes) 
+    {
+    	
+   		setChanged();
+   		
+   		// GUIA : Y luego da cierta informacion, pero no a nadie concteto, simplenete lo suelta al aire
+    
+		notifyObservers(new Object[] {numBots, numJugs, numPokes});
+		
+		// GUIA : Eso si, nosotros sabemos quien lo va a recibir, en este caso, VentanaInicio con su metodo "update"
+		// GUIA : Siganme ...
+    	
     }
     
 	public static Pokescape getMiPokescape() 

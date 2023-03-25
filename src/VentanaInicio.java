@@ -333,8 +333,8 @@ public class VentanaInicio extends JFrame implements Observer{
 					int numj;
 					int nump;
 					
-					try 
-					{
+					//try 
+					//{
 						// GUIA : Como la vieja siempre dice, "El diablo es mas sabio por viejo que por diablo" y por tanto sabemos que la gente que usa aplicaciones no es muy lista
 						// GUIA : Por eso tenemos que comprobar que lo que nos han pasado es un numero y no un versiculo de la biblia
 						numb = Integer.parseInt(strb);
@@ -351,11 +351,11 @@ public class VentanaInicio extends JFrame implements Observer{
 							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
 							// GUIA : Siganme...
 						}
-					}
-					catch(Exception ex) 
-					{
-						System.out.println("Valores no validos");
-					}	
+					//}
+					//catch(Exception ex) 
+					//{
+					//	System.out.println("Valores no validos");
+					//}	
 				}	
 			}
 		}
@@ -394,9 +394,13 @@ public class VentanaInicio extends JFrame implements Observer{
 						VentanaJugador ventJug = new VentanaJugador("Jugador" + i);
 						// GUIA : Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
 						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(ventJug);
+						
+						ventJug.setVisible(true);
 						// GUIA : Dicho esto vamos a ver como se crean las ventanas de VentanaJugador
 						// GUIA : Por aqui...
 					}
+					
+					this.setVisible(false);
 		
 				}
 			}

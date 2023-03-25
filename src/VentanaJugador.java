@@ -185,6 +185,8 @@ public class VentanaJugador extends JFrame implements Observer{
 				int numPoke = (int) lista[0];
 				int numComb = (int) lista[1];
 				
+				setBounds(100, 100, 155*numPoke + 155, 240);
+				
 				
 				// GUIA : Y lo segundo usarlos para algo
 				// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador

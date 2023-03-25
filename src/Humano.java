@@ -4,9 +4,11 @@ public class Humano extends Combatiente {
 		super(pNombre, pId);
 	}
 
+	/*
 	public void inicializate(int i, int i2, int numPoke) {
 		// TODO Auto-generated method stub
 		
 	}
+	*/
 
 }
