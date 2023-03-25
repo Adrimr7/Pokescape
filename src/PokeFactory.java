@@ -28,6 +28,7 @@ public class PokeFactory
 			// GUIA : Auque ponga 48 en un futuro pondra 200 y sus correspondientes valores, tal y como ordenan las sagradas leyes originales.
 			// GUIA : No sera necesario entrar a Ditto para ver como funciona, en sentido metaforico claramente
 			// GUIA : Simplemente agrea un pequeño valor aleatorio a los parametros pasados para darle un poco de aleatoriedad
+			System.out.println("Creamos al pokemon Ditto");
 			unPokemon = new Agua("Ditto", 48, 48, 48, 0);
 			
 			// GUIA : Quedando esto claro vamos a volver a la lista combatientes para seguir con el metodo iniciarCombate

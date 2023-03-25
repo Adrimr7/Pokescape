@@ -29,7 +29,7 @@ public class JPokemon extends JPanel implements Observer
 	JProgressBar barraAtaque;
 	JProgressBar barraDefensa;
 	
-	public JPokemon (int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa)
+	public JPokemon ()
 	{
 		//Variables para añadir fotos
 				URL url;
@@ -46,13 +46,13 @@ public class JPokemon extends JPanel implements Observer
 					zonaNombrePokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 						// Nombre
-						nombrePokemon = new JLabel(pNombrePokemon);
+						nombrePokemon = new JLabel("Vaporeon");
 						nombrePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
 						zonaNombrePokemon.add(nombrePokemon);
 						
 						// Tipo1
 						tipo = new JLabel();
-						url = this.getClass().getResource(pTipo + ".png");
+						url = this.getClass().getResource("Agua" + ".png");
 						imageIcon = new ImageIcon(url);
 						tipo.setIcon(imageIcon);
 						zonaNombrePokemon.add(tipo);
@@ -63,7 +63,7 @@ public class JPokemon extends JPanel implements Observer
 				
 					// Imagen pokemon //////////////////////////////////////////////////////////////////////////		
 					spritePokemon = new JLabel();
-					url = this.getClass().getResource(pNumPokemon + ".png");
+					url = this.getClass().getResource(134 + ".png");
 					imageIcon = new ImageIcon(url);
 					spritePokemon.setIcon(imageIcon);
 					spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
@@ -99,18 +99,53 @@ public class JPokemon extends JPanel implements Observer
 						panelBarrasEstats = new JPanel();
 						panelBarrasEstats.setLayout(new GridLayout(5, 1, 0, 0));
 						
-							barraAtaque = barraEstatt(pAtaque, new Color(255, 255, 0));
+							barraAtaque = barraEstatt(150, new Color(255, 255, 0));
 							panelBarrasEstats.add(barraAtaque);
-							barraDefensa = barraEstatt(pDefensa, new Color(255, 255, 0));
+							barraDefensa = barraEstatt(150, new Color(255, 255, 0));
 							panelBarrasEstats.add(barraDefensa);
 				
 						estadisticas.add(panelBarrasEstats);
 				this.add(estadisticas);
 	}
+	
+	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa)
+	{
+		//Variables para añadir fotos
+				URL url;
+				Icon imageIcon;
+				
+				nombrePokemon.setText(pNombrePokemon);
+	
+					
+				url = this.getClass().getResource(pTipo + ".png");
+				imageIcon = new ImageIcon(url);
+				tipo.setIcon(imageIcon);
+
+				
+				url = this.getClass().getResource(pNumPokemon + ".png");
+				imageIcon = new ImageIcon(url);
+				spritePokemon.setIcon(imageIcon);
+	
+				
+				barraHp.setValue(100);
+						
+				barraAtaque.setValue((int) (pAtaque*100/255));
+				barraDefensa.setValue((int) (pDefensa*100/255));
+	}
+	
+	
 	@Override
 	public void update(Observable o, Object arg) 
 	{
 		// TODO Auto-generated method stub
+		Object[] lista = (Object[]) arg;
+		//nombre, vida, ataque, defensa
+		String nombre = (String) lista[0];
+		int vida = (int) lista[1];
+		int ataque = (int) lista[2];
+		int defensa = (int) lista[3];
+		
+		actualizarDatos(132, nombre, "Agua", ataque, defensa);
 		
 	}
 
@@ -123,6 +158,7 @@ public class JPokemon extends JPanel implements Observer
 		barra.setMaximumSize(new Dimension(100, 14));
 		return barra;
 	}
+	
 	
 	
 }

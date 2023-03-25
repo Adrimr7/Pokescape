@@ -346,6 +346,7 @@ public class VentanaInicio extends JFrame implements Observer{
 						if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
 						else
 						{
+							System.out.println("Pasamos a Pokescape");
 							// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
 							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
 							// GUIA : Siganme...

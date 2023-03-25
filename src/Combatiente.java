@@ -19,7 +19,25 @@ public abstract class Combatiente extends Observable
 			// GUIA : A lo sumo, le pide al Pokefactory que le los pokemon
 			// GUIA : Dicho esto, ya sabeis donde estare
 			// GUIA : Seguidme ...
+			System.out.println("Entramos a la factory de pokemon");
 			listaPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
 		}
+	}
+	
+	public Pokemon getPokemon(int i) 
+	{
+		return listaPokemon[i];
+	}
+	
+	public void daAviso() 
+	{
+		setChanged();
+		notifyObservers(new Object[] {listaPokemon.length, id});
+		
+		for(int i = 0; i < listaPokemon.length; i++) 
+		{
+			listaPokemon[i].daAviso();
+		}
+		
 	}
 }

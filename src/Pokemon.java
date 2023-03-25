@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Observable;
 public abstract class Pokemon extends Observable
 {
+	protected int numPokemon;
 	protected String nombre;
 	protected int vida;
 	protected int ataque;
@@ -17,8 +18,11 @@ public abstract class Pokemon extends Observable
 		ataque = pAtaque + aleatorio.nextInt(1,7);
 		defensa = pDefensa + aleatorio.nextInt(1,4);
 	}
-	public void notifyObservers()
+	
+	public void daAviso() 
 	{
-		  notifyObservers(null);
+		setChanged();
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa});
+		
 	}
 }

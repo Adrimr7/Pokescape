@@ -145,13 +145,13 @@ public class VentanaJugador extends JFrame implements Observer{
 		
 		// GUIA : 
 		//		Paso 1:
-		//					Cerrar ventanaJugador
+		//					Cerrar ventanaInicio
 		
 		//		Paso 2:		
 		//					Recorrer cada Combatiente para que mediante notifyObservers y updates pase su respectiva ventana el numero de pokemons, su nombre ...
 		
 		//		Paso 3:
-		//					Recorrec cada Pokemon de cada Combatiente para que mediante notifyObservers y updates para toda la informacion del pokemon
+		//					Recorrer cada Pokemon de cada Combatiente para que mediante notifyObservers y updates para toda la informacion del pokemon
 		//					y asi rellenar las ventanas vacias
 		//
 		//		Paso 4:
@@ -171,6 +171,41 @@ public class VentanaJugador extends JFrame implements Observer{
 		// hace un bucle con el numero de pokemon y va generando los siguientes pokemon
 		// pokemon vacios y les añade el que es el observer de cada pokemon.
 		// luego mas adelante 
+		
+		
+		
+		if (o instanceof Combatiente)
+		{
+			// GUIA : Y despues de comprobar que lo que ha recibido es de Pokescape
+			if (arg instanceof Object[])
+			{
+				// GUIA : Y que es la informacion que nos interesa, se pone manos a la obra
+				// GUIA : Lo primero es tener bien repartiditos los datos
+				Object[] lista = (Object[]) arg;
+				int numPoke = (int) lista[0];
+				int numComb = (int) lista[1];
+				
+				
+				// GUIA : Y lo segundo usarlos para algo
+				// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador
+				// GUIA : Entonces vamos a crear los diferentes jpokemon para los combatientes
+				for (int i = 0; i < numPoke; i++)
+				{
+					
+					
+					
+					JPokemon poketoMonsta = new JPokemon();
+					// GUIA : Una vez creados hacemos que estos Jpokemon observen a sus respectivos pokemon de su combatiente
+					ListaCombatientes.getMiListaCombatientes().getCombatiente(numComb).getPokemon(i).addObserver(poketoMonsta);
+					
+					// GUIA : Y lo añadimos a la ventana actual
+					pokemons.add(poketoMonsta);
+						
+				}
+	
+			}
+		}
+		
 		
 	}
 	
