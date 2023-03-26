@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.JFrame;
@@ -16,13 +17,26 @@ import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 import java.awt.FlowLayout;
 import javax.swing.Action;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Observable;
 import java.util.Observer;
+
+
 public class VentanaInicio extends JFrame implements Observer{
 
 	private JPanel contentPane;
@@ -74,7 +88,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		contentPane.add(getBotones(), BorderLayout.EAST);
 		// GUIA : Hablando de botones, vamos a ir a la funcion "getBtnNewButton" para ver como funcionan
 		// GUIA : Siganme ...
-	}
+	
 
 	private JPanel getImagen() {
 		if (Imagen == null) {
