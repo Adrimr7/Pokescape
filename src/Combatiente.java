@@ -52,8 +52,5 @@ public abstract class Combatiente extends Observable
 	public void tuTurno()
 	{
 		System.out.println("Mi turno " + nombre);
-		while(true)
-		{
-		}
 	}
 }
