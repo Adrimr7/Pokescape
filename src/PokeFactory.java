@@ -16,8 +16,35 @@ public class PokeFactory
 	public Pokemon createPokemon()
 	{
 		Random rn = new Random();
+		
 		ArrayList<Pokemon> lista = new ArrayList<Pokemon>();
-		Pokemon pk = new Agua("Blastoise", 90,48,48,0);
+		
+		Pokemon pk;
+		pk = new Planta("Bulbasaur", 48,57,48,0);
+		pk.setNumPokemon(1);
+		lista.add(pk);
+		pk = new Planta("Ivysaur", 48,57,48,0);
+		pk.setNumPokemon(2);
+		lista.add(pk);
+		pk = new Planta("Venusaur", 48,57,48,0);
+		pk.setNumPokemon(3);
+		lista.add(pk);
+		pk = new Fuego("Charmander", 48,60,48,0);
+		pk.setNumPokemon(5);
+		lista.add(pk);
+		pk = new Fuego("Charmeleon", 48,60,48,0);
+		pk.setNumPokemon(5);
+		lista.add(pk);
+		pk = new Fuego("Charizard", 48,60,48,0);
+		pk.setNumPokemon(5);
+		lista.add(pk);
+		pk = new Agua("Squirtle", 90,48,48,0);
+		pk.setNumPokemon(7);
+		lista.add(pk);
+		pk = new Agua("Wartortle", 90,48,48,0);
+		pk.setNumPokemon(8);
+		lista.add(pk);
+		pk = new Agua("Blastoise", 90,48,48,0);
 		pk.setNumPokemon(9);
 		lista.add(pk);
 		pk = new Agua("Slowpoke", 48,70,48,0);
@@ -41,12 +68,7 @@ public class PokeFactory
 		pk = new Fuego("Arcanine", 50,108,48,0);
 		pk.setNumPokemon(59);
 		lista.add(pk);
-		pk = new Fuego("Charmeleon", 48,60,48,0);
-		pk.setNumPokemon(5);
-		lista.add(pk);
-		pk = new Planta("Bulbasaur", 48,57,48,0);
-		pk.setNumPokemon(1);
-		lista.add(pk);
+
 		pk = new Planta("Oddish", 48,48,32,0);
 		pk.setNumPokemon(43);
 		lista.add(pk);
