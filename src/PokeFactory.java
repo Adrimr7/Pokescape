@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Random;
 
 public class PokeFactory 
 {
@@ -11,7 +13,49 @@ public class PokeFactory
 		}
 		return miPokeFactory;
 	}
-	public Pokemon createPokemon (/*String tipo, String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones*/)
+	public Pokemon createPokemon()
+	{
+		Random rn = new Random();
+		ArrayList<Pokemon> lista = new ArrayList<Pokemon>();
+		Pokemon pk = new Agua("Blastoise", 90,48,48,0);
+		pk.setNumPokemon(9);
+		lista.add(pk);
+		pk = new Agua("Slowpoke", 48,70,48,0);
+		pk.setNumPokemon(79);
+		lista.add(pk);
+		pk = new Agua("Psyduck", 48,48,32,0);
+		pk.setNumPokemon(54);
+		lista.add(pk);
+		pk = new Electrico("Pikachu", 48,48,48,0);
+		pk.setNumPokemon(25);
+		lista.add(pk);
+		pk = new Electrico("Magnemite", 48,48,48,0);
+		pk.setNumPokemon(81);
+		lista.add(pk);
+		pk = new Electrico("Voltorb", 48,48,32,0);
+		pk.setNumPokemon(100);
+		lista.add(pk);
+		pk = new Fuego("Ponyta", 48,48,32,0);
+		pk.setNumPokemon(77);
+		lista.add(pk);
+		pk = new Fuego("Arcanine", 50,108,48,0);
+		pk.setNumPokemon(59);
+		lista.add(pk);
+		pk = new Fuego("Charmeleon", 48,60,48,0);
+		pk.setNumPokemon(5);
+		lista.add(pk);
+		pk = new Planta("Bulbasaur", 48,57,48,0);
+		pk.setNumPokemon(1);
+		lista.add(pk);
+		pk = new Planta("Oddish", 48,48,32,0);
+		pk.setNumPokemon(43);
+		lista.add(pk);
+		pk = new Planta("Exeggutor", 90,48,48,0);
+		pk.setNumPokemon(103);
+		lista.add(pk);
+		return lista.get(rn.nextInt(0,11));
+	}
+	public Pokemon createPokemon2 (/*String tipo, String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones*/)
 	{
 		// GUIA (9)
 		// GUIA : Sean bienvenidos a la fabrica de Willy Wonka, solo que sin Willy Wonka ni chocolate ni Oompa Loompas, solo codigo

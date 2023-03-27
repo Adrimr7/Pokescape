@@ -144,8 +144,10 @@ public class JPokemon extends JPanel implements Observer
 		int vida = (int) lista[1];
 		int ataque = (int) lista[2];
 		int defensa = (int) lista[3];
+		int numPoke = (int) lista[4];
+		String pTipo = (String) lista[5];
 		
-		actualizarDatos(132, nombre, "Agua", ataque, defensa);
+		actualizarDatos(numPoke, nombre, pTipo, ataque, defensa);
 		
 	}
 

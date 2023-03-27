@@ -22,7 +22,22 @@ public abstract class Pokemon extends Observable
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase()});
 		
+	}
+	public void setNumPokemon(int pNumPoke)
+	{
+		numPokemon = pNumPoke;
+	}
+	private String obtenerClase()
+	{
+		if((String) this.getClass().getSimpleName() == "Electrico")
+		{
+			return "Eléctrico";
+		}
+		else
+		{
+			return this.getClass().getSimpleName();
+		}
 	}
 }

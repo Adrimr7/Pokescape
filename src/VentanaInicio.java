@@ -88,7 +88,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		contentPane.add(getBotones(), BorderLayout.EAST);
 		// GUIA : Hablando de botones, vamos a ir a la funcion "getBtnNewButton" para ver como funcionan
 		// GUIA : Siganme ...
-	
+	}
 
 	private JPanel getImagen() {
 		if (Imagen == null) {
