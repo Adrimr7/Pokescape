@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class ListaCombatientes 
 {
 	private static ListaCombatientes miListaCombatientes;
@@ -63,5 +65,32 @@ public class ListaCombatientes
 		{
 			arrayCombatientes[i].daAviso();
 		}
+	}
+	
+	public boolean estanVivos() 
+	{
+		int j = 0;
+		for(int i = 0; i < arrayCombatientes.length; i++) 
+		{
+			if(arrayCombatientes[i].estaVivo())
+			{
+				j++;
+			}
+		}
+		
+		boolean ret = false;
+		
+		if(j > 1)
+		{
+			ret = true;
+		}
+		
+		return true;
+	}
+	
+	public void escogeCombatiente()
+	{
+		Random rn = new Random();
+		arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)].tuTurno();
 	}
 }

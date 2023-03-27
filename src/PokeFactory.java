@@ -30,13 +30,13 @@ public class PokeFactory
 		pk.setNumPokemon(3);
 		lista.add(pk);
 		pk = new Fuego("Charmander", 48,60,48,0);
-		pk.setNumPokemon(5);
+		pk.setNumPokemon(4);
 		lista.add(pk);
 		pk = new Fuego("Charmeleon", 48,60,48,0);
 		pk.setNumPokemon(5);
 		lista.add(pk);
 		pk = new Fuego("Charizard", 48,60,48,0);
-		pk.setNumPokemon(5);
+		pk.setNumPokemon(6);
 		lista.add(pk);
 		pk = new Agua("Squirtle", 90,48,48,0);
 		pk.setNumPokemon(7);

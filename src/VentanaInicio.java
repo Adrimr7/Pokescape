@@ -364,6 +364,7 @@ public class VentanaInicio extends JFrame implements Observer{
 							// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
 							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
 							// GUIA : Siganme...
+							System.out.println("Aqui me quedo.");
 						}
 					//}
 					//catch(Exception ex) 
@@ -382,8 +383,7 @@ public class VentanaInicio extends JFrame implements Observer{
 			// poner los observers de las ventanas y los pokemon
 			
 			// Stream de jugadores y de pokemon 
-			
-			
+
 			
 			// GUIA (11)
 			// GUIA : Bien, cuando Pokescape dice que algo ha pasado, este esta con la oreja puesta

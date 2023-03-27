@@ -4,6 +4,7 @@ public abstract class Combatiente extends Observable
 	private Pokemon[] listaPokemon;
 	private String nombre;
 	private int id;
+	private boolean enPie;
 	
 	public Combatiente(String pNombre, int pId)
 	{
@@ -41,5 +42,18 @@ public abstract class Combatiente extends Observable
 			listaPokemon[i].daAviso();
 		}
 		
+	}
+	
+	public boolean estaVivo()
+	{
+		return enPie;
+	}
+	
+	public void tuTurno()
+	{
+		System.out.println("Mi turno " + nombre);
+		while(true)
+		{
+		}
 	}
 }

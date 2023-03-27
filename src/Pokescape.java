@@ -81,6 +81,15 @@ public class Pokescape extends Observable
 		// GUIA : Una vez esten todas las ventanas de combatientes preparaddas, es hora de llenarlas
 		ListaCombatientes.getMiListaCombatientes().daAvisos();
 		
+		
+
+		// Turnos
+		
+		while(ListaCombatientes.getMiListaCombatientes().estanVivos())
+		{
+			ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
+		}
+		
     }
     
     public void avisarInicio(int numBots, int numJugs, int numPokes) 
