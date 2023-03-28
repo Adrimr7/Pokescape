@@ -84,11 +84,12 @@ public class Pokescape extends Observable
 		
 
 		// Turnos
-		
+		/*
 		while(ListaCombatientes.getMiListaCombatientes().estanVivos())
 		{
 			ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
 		}
+		*/
 		
     }
     
