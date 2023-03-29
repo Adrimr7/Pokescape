@@ -1,7 +1,8 @@
 import java.util.Observable;
+import java.util.Random;
 public abstract class Combatiente extends Observable 
 {
-	private Pokemon[] listaPokemon;
+	protected Pokemon[] listaPokemon;
 	private String nombre;
 	private int id;
 	private boolean enPie;
@@ -52,5 +53,25 @@ public abstract class Combatiente extends Observable
 	public void tuTurno()
 	{
 		System.out.println("Mi turno " + nombre);
+		
+		
+		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
+	}
+	
+	public Pokemon obtenerPokemonAleatorio()
+	{
+		Random rn = new Random();
+		return listaPokemon[rn.nextInt(0,listaPokemon.length-1)];
+	}
+	
+	public void eliminarPokemon(Pokemon pPoke) 
+	{
+		for(int i = 0; i < listaPokemon.length; i++) 
+		{
+			if (listaPokemon[i] == pPoke) 
+			{
+				//Borrar pokemon???
+			}
+		}
 	}
 }

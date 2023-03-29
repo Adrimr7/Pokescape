@@ -40,4 +40,26 @@ public abstract class Pokemon extends Observable
 			return this.getClass().getSimpleName();
 		}
 	}
+	
+	public void ataca() 
+	{
+		Combatiente combee = ListaCombatientes.getMiListaCombatientes().obtenerCombatienteAleatorio();
+		Pokemon poke = combee.obtenerPokemonAleatorio();
+		boolean vivo = poke.danar(ataque);
+		if(!vivo) 
+		{
+			combee.eliminarPokemon(poke);
+		}
+	}
+	
+	public boolean danar(int pAtaque)
+	{
+		vida = vida - (pAtaque - defensa);
+		boolean vivo = true;
+		if(vida <= 0) 
+		{
+			vivo = false;
+		}
+		return vivo;
+	}
 }

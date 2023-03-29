@@ -10,5 +10,17 @@ public class NPC extends Combatiente {
 		
 	}
 	*/
+	
+	public void tuTurno()
+	{
+		System.out.println("A ");
+		
+		for (int i = 0; i < super.listaPokemon.length; i++)
+		{
+			super.listaPokemon[i].ataca();
+		}
+
+	
+	}
 
 }

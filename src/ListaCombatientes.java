@@ -93,4 +93,10 @@ public class ListaCombatientes
 		Random rn = new Random();
 		arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)].tuTurno();
 	}
+	
+	public Combatiente obtenerCombatienteAleatorio()
+	{
+		Random rn = new Random();
+		return arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)];
+	}
 }
