@@ -17,7 +17,9 @@ public class NPC extends Combatiente {
 		
 		for (int i = 0; i < super.arrayPokemon.length; i++)
 		{
-			super.arrayPokemon[i].ataca();
+			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i]);
+			System.out.println("Ataka el poquemon " + i);
+			ListaCombatientes.getMiListaCombatientes().escogerObjetivo(super.getId());
 		}
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
 	}

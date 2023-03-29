@@ -4,11 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import VentanaInicio.ControladorInicio;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import javax.swing.JLabel;
@@ -206,6 +209,7 @@ public class VentanaJugador extends JFrame implements Observer{
 					
 					// GUIA : Y lo añadimos a la ventana actual
 					pokemons.add(poketoMonsta);
+					poketoMonsta.addActionListener(ControladorJugador.getControladorJugador());
 						
 				}
 	
@@ -234,11 +238,14 @@ public class VentanaJugador extends JFrame implements Observer{
 			return miControladorJugador;
 		}
 		
+		public void mouseClicked(MouseEvent e)
+		{
+			
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			/*
-			
+			// GUIA : Como buena fuente de informacion, primero comprueba que esta cotillenado
 			if (e.getSource().equals(btnNewButton))
 			{
 				// GUIA : Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
@@ -270,13 +277,16 @@ public class VentanaJugador extends JFrame implements Observer{
 						// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
 						Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
 						// GUIA : Siganme...
+						System.out.println("Aqui me quedo.");
 					}
 				//}
 				//catch(Exception ex) 
 				//{
 				//	System.out.println("Valores no validos");
-				//}	*/
-		}	
+				//}	
+			}	
+		}
+	}
 			
 	}
 }

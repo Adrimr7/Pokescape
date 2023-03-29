@@ -103,4 +103,22 @@ public class ListaCombatientes
 	{	
 		arrayCombatientes[pIdCombatiente].debilitar(pIdPokemon);
 	}
+	public void escogerObjetivo(int pId)
+	{
+		Random rn = new Random();
+		Combatiente combee = null;
+		int idRandom = rn.nextInt(0,arrayCombatientes.length-1);
+		System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+		combee = arrayCombatientes[idRandom];
+		while ((idRandom == pId) || (combee == null))
+		{
+			
+			idRandom = rn.nextInt(0,arrayCombatientes.length-1);
+			System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+			combee = arrayCombatientes[idRandom];
+		}
+		System.out.println("Entrar escoger objetivo");
+		combee.escogerObjetivo();
+		System.out.println("NaCli escoger objetivo");
+	}
 }

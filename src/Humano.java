@@ -10,5 +10,10 @@ public class Humano extends Combatiente {
 		
 	}
 	*/
+	@Override
+	public void tuTurno()
+	{
+		System.out.println("Turno Humano");
+	}
 
 }

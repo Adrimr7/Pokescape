@@ -18,16 +18,17 @@ public class JPokemon extends JPanel implements Observer
 {
 	
 	//JPanel pokemon;
-	JPanel zonaNombrePokemon;
-	JLabel nombrePokemon;
-	JLabel tipo;
-	JLabel spritePokemon;
-	JProgressBar barraHp;
-	JPanel estadisticas;
-	JPanel panelNombresEstats;
-	JPanel panelBarrasEstats;
-	JProgressBar barraAtaque;
-	JProgressBar barraDefensa;
+	private JPanel zonaNombrePokemon;
+	private JLabel nombrePokemon;
+	private JLabel tipo;
+	private JLabel spritePokemon;
+	private JProgressBar barraHp;
+	private JPanel estadisticas;
+	private JPanel panelNombresEstats;
+	private JPanel panelBarrasEstats;
+	private JProgressBar barraAtaque;
+	private JProgressBar barraDefensa;
+	private int vidaMax;
 	
 	public JPokemon ()
 	{
@@ -108,11 +109,13 @@ public class JPokemon extends JPanel implements Observer
 				this.add(estadisticas);
 	}
 	
-	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa)
+	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa, int pVida)
 	{
 		//Variables para añadir fotos
 				URL url;
 				Icon imageIcon;
+				
+				vidaMax = pVida;
 				
 				nombrePokemon.setText(pNombrePokemon);
 	
@@ -133,6 +136,10 @@ public class JPokemon extends JPanel implements Observer
 				barraDefensa.setValue((int) (pDefensa*5));
 	}
 	
+	public void actualizarVida(int pVida)
+	{
+		barraHp.setValue((pVida/vidaMax)*100);
+	}
 	
 	@Override
 	public void update(Observable o, Object arg) 
@@ -146,8 +153,17 @@ public class JPokemon extends JPanel implements Observer
 		int defensa = (int) lista[3];
 		int numPoke = (int) lista[4];
 		String pTipo = (String) lista[5];
+		int tipoUpdate = (int) lista[6];
 		
-		actualizarDatos(numPoke, nombre, pTipo, ataque, defensa);
+		if(tipoUpdate == 0) 
+		{
+			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);
+		}
+		else
+		{
+			actualizarVida(vida);
+		}
+		
 		
 	}
 

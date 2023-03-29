@@ -80,4 +80,19 @@ public abstract class Combatiente extends Observable
 	{
 		this.arrayPokemon[pIdPokemon] = null;
 	}
+	public void escogerObjetivo()
+	{
+		Random rn = new Random();
+		int idRandom = rn.nextInt(0,arrayPokemon.length-1);
+		
+		while (!arrayPokemon[idRandom].estaVivo())
+		{
+			idRandom = rn.nextInt(0,arrayPokemon.length-1);
+		}
+		Pokemon poke = arrayPokemon[idRandom];
+	}
+	
+	public int getId() {
+		return id;
+	}
 }

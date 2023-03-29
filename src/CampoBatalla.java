@@ -18,11 +18,13 @@ public class CampoBatalla
 		if (atacante == null)
 		{
 			atacante = poke;
+			System.out.println("Añadimos atacante");
 			defensor = null;
 		}
 		else if (defensor == null)
 		{
 			defensor = poke;
+			System.out.println("Añadimos defensor");
 			iniciarAtaque();
 		}
 		else
@@ -32,10 +34,13 @@ public class CampoBatalla
 	}
 	private void iniciarAtaque()
 	{
+		System.out.println("Iniciamos ataque");
 		boolean vivo = defensor.danar(atacante.getAtaque());
 		if (!vivo)
 		{
 			ListaCombatientes.getMiListaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
 		}
+		atacante = null;
+		defensor = null;
 	}
 }

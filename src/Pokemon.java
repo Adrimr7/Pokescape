@@ -19,11 +19,12 @@ public abstract class Pokemon extends Observable
 		vida = pVida + aleatorio.nextInt(1,20);
 		ataque = pAtaque + aleatorio.nextInt(1,7);
 		defensa = pDefensa + aleatorio.nextInt(1,4);
+		
 	}
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase()});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0});
 		
 	}
 	public void setNumPokemon(int pNumPoke)
@@ -41,26 +42,32 @@ public abstract class Pokemon extends Observable
 			return this.getClass().getSimpleName();
 		}
 	}
-	
+	/*
 	public void ataca() 
 	{
 		Pokemon poke = ListaCombatientes.getMiListaCombatientes().obtenerCombatienteAleatorio().obtenerPokemonAleatorio();
 		boolean vivo = poke.danar(ataque);
-
 	}
+	*/
 	
 	public boolean danar(int pAtaque)
 	{
-		vida = vida - (pAtaque - defensa);
+		int dano = (pAtaque - defensa);
+		System.out.println(vida);
+		vida = vida - dano;
+		System.out.println("Daño = " + dano);
 		boolean vivo = true;
 		if(vida <= 0) 
 		{
 			vivo = false;
 		}
+		System.out.println(vida);
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase()});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1});
+		
 		return vivo;
 	}
+	
 	public int getAtaque()
 	{
 		return ataque;
@@ -84,6 +91,11 @@ public abstract class Pokemon extends Observable
 	public int getIdPokemon()
 	{
 		return idPokemon;
+	}
+	public boolean estaVivo() 
+	{
+		
+		return (vida>0);
 	}
 	
 	
