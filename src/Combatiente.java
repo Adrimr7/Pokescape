@@ -2,7 +2,7 @@ import java.util.Observable;
 import java.util.Random;
 public abstract class Combatiente extends Observable 
 {
-	protected Pokemon[] listaPokemon;
+	protected Pokemon[] arrayPokemon;
 	private String nombre;
 	private int id;
 	private boolean enPie;
@@ -17,30 +17,32 @@ public abstract class Combatiente extends Observable
 		System.out.println("Se ejecuta 'inicializate'");
 		// GUIA (8)
 		// GUIA : Pero que tenemos por aqui, no es difil ver que este luchador no hace mucho
-		listaPokemon = new Pokemon[pNumPoke];
+		arrayPokemon = new Pokemon[pNumPoke];
 		for (int i = 0; i < pNumPoke; i++)
 		{
 			// GUIA : A lo sumo, le pide al Pokefactory que le los pokemon
 			// GUIA : Dicho esto, ya sabeis donde estare
 			// GUIA : Seguidme ...
 			System.out.println("Entramos a la factory de pokemon");
-			listaPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
+			arrayPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
+			arrayPokemon[i].setIdPokemon(i);
+			arrayPokemon[i].setIdCombatiente(id);
 		}
 	}
 	
 	public Pokemon getPokemon(int i) 
 	{
-		return listaPokemon[i];
+		return arrayPokemon[i];
 	}
 	
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {listaPokemon.length, id});
+		notifyObservers(new Object[] {arrayPokemon.length, id, nombre});
 		
-		for(int i = 0; i < listaPokemon.length; i++) 
+		for(int i = 0; i < arrayPokemon.length; i++) 
 		{
-			listaPokemon[i].daAviso();
+			arrayPokemon[i].daAviso();
 		}
 		
 	}
@@ -61,17 +63,21 @@ public abstract class Combatiente extends Observable
 	public Pokemon obtenerPokemonAleatorio()
 	{
 		Random rn = new Random();
-		return listaPokemon[rn.nextInt(0,listaPokemon.length-1)];
+		return arrayPokemon[rn.nextInt(0,arrayPokemon.length-1)];
 	}
 	
 	public void eliminarPokemon(Pokemon pPoke) 
 	{
-		for(int i = 0; i < listaPokemon.length; i++) 
+		for(int i = 0; i < arrayPokemon.length; i++) 
 		{
-			if (listaPokemon[i] == pPoke) 
+			if (arrayPokemon[i] == pPoke) 
 			{
 				//Borrar pokemon???
 			}
 		}
+	}
+	public void debilitar(int pIdPokemon) 
+	{
+		this.arrayPokemon[pIdPokemon] = null;
 	}
 }

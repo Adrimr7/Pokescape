@@ -129,8 +129,8 @@ public class JPokemon extends JPanel implements Observer
 				
 				barraHp.setValue(100);
 						
-				barraAtaque.setValue((int) (pAtaque*100/255));
-				barraDefensa.setValue((int) (pDefensa*100/255));
+				barraAtaque.setValue((int) (pAtaque*5));
+				barraDefensa.setValue((int) (pDefensa*5));
 	}
 	
 	
@@ -154,7 +154,7 @@ public class JPokemon extends JPanel implements Observer
 	private JProgressBar barraEstatt(int stat, Color color) 
 	{
 		JProgressBar barra = new JProgressBar();
-		barra.setValue((int) (stat*100/255));
+		barra.setValue((int) (stat*5));
 		barra.setForeground(color);
 		barra.setPreferredSize(new Dimension(100, 14));
 		barra.setMaximumSize(new Dimension(100, 14));

@@ -99,4 +99,8 @@ public class ListaCombatientes
 		Random rn = new Random();
 		return arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)];
 	}
+	public void debilitar(int pIdPokemon, int pIdCombatiente) 
+	{	
+		arrayCombatientes[pIdCombatiente].debilitar(pIdPokemon);
+	}
 }

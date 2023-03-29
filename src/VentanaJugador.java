@@ -187,7 +187,8 @@ public class VentanaJugador extends JFrame implements Observer{
 				Object[] lista = (Object[]) arg;
 				int numPoke = (int) lista[0];
 				int numComb = (int) lista[1];
-				
+				String nombre = (String) lista[2];
+				setTitle(nombre);
 				setBounds(100, 100, 155*numPoke + 155, 240);
 				
 				

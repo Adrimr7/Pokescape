@@ -13,14 +13,13 @@ public class NPC extends Combatiente {
 	
 	public void tuTurno()
 	{
-		System.out.println("A ");
+		System.out.println("Turno NPC");
 		
-		for (int i = 0; i < super.listaPokemon.length; i++)
+		for (int i = 0; i < super.arrayPokemon.length; i++)
 		{
-			super.listaPokemon[i].ataca();
+			super.arrayPokemon[i].ataca();
 		}
-
-	
+		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
 	}
 
 }
