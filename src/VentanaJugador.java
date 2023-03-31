@@ -4,14 +4,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import VentanaInicio.ControladorInicio;
+//import VentanaInicio.ControladorInicio;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 import javax.swing.JLabel;
@@ -27,10 +29,13 @@ import javax.swing.SwingConstants;
 
 import java.util.Observable;
 import java.util.Observer;
-public class VentanaJugador extends JFrame implements Observer{
+
+public class VentanaJugador extends JFrame implements Observer
+{
 
 	private JPanel contentPane;
 	private JPanel pokemons;
+	private static JPokemon[] jpoke;
 	
 	/*
 	private JPanel panelPokemon;
@@ -198,6 +203,8 @@ public class VentanaJugador extends JFrame implements Observer{
 				// GUIA : Y lo segundo usarlos para algo
 				// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador
 				// GUIA : Entonces vamos a crear los diferentes jpokemon para los combatientes
+				
+				jpoke = new JPokemon[numPoke];
 				for (int i = 0; i < numPoke; i++)
 				{
 					
@@ -209,7 +216,12 @@ public class VentanaJugador extends JFrame implements Observer{
 					
 					// GUIA : Y lo añadimos a la ventana actual
 					pokemons.add(poketoMonsta);
-					poketoMonsta.addActionListener(ControladorJugador.getControladorJugador());
+					
+					poketoMonsta.addMouseListener(ControladorJugador.getControladorJugador());
+					
+					jpoke[i] = poketoMonsta;
+					
+					
 						
 				}
 	
@@ -220,7 +232,7 @@ public class VentanaJugador extends JFrame implements Observer{
 	}
 	
 
-	static private class ControladorJugador implements ActionListener 
+	static private class ControladorJugador implements MouseListener 
 	{
 		
 		
@@ -237,15 +249,11 @@ public class VentanaJugador extends JFrame implements Observer{
 			}
 			return miControladorJugador;
 		}
-		
-		public void mouseClicked(MouseEvent e)
-		{
-			
-		}
-		@Override
-		public void actionPerformed(ActionEvent e) 
+		/*
+		public void mouseClicked(ActionEvent e) 
 		{
 			// GUIA : Como buena fuente de informacion, primero comprueba que esta cotillenado
+			
 			if (e.getSource().equals(btnNewButton))
 			{
 				// GUIA : Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
@@ -286,9 +294,50 @@ public class VentanaJugador extends JFrame implements Observer{
 				//}	
 			}	
 		}
+		*/
+
+		@Override
+		public void mouseClicked(MouseEvent e) 
+		{
+			for(int i = 0; i < jpoke.length; i++)
+			{
+				if (e.getSource().equals(jpoke[i]))
+				{
+					System.out.println(i);
+				}
+			}
+		}
+
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 			
-	}
+	
 }
 	
 	
