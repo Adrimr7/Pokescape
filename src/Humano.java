@@ -13,7 +13,13 @@ public class Humano extends Combatiente {
 	@Override
 	public void tuTurno()
 	{
+		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
 		System.out.println("Turno Humano");
+		
+		setChanged();
+		notifyObservers(new Object[] {1});
 	}
+	
+
 
 }

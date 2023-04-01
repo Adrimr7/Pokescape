@@ -22,8 +22,7 @@ public class ListaCombatientes
 		// GUIA : Para empezar, preparamos el alojamiento, del tamaño exacto para los concursantes
 		arrayCombatientes = new Combatiente[numBots + numJugs];
 		
-		// GUIA : Empezaremos por los humanos y luego los NPC, como espero que comprendais, este orden es completamente aleatorio
-		// GUIA : y no tiene nada que ver con un tema racial (ni nada)
+		// GUIA : Empezaremos por los humanos y luego los NPC
 		
     	for (int i = 0; i<numJugs; i++)
     	{
@@ -42,7 +41,7 @@ public class ListaCombatientes
     	
 		// GUIA (10)
 		// GUIA : Bien, quedando explicado como nacen los pokemon volveremos directamnte a iniciarCombate de Pokescape
-		// GUIA : Daremos por enseñado como se crean los bots, digo NPC, por que son lo mismo que los humanos, no por ningun problema que pueda tener con ellos
+		// GUIA : Daremos por enseñado como se crean los NPC, por que son lo mismo que los humanos 
 		// GUIA : Seguidme...
     	for (int i = 0; i<numBots; i++)
     	{
@@ -51,6 +50,8 @@ public class ListaCombatientes
     	
     		arrayCombatientes[i + numJugs].inicializate(i, i+numJugs, numPoke);
     	}
+    	
+
 		
 	}
 	
@@ -91,7 +92,14 @@ public class ListaCombatientes
 	public void escogeCombatiente()
 	{
 		Random rn = new Random();
+		if(arrayCombatientes.length == 1)
+		{
+			arrayCombatientes[0].tuTurno();
+		}
+		else
+		{
 		arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)].tuTurno();
+		}
 	}
 	
 	public Combatiente obtenerCombatienteAleatorio()
@@ -112,7 +120,6 @@ public class ListaCombatientes
 		combee = arrayCombatientes[idRandom];
 		while ((idRandom == pId) || (combee == null))
 		{
-			
 			idRandom = rn.nextInt(0,arrayCombatientes.length-1);
 			System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
 			combee = arrayCombatientes[idRandom];
@@ -120,5 +127,10 @@ public class ListaCombatientes
 		System.out.println("Entrar escoger objetivo");
 		combee.escogerObjetivo();
 		System.out.println("NaCli escoger objetivo");
+	}
+	
+	public void seleccionado(int idJug, int idPoke) 
+	{
+		arrayCombatientes[idJug].atacaCon(idPoke);
 	}
 }

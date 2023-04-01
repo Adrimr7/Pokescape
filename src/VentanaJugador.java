@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,8 +36,9 @@ public class VentanaJugador extends JFrame implements Observer
 
 	private JPanel contentPane;
 	private JPanel pokemons;
-	private static JPokemon[] jpoke;
-	
+	private ArrayList<JPokemon> jpoke;
+	private JLabel foto;
+	private int idCombee;
 	/*
 	private JPanel panelPokemon;
 	private JLabel lblNombrePokemon;
@@ -108,13 +110,13 @@ public class VentanaJugador extends JFrame implements Observer
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		personaje.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
+		foto = new JLabel("");
 		URL url;
 		Icon imageIcon;
 		url = this.getClass().getResource("201-a.png");
 		imageIcon = new ImageIcon(url);
-		lblNewLabel_1.setIcon(imageIcon);
-		personaje.add(lblNewLabel_1);
+		foto.setIcon(imageIcon);
+		personaje.add(foto);
 		
 		// GUIA : Tras definir los diferentes apartados, el nombre, la imagen del jugador, el panel donde estaran los pokemon... empieza otra fiesta
 		// GUIA : La fiesta de pasar los datos de los pokemon a su respectivo lugar
@@ -193,45 +195,188 @@ public class VentanaJugador extends JFrame implements Observer
 				// GUIA : Y que es la informacion que nos interesa, se pone manos a la obra
 				// GUIA : Lo primero es tener bien repartiditos los datos
 				Object[] lista = (Object[]) arg;
-				int numPoke = (int) lista[0];
-				int numComb = (int) lista[1];
-				String nombre = (String) lista[2];
-				setTitle(nombre);
-				setBounds(100, 100, 155*numPoke + 155, 240);
 				
+				int codigo = (int) lista[0];
 				
-				// GUIA : Y lo segundo usarlos para algo
-				// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador
-				// GUIA : Entonces vamos a crear los diferentes jpokemon para los combatientes
-				
-				jpoke = new JPokemon[numPoke];
-				for (int i = 0; i < numPoke; i++)
+				if(codigo == 0) 
 				{
 					
+					int numComb = (int) lista[1];
+					String nombre = (String) lista[2];
+					int numPoke = (int) lista[3];
+					idCombee = (int) lista[4];
+					
+				
+					setTitle(nombre);
+					setBounds(100, 100, 155*numPoke + 155, 240);
 					
 					
-					JPokemon poketoMonsta = new JPokemon();
-					// GUIA : Una vez creados hacemos que estos Jpokemon observen a sus respectivos pokemon de su combatiente
-					ListaCombatientes.getMiListaCombatientes().getCombatiente(numComb).getPokemon(i).addObserver(poketoMonsta);
+					// GUIA : Y lo segundo usarlos para algo
+					// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador
+					// GUIA : Entonces vamos a crear los diferentes jpokemon para los combatientes
 					
-					// GUIA : Y lo añadimos a la ventana actual
-					pokemons.add(poketoMonsta);
-					
-					poketoMonsta.addMouseListener(ControladorJugador.getControladorJugador());
-					
-					jpoke[i] = poketoMonsta;
-					
-					
+					jpoke = new ArrayList<JPokemon>();
+					for (int i = 0; i < numPoke; i++)
+					{
+						JPokemon poketoMonsta = new JPokemon();
+						// GUIA : Una vez creados hacemos que estos Jpokemon observen a sus respectivos pokemon de su combatiente
+						ListaCombatientes.getMiListaCombatientes().getCombatiente(numComb).getPokemon(i).addObserver(poketoMonsta);
 						
-				}
-	
+						// GUIA : Y lo añadimos a la ventana actual
+						pokemons.add(poketoMonsta);
+						
+						ControladorJugador cj = new ControladorJugador();
+						poketoMonsta.addMouseListener(cj);
+						
+						jpoke.add(poketoMonsta);
+					}
+				} 
+				else 
+				{
+					//Mi turno
+					
+					URL url;
+					Icon imageIcon;
+					url = this.getClass().getResource("Spr_B2W2_Veteran_M.png");
+					imageIcon = new ImageIcon(url);
+					foto.setIcon(imageIcon);
+					
+					
+				}	
 			}
 		}
-		
-		
 	}
 	
 
+	private class ControladorJugador implements MouseListener 
+	{
+		
+		
+		//private static ControladorJugador miControladorJugador;
+	
+		public ControladorJugador() {}
+	
+		/*
+		public static ControladorJugador getControladorJugador()
+		{
+			if(miControladorJugador == null) 
+			{
+				miControladorJugador = new ControladorJugador();
+			}
+			return miControladorJugador;
+		}
+		/*
+		public void mouseClicked(ActionEvent e) 
+		{
+			// GUIA : Como buena fuente de informacion, primero comprueba que esta cotillenado
+			
+			if (e.getSource().equals(btnNewButton))
+			{
+				// GUIA : Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
+				// GUIA : El objetivo del listener en este caso es que si se le da al boton, avise al modelo, en este caso a Pokescape para que comience el juego.
+				
+				// GUIA : Estos tres datos son los que nos interesa entonces se los guarda
+				String strb = textFieldBots.getText();
+				String strj = textFieldJugadores.getText();
+				String strp = textFieldPokemons.getText();
+				
+				int numb;
+				int numj;
+				int nump;
+				
+				//try 
+				//{
+					// GUIA : Como la vieja siempre dice, "El diablo es mas sabio por viejo que por diablo" y por tanto sabemos que la gente que usa aplicaciones no es muy lista
+					// GUIA : Por eso tenemos que comprobar que lo que nos han pasado es un numero y no un versiculo de la biblia
+					numb = Integer.parseInt(strb);
+					numj = Integer.parseInt(strj);
+					nump = Integer.parseInt(strp);
+				
+					System.out.println(numb + " " + numj + " " + nump);
+					// TODO ******************************
+					if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
+					else
+					{
+						System.out.println("Pasamos a Pokescape");
+						// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
+						Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
+						// GUIA : Siganme...
+						System.out.println("Aqui me quedo.");
+					}
+				//}
+				//catch(Exception ex) 
+				//{
+				//	System.out.println("Valores no validos");
+				//}	
+			}	
+		}
+		*/
+
+		@Override
+		public void mouseClicked(MouseEvent e) 
+		{
+			System.out.println(jpoke.indexOf(e.getSource()));
+			ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
+
+			
+			/*
+			for(int i = 0; i < jpoke.length; i++)
+			{
+				if (e.getSource().equals(jpoke[i]))
+				{
+					System.out.println(i);
+				}
+			}*/
+		}
+
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+	
+		}
+
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	  
+	 
 	static private class ControladorJugador implements MouseListener 
 	{
 		
@@ -294,7 +439,7 @@ public class VentanaJugador extends JFrame implements Observer
 				//}	
 			}	
 		}
-		*/
+	
 
 		@Override
 		public void mouseClicked(MouseEvent e) 
@@ -338,6 +483,8 @@ public class VentanaJugador extends JFrame implements Observer
 	}
 			
 	
+	  
+	 */
 }
 	
 	

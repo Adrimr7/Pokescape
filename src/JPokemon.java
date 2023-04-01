@@ -164,7 +164,23 @@ public class JPokemon extends JPanel implements Observer
 		}
 		else
 		{
-			actualizarVida(vida);
+			
+			
+			if(vida <= 0)
+			{
+				URL url;
+				Icon imageIcon;
+
+				url = this.getClass().getResource(92 + ".png");
+				imageIcon = new ImageIcon(url);
+				spritePokemon.setIcon(imageIcon);
+				
+				actualizarVida(0);
+			}
+			else
+			{
+				actualizarVida(vida);
+			}
 		}
 		
 		

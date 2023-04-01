@@ -5,6 +5,7 @@ public class CampoBatalla
 	private Pokemon atacante;
 	private Pokemon defensor;
 	private CampoBatalla(){}
+	private int idTurnoActual;
 	public static CampoBatalla getMiCampoBatalla()
 	{
 		if (miCampoBatalla == null)
@@ -13,16 +14,19 @@ public class CampoBatalla
 		}
 		return miCampoBatalla;
 	}
-	public void anadir(Pokemon poke)
+	public void anadir(Pokemon poke, int idCombee)
 	{
-		if (atacante == null)
-		{
+		System.out.println("Entramos al campo");
+		if (atacante == null && idCombee == idTurnoActual)
+		{ 
+			System.out.println("Añadimos pokemon de " + idCombee + " como combatiente");
 			atacante = poke;
 			System.out.println("Añadimos atacante");
 			defensor = null;
 		}
-		else if (defensor == null)
+		else if (defensor == null && atacante != null)
 		{
+			System.out.println("Añadimos defensor");
 			defensor = poke;
 			System.out.println("Añadimos defensor");
 			iniciarAtaque();
@@ -43,4 +47,10 @@ public class CampoBatalla
 		atacante = null;
 		defensor = null;
 	}
+	
+	public void setTurno(int idTurno)
+	{
+		idTurnoActual = idTurno;
+	}
+	
 }

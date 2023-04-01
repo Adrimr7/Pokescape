@@ -38,7 +38,7 @@ public abstract class Combatiente extends Observable
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {arrayPokemon.length, id, nombre});
+		notifyObservers(new Object[] {0, id, nombre, arrayPokemon.length, id});
 		
 		for(int i = 0; i < arrayPokemon.length; i++) 
 		{
@@ -52,13 +52,9 @@ public abstract class Combatiente extends Observable
 		return enPie;
 	}
 	
-	public void tuTurno()
-	{
-		System.out.println("Mi turno " + nombre);
-		
-		
-		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
-	}
+	
+	public void tuTurno(){}
+	
 	
 	public Pokemon obtenerPokemonAleatorio()
 	{
@@ -80,6 +76,7 @@ public abstract class Combatiente extends Observable
 	{
 		this.arrayPokemon[pIdPokemon] = null;
 	}
+	
 	public void escogerObjetivo()
 	{
 		Random rn = new Random();
@@ -92,7 +89,18 @@ public abstract class Combatiente extends Observable
 		Pokemon poke = arrayPokemon[idRandom];
 	}
 	
-	public int getId() {
+	public int getId() 
+	{
 		return id;
 	}
+	
+	
+	public void atacaCon(int idPoke)
+	{
+		if(arrayPokemon[idPoke] != null)
+		{
+		CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
+		}
+	}
+	
 }

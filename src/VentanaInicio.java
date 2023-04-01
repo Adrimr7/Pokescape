@@ -61,6 +61,8 @@ public class VentanaInicio extends JFrame implements Observer{
 	private JLabel lblNewLabel_10;
 	private JLabel lblNewLabel_11;
 	private JLabel lblNewLabel_12;
+	
+	private VentanaJugador[] listaVentanas;
 
 	public VentanaInicio() {
 		
@@ -400,16 +402,23 @@ public class VentanaInicio extends JFrame implements Observer{
 					int numJugs = (int) lista[1];
 					int numPoke = (int) lista[2];
 					
+					listaVentanas = new VentanaJugador[numJugs+numBots];
+					
 					// GUIA : Y lo segundo usarlos para algo
 					// GUIA : Como ya sabeis tenemos todos los combatientes y pokemon creados en el modelo, pero en el la vista
 					// GUIA : Entonces vamos a crear las diferentes ventanas para los combatientes
 					for (int i = 0; i< numBots+numJugs; i++)
 					{
-						VentanaJugador ventJug = new VentanaJugador("Jugador" + i);
-						// GUIA : Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
-						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(ventJug);
+						listaVentanas[i] = new VentanaJugador("Jugador" + i);
 						
-						ventJug.setVisible(true);
+						// GUIA : Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
+						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(listaVentanas[i]);
+						
+						/*
+						Pokescape.getMiPokescape().setListaVentanas(listaVentanas);
+						*/
+						
+						listaVentanas[i].setVisible(true);
 						// GUIA : Dicho esto vamos a ver como se crean las ventanas de VentanaJugador
 						// GUIA : Por aqui...
 					}

@@ -1,9 +1,12 @@
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Observable;
+
+import javax.swing.JFrame;
 public class Pokescape extends Observable
 {
 	private static VentanaInicio frameInicio;
+	//private static VentanaJugador[] listaFrames;
 	//private static VentanaJugador frameJugador;
 	private static Pokescape miPokescape;
 	public Pokescape()
@@ -111,4 +114,10 @@ public class Pokescape extends Observable
 		}
 		return miPokescape;
 	}
+	/*
+	public void setListaVentanas(VentanaJugador[] listaVentanas)
+	{
+		listaFrames =  listaVentanas;
+	}
+	*/
 }

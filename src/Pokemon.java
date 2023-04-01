@@ -48,6 +48,10 @@ public abstract class Pokemon extends Observable
 		int dano = (pAtaque - defensa);
 		System.out.println(vida);
 		vida = vida - dano;
+		if(vida < 0)
+		{
+			vida = 0;
+		}
 		System.out.println("Daño = " + dano);
 		boolean vivo = estaVivo();
 		System.out.println(vida);
