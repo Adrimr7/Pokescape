@@ -130,7 +130,7 @@ public class JPokemon extends JPanel implements Observer
 				spritePokemon.setIcon(imageIcon);
 	
 				
-				barraHp.setValue(100);
+				barraHp.setValue(pVida);
 						
 				barraAtaque.setValue((int) (pAtaque*5));
 				barraDefensa.setValue((int) (pDefensa*5));
@@ -138,9 +138,11 @@ public class JPokemon extends JPanel implements Observer
 	
 	public void actualizarVida(int pVida)
 	{
-		barraHp.setValue((pVida/vidaMax)*100);
+		System.out.println("Vida max :" + vidaMax + "  "  + barraHp.getValue() + "  "   + (double) pVida/vidaMax);
+		System.out.println("Vida :" + pVida + "  " + (int) (barraHp.getValue() - (double) pVida/vidaMax));
+		barraHp.setValue((int) (double) (pVida*100/vidaMax));
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) 
 	{
@@ -149,12 +151,13 @@ public class JPokemon extends JPanel implements Observer
 		//nombre, vida, ataque, defensa
 		String nombre = (String) lista[0];
 		int vida = (int) lista[1];
+		//System.out.println("VIDA EN UPDATE ES DE" + vida);
 		int ataque = (int) lista[2];
 		int defensa = (int) lista[3];
 		int numPoke = (int) lista[4];
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
-		
+		//System.out.println("TIPO DE UPDATE ES DE" + tipoUpdate);
 		if(tipoUpdate == 0) 
 		{
 			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);

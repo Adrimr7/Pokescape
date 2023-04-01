@@ -42,13 +42,6 @@ public abstract class Pokemon extends Observable
 			return this.getClass().getSimpleName();
 		}
 	}
-	/*
-	public void ataca() 
-	{
-		Pokemon poke = ListaCombatientes.getMiListaCombatientes().obtenerCombatienteAleatorio().obtenerPokemonAleatorio();
-		boolean vivo = poke.danar(ataque);
-	}
-	*/
 	
 	public boolean danar(int pAtaque)
 	{
@@ -56,15 +49,10 @@ public abstract class Pokemon extends Observable
 		System.out.println(vida);
 		vida = vida - dano;
 		System.out.println("Daño = " + dano);
-		boolean vivo = true;
-		if(vida <= 0) 
-		{
-			vivo = false;
-		}
+		boolean vivo = estaVivo();
 		System.out.println(vida);
 		setChanged();
 		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1});
-		
 		return vivo;
 	}
 	
@@ -97,40 +85,5 @@ public abstract class Pokemon extends Observable
 		
 		return (vida>0);
 	}
-	
-	
-	/*
-	 public class ListaPokemon 
-{
-	private Pokemon[] arrayPokemon;
-	
-	public ListaPokemon(int pTam) 
-	{
-		if (arrayPokemon == null) {arrayPokemon = new Pokemon[pTam];}
-	}
-	
-	private void cargarPokemon() {};
-	private void metodo1() {};
-	private void metodo2() {};
-	private void metodo3() {}
-
-	public void anadirPokemon(Pokemon poke) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-	public void inicializate()
-	{
-		for (int i = 0; i< arrayPokemon.length; i++)
-		{
-			// TODO DETERMINAR EL POKEMON ALEATORIO!!!!!!!!!!
-			// TODO DETERMINAR EL POKEMON ALEATORIO!!!!!!!!!!
-			// TODO DETERMINAR EL POKEMON ALEATORIO!!!!!!!!!!
-			arrayPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
-		}
-	}
-}
-	 */
-	
 	
 }
