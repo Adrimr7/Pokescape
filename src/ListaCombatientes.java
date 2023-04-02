@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ListaCombatientes 
 {
@@ -92,11 +94,16 @@ public class ListaCombatientes
 		Random rn = new Random();
 		if(arrayCombatientes.length == 1)
 		{
-			arrayCombatientes[0].tuTurno();
+			Timer t = new Timer();
+			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[0].tuTurno();}};
+			t.schedule(tt, 500);
+			
 		}
 		else
 		{
-			arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();
+			Timer t = new Timer();
+			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
+			t.schedule(tt, 500);
 		}
 	}
 	

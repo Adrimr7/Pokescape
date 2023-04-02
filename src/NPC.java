@@ -1,5 +1,7 @@
-import java.util.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.TimerTask;
+import java.util.Timer;
 
 public class NPC extends Combatiente {
 
@@ -31,20 +33,9 @@ public class NPC extends Combatiente {
 				Pokemon poke = ListaCombatientes.getMiListaCombatientes().escogerObjetivo(super.getId());
 				bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
 				System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());
-				Timer t = new Timer();
-				t.schedule(new TimerTask(){
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						
-					} }, 5000);
 			}
-
 		}
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
 	}
-	
-
 
 }
