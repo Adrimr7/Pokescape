@@ -17,12 +17,10 @@ public class CampoBatalla
 	public boolean anadir(Pokemon poke, int idCombee)
 	{
 		boolean bool = false;
-		//System.out.println("Entramos al campo");
 		if (atacante == null && idCombee == idTurnoActual)
 		{ 
 			System.out.println("Añadimos pokemon de " + idCombee + " como combatiente");
 			atacante = poke;
-			//System.out.println("Añadimos atacante");
 			defensor = null;
 			bool = true;
 		}

@@ -95,13 +95,14 @@ public abstract class Combatiente extends Observable
 		return id;
 	}
 	
-	
 	public void atacaCon(int idPoke)
 	{
 		if(arrayPokemon[idPoke] != null && !arrayUsados[idPoke])
 		{
-			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
-			arrayUsados[idPoke] = true;
+			if (CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id))
+			{
+				arrayUsados[idPoke] = true;
+			}
 		}
 	}
 	public boolean haAcabado()
