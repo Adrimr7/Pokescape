@@ -6,13 +6,19 @@ import javax.swing.JFrame;
 public class Pokescape extends Observable
 {
 	private static VentanaInicio frameInicio;
-	//private static VentanaJugador[] listaFrames;
-	//private static VentanaJugador frameJugador;
 	private static Pokescape miPokescape;
-	public Pokescape()
+	
+	public Pokescape(){}
+	
+	public static Pokescape getMiPokescape() 
 	{
-
+		if (miPokescape == null)
+		{
+			miPokescape = new Pokescape();
+		}
+		return miPokescape;
 	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() 
 		{
@@ -53,19 +59,11 @@ public class Pokescape extends Observable
     }
     public void iniciarCombate(int numBots, int numJugs, int numPokes)
     {
-    	//TODO ********************* Tiene pinta de que primero tenemos que tener los pokemon hechos para general las pantallas con los pokemon ya puestos *****
-    	//Creamos una lista para almacenar todas las ventanas de los jugadores
-    	
-    	
     	// GUIA (6)  	
       	// GUIA : Bueno bueno, parece ser que empieza la fiesta por que depues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de ListaCombatientes.
     	// GUIA : Estad atentos por que mas adelante volveremos aqui
     	// GUIA : Seguidme ...
-    	
     	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
-    	
-    	
-    	
     	
     	
     	// GUIA (10)
@@ -75,8 +73,6 @@ public class Pokescape extends Observable
     	// GUIA : Trabajan juntos pero sin que se vea. El Observable hace una seña, y el Observer la recibe.
     	// GUIA : Es una forma de pasar informacion de forma "indirecta"
     	// GUIA : Con setChanged() Pokespace dice que algo ha cambiado, como que lo deja caer
-    	
-    	
     	avisarInicio(numBots, numJugs, numPokes);
 		
 		
@@ -85,9 +81,7 @@ public class Pokescape extends Observable
 		ListaCombatientes.getMiListaCombatientes().daAvisos();
 		
 		
-
-		// Turnos
-		
+		// Con este metodo le damos turno a un combatiente aleatorio
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
 		
     }
@@ -106,18 +100,6 @@ public class Pokescape extends Observable
     	
     }
     
-	public static Pokescape getMiPokescape() 
-	{
-		if (miPokescape == null)
-		{
-			miPokescape = new Pokescape();
-		}
-		return miPokescape;
-	}
-	/*
-	public void setListaVentanas(VentanaJugador[] listaVentanas)
-	{
-		listaFrames =  listaVentanas;
-	}
-	*/
+
+
 }

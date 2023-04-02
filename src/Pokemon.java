@@ -60,34 +60,22 @@ public abstract class Pokemon extends Observable
 		return vivo;
 	}
 	
-	public int getAtaque()
-	{
-		return ataque;
-	}
-	public int getDefensa()
-	{
-		return defensa;
-	}
-	public int getIdCombatiente()
-	{
-		return idCombatiente;
-	}
-	public void setIdCombatiente(int pId)
-	{
-		idCombatiente = pId;
-	}
-	public void setIdPokemon(int pId)
-	{
-		idPokemon = pId;
-	}
-	public int getIdPokemon()
-	{
-		return idPokemon;
-	}
-	public boolean estaVivo() 
-	{
-		
-		return (vida>0);
-	}
+	public int getAtaque(){ return ataque; }
+	
+	public int getDefensa() { return defensa; }
+	
+	public int getIdCombatiente(){ return idCombatiente; }
+	
+	public int getIdPokemon(){ return idPokemon; }
+	
+	public boolean estaVivo() {	return (vida>=0); }
+	
+	public void setIdCombatiente(int pId){ idCombatiente = pId; }
+	
+	public void setIdPokemon(int pId){ idPokemon = pId;	}
+	
+
+	
+
 	
 }

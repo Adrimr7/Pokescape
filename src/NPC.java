@@ -18,22 +18,41 @@ public class NPC extends Combatiente {
 	
 	public void tuTurno()
 	{
+		
+		// Avisa al campo de batalla de que le toca atacar
 		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
+		
+		// Ponemos a false la lista de usados (aquellos pokemon que ya han atacado)
 		usados = new boolean[arrayPokemon.length];
-		System.out.println(" ");
-		System.out.println(" ");
-		System.out.println("Turno NPC");
-		boolean bool = false;
+		
+		
+		System.out.println(" ");      					 	//////////////////////////////////////////////////////////////////
+		System.out.println(" ");							//////////////////////////////////////////////////////////////////
+		System.out.println("Turno NPC : " + super.nombre);	//////////////////////////////////////////////////////////////////
+		
+		
+		
 		for (int i = 0; i < super.arrayPokemon.length; i++)
 		{
+			// Añadimos al campo de batalla el pokemon en posicion i para que ataque
 			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i], super.getId());
-			System.out.println(" ");
-			System.out.println("Ataca el pokemon " + i);
+			
+			
+			//System.out.println(" ");						//////////////////////////////////////////////////////////////////
+			//System.out.println("Ataca el pokemon " + i);	//////////////////////////////////////////////////////////////////
+			
+			
+			boolean bool = false;
 			while (!bool)
 			{
+				// Buscamos aleatoriamente un pokemon al que atacar
 				Pokemon poke = ListaCombatientes.getMiListaCombatientes().escogerObjetivo(super.getId());
+				
+				// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
 				bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
-				System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());
+				
+				
+				System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());	//////////////////////////////////////////////////////////////////
 			}
 		}
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();

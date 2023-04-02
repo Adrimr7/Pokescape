@@ -413,11 +413,7 @@ public class VentanaInicio extends JFrame implements Observer{
 						
 						// GUIA : Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
 						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(listaVentanas[i]);
-						
-						/*
-						Pokescape.getMiPokescape().setListaVentanas(listaVentanas);
-						*/
-						
+
 						listaVentanas[i].setVisible(true);
 						// GUIA : Dicho esto vamos a ver como se crean las ventanas de VentanaJugador
 						// GUIA : Por aqui...

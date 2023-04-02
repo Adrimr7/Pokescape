@@ -8,6 +8,7 @@ public class ListaCombatientes
 	private Combatiente[] arrayCombatientes;
 	
 	private ListaCombatientes () {}
+	
 	public static ListaCombatientes getMiListaCombatientes()
 	{
 		if (miListaCombatientes == null)
@@ -16,12 +17,12 @@ public class ListaCombatientes
 		}
 		return miListaCombatientes;
 	}
+	
 	public void iniciarCombate(int numBots, int numJugs, int numPoke)
 	{
 		// GUIA (7)
-		// GUIA : Pues la historia continua en esta bonita MAE que guardara a los diferentes luchadores de hoy
-		
-		// GUIA : Para empezar, preparamos el alojamiento, del tamaño exacto para los concursantes
+		// GUIA : Pues la historia continua en esta MAE que guardara a los diferentes luchadores
+		// GUIA : Para empezar, preparamos la lista, del tamaño exacto para los concursantes
 		arrayCombatientes = new Combatiente[numBots + numJugs];
 		
 		// GUIA : Empezaremos por los humanos y luego los NPC
@@ -55,10 +56,7 @@ public class ListaCombatientes
 		
 	}
 	
-	public Combatiente getCombatiente (int i)
-	{
-		return arrayCombatientes[i];
-	}
+	public Combatiente getCombatiente (int i){ return arrayCombatientes[i];	}
 	
 	public void daAvisos() 
 	{
@@ -91,10 +89,12 @@ public class ListaCombatientes
 	
 	public void escogeCombatiente()
 	{
-		System.out.println("SE PASA TURNO");
+		System.out.println("Nuevo Turno");
 		Random rn = new Random();
+		
 		if(arrayCombatientes.length == 1)
 		{
+			// En medio segundo se le dara el turno al combatiente seleccionado
 			Timer t = new Timer();
 			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[0].tuTurno();}};
 			t.schedule(tt, 500);
@@ -102,6 +102,7 @@ public class ListaCombatientes
 		}
 		else
 		{
+			// En medio segundo se le dara el turno al combatiente seleccionado
 			Timer t = new Timer();
 			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
 			t.schedule(tt, 500);
@@ -113,32 +114,41 @@ public class ListaCombatientes
 		Random rn = new Random();
 		return arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)];
 	}
+	
 	public void debilitar(int pIdPokemon, int pIdCombatiente) 
 	{	
 		arrayCombatientes[pIdCombatiente].debilitar(pIdPokemon);
 	}
+	
 	public Pokemon escogerObjetivo(int pId)
 	{
 		Random rn = new Random();
 		Combatiente combee = null;
 		int idRandom = rn.nextInt(arrayCombatientes.length);
-		//System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+		
 		combee = arrayCombatientes[idRandom];
+		
 		while ((idRandom == pId) || (combee == null))
 		{
 			idRandom = rn.nextInt(arrayCombatientes.length);
 			combee = arrayCombatientes[idRandom];
-			//System.out.println(combee.getId());
 		}
-		System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
-		//System.out.println("Entrar escoger objetivo");
+		
+
+		System.out.println("Se ha escogido como objetivo : pId (ata) = " + pId + " , combee (def) = " + idRandom);
+	
 		Pokemon poke = combee.escogerObjetivo();
-		//System.out.println("NaCli escoger objetivo");
+
 		return poke;
 	}
 	
 	public void seleccionado(int idJug, int idPoke) 
 	{
 		arrayCombatientes[idJug].atacaCon(idPoke);
+	}
+	
+	public void avisaFinAtaque(int idJug)
+	{
+		arrayCombatientes[idJug].finAtaque();
 	}
 }

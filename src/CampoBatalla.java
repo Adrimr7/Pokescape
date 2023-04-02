@@ -6,6 +6,7 @@ public class CampoBatalla
 	private Pokemon defensor;
 	private CampoBatalla(){}
 	private int idTurnoActual;
+	
 	public static CampoBatalla getMiCampoBatalla()
 	{
 		if (miCampoBatalla == null)
@@ -14,47 +15,64 @@ public class CampoBatalla
 		}
 		return miCampoBatalla;
 	}
+	
 	public boolean anadir(Pokemon poke, int idAtacante)
 	{
-		boolean bool = false;
-		//System.out.println("Entramos al campo");
-		System.out.println(idAtacante);
-		if (atacante == null && idAtacante == idTurnoActual)
+		boolean correcto = false;
+		
+		System.out.println("Id combatiente atacante : " + idAtacante); //////////////////////////////////////////////////////////////////
+		
+		if (atacante == null && idAtacante == idTurnoActual && poke != null)
 		{ 
-			System.out.println("Añadimos pokemon de " + idAtacante + " como combatiente");
+			System.out.println("Añadimos pokemon de " + idAtacante + " como atacante"); //////////////////////////////////////////////////////////////////
 			atacante = poke;
-			//System.out.println("Añadimos atacante");
 			defensor = null;
-			bool = true;
+			correcto = true;
 		}
-		else if (defensor == null && atacante != null && atacante.getIdCombatiente()!=idAtacante)
+		else if (defensor == null && atacante != null && atacante.getIdCombatiente() != idAtacante && poke != null)
 		{
 				defensor = poke;
-				System.out.println("Añadimos defensor");
+				System.out.println("Añadimos defensor"); //////////////////////////////////////////////////////////////////
 				iniciarAtaque();
-				bool = true;
+				correcto = true;
 		}
-		else
+		else if(poke != null)
 		{
-			System.out.println("Esta ocupado");
+			System.out.println("No puedes añadir un pokemon nulo"); //////////////////////////////////////////////////////////////////
 		}
-		return bool;
+		else if(atacante == null && idAtacante != idTurnoActual)
+		{
+			System.out.println("No puedes añadir un atacante, no es tu turno"); //////////////////////////////////////////////////////////////////
+		}
+		else if(atacante.getIdCombatiente() == idAtacante)
+		{
+			System.out.println("No puedes atacarte a ti mismo"); //////////////////////////////////////////////////////////////////
+		}
+		else 
+		{
+			System.out.println("Esta ocupado"); //////////////////////////////////////////////////////////////////
+		}
+		return correcto;
 	}
+	
 	private void iniciarAtaque()
 	{
-		System.out.println("Iniciamos ataque");
+		System.out.println("Iniciamos ataque"); //////////////////////////////////////////////////////////////////
+		
+		// Danamos al defensor con el ataque del atacante
 		boolean vivo = defensor.danar(atacante.getAtaque());
+		
 		if (!vivo)
 		{
+			// Si no ha sobrevivido al ataque, lo debilitamos (Se pone a null en su respectiva lista)
 			ListaCombatientes.getMiListaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
 		}
 		atacante = null;
 		defensor = null;
+		
+		ListaCombatientes.getMiListaCombatientes().avisaFinAtaque(idTurnoActual);
 	}
 	
-	public void setTurno(int idTurno)
-	{
-		idTurnoActual = idTurno;
-	}
+	public void setTurno(int idTurno) { idTurnoActual = idTurno; }
 	
 }
