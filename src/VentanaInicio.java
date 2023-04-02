@@ -120,7 +120,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		if (textFieldBots == null) {
 			textFieldBots = new JTextField();
 			textFieldBots.setColumns(10);
-			textFieldBots.setText("2");
+			textFieldBots.setText("1");
 		}
 		return textFieldBots;
 	}

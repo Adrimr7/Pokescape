@@ -27,9 +27,7 @@ public class ListaCombatientes
     	for (int i = 0; i<numJugs; i++)
     	{
     		// GUIA : Creamos un nuevo humano
-    		Humano comb = new Humano("NombreHumano", i);
-    		arrayCombatientes[i] = comb;
-    		
+    		arrayCombatientes[i] = new Humano("NombreHumano", i);		
     		// GUIA : Y le pedimos que se prepare, este se encargara de todo lo que necesite
     		// GUIA : Dicho esto, vamos a ver como funciona "inicializate" de la clase Combatiente
     		// GUIA : Antes de nada, cabe recalacar que Humano y NPC son dos clases que heredan de combatiente.
@@ -45,9 +43,9 @@ public class ListaCombatientes
 		// GUIA : Seguidme...
     	for (int i = 0; i<numBots; i++)
     	{
-    		NPC comb = new NPC("NombreNPC", i + numJugs);
-    		arrayCombatientes[i + numJugs] = comb;
-    	
+    		
+    		arrayCombatientes[i + numJugs] = new NPC("NombreNPC", i + numJugs);
+    		System.out.println("Bot : " + (i+numJugs));
     		arrayCombatientes[i + numJugs].inicializate(i, i+numJugs, numPoke);
     	}
     	
@@ -98,35 +96,37 @@ public class ListaCombatientes
 		}
 		else
 		{
-		arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)].tuTurno();
+			arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();
 		}
 	}
 	
 	public Combatiente obtenerCombatienteAleatorio()
 	{
 		Random rn = new Random();
-		return arrayCombatientes[rn.nextInt(0,arrayCombatientes.length-1)];
+		return arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)];
 	}
 	public void debilitar(int pIdPokemon, int pIdCombatiente) 
 	{	
 		arrayCombatientes[pIdCombatiente].debilitar(pIdPokemon);
 	}
-	public void escogerObjetivo(int pId)
+	public Pokemon escogerObjetivo(int pId)
 	{
 		Random rn = new Random();
 		Combatiente combee = null;
-		int idRandom = rn.nextInt(0,arrayCombatientes.length-1);
-		System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+		int idRandom = rn.nextInt(arrayCombatientes.length);
+		//System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
 		combee = arrayCombatientes[idRandom];
 		while ((idRandom == pId) || (combee == null))
 		{
-			idRandom = rn.nextInt(0,arrayCombatientes.length-1);
-			System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+			idRandom = rn.nextInt(arrayCombatientes.length);
 			combee = arrayCombatientes[idRandom];
+			//System.out.println(combee.getId());
 		}
-		System.out.println("Entrar escoger objetivo");
-		combee.escogerObjetivo();
-		System.out.println("NaCli escoger objetivo");
+		System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+		//System.out.println("Entrar escoger objetivo");
+		Pokemon poke = combee.escogerObjetivo();
+		//System.out.println("NaCli escoger objetivo");
+		return poke;
 	}
 	
 	public void seleccionado(int idJug, int idPoke) 

@@ -138,8 +138,8 @@ public class JPokemon extends JPanel implements Observer
 	
 	public void actualizarVida(int pVida)
 	{
-		System.out.println("Vida max :" + vidaMax + "  "  + barraHp.getValue() + "  "   + (double) pVida/vidaMax);
-		System.out.println("Vida :" + pVida + "  " + (int) (barraHp.getValue() - (double) pVida/vidaMax));
+		//System.out.println("Vida max :" + vidaMax + "  "  + barraHp.getValue() + "  "   + (double) pVida/vidaMax);
+		//System.out.println("Vida :" + pVida + "  " + (int) (barraHp.getValue() - (double) pVida/vidaMax));
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
 	}
 

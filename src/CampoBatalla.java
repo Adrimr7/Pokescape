@@ -14,27 +14,33 @@ public class CampoBatalla
 		}
 		return miCampoBatalla;
 	}
-	public void anadir(Pokemon poke, int idCombee)
+	public boolean anadir(Pokemon poke, int idCombee)
 	{
-		System.out.println("Entramos al campo");
+		boolean bool = false;
+		//System.out.println("Entramos al campo");
 		if (atacante == null && idCombee == idTurnoActual)
 		{ 
 			System.out.println("Añadimos pokemon de " + idCombee + " como combatiente");
 			atacante = poke;
-			System.out.println("Añadimos atacante");
+			//System.out.println("Añadimos atacante");
 			defensor = null;
+			bool = true;
 		}
 		else if (defensor == null && atacante != null)
 		{
-			System.out.println("Añadimos defensor");
-			defensor = poke;
-			System.out.println("Añadimos defensor");
-			iniciarAtaque();
+			if (poke.getIdPokemon() != atacante.getIdPokemon())
+			{
+				defensor = poke;
+				System.out.println("Añadimos defensor");
+				iniciarAtaque();
+				bool = true;
+			}
 		}
 		else
 		{
 			System.out.println("Esta ocupado");
 		}
+		return bool;
 	}
 	private void iniciarAtaque()
 	{

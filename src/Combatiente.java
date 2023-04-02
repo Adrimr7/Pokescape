@@ -14,7 +14,7 @@ public abstract class Combatiente extends Observable
 	}
 	public void inicializate (int pNumComb, int pId, int pNumPoke)
 	{
-		System.out.println("Se ejecuta 'inicializate'");
+		//System.out.println("Se ejecuta 'inicializate'");
 		// GUIA (8)
 		// GUIA : Pero que tenemos por aqui, no es difil ver que este luchador no hace mucho
 		arrayPokemon = new Pokemon[pNumPoke];
@@ -23,7 +23,7 @@ public abstract class Combatiente extends Observable
 			// GUIA : A lo sumo, le pide al Pokefactory que le los pokemon
 			// GUIA : Dicho esto, ya sabeis donde estare
 			// GUIA : Seguidme ...
-			System.out.println("Entramos a la factory de pokemon");
+			//System.out.println("Entramos a la factory de pokemon");
 			arrayPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
 			arrayPokemon[i].setIdPokemon(i);
 			arrayPokemon[i].setIdCombatiente(id);
@@ -52,7 +52,7 @@ public abstract class Combatiente extends Observable
 		return enPie;
 	}
 	
-	
+	// está vacío porque se sobreescribe en las clases herederas! (NPC y Humano)
 	public void tuTurno(){}
 	
 	
@@ -77,16 +77,16 @@ public abstract class Combatiente extends Observable
 		this.arrayPokemon[pIdPokemon] = null;
 	}
 	
-	public void escogerObjetivo()
+	public Pokemon escogerObjetivo()
 	{
 		Random rn = new Random();
-		int idRandom = rn.nextInt(0,arrayPokemon.length-1);
+		int idRandom = rn.nextInt(0,arrayPokemon.length);
 		
 		while (!arrayPokemon[idRandom].estaVivo())
 		{
-			idRandom = rn.nextInt(0,arrayPokemon.length-1);
+			idRandom = rn.nextInt(0,arrayPokemon.length);
 		}
-		Pokemon poke = arrayPokemon[idRandom];
+		return arrayPokemon[idRandom];
 	}
 	
 	public int getId() 

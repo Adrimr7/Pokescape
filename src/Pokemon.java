@@ -16,9 +16,9 @@ public abstract class Pokemon extends Observable
 	{
 		nombre = pNombre;
 		Random aleatorio = new Random();
-		vida = pVida + aleatorio.nextInt(1,20);
-		ataque = pAtaque + aleatorio.nextInt(1,7);
-		defensa = pDefensa + aleatorio.nextInt(1,4);
+		vida = pVida + aleatorio.nextInt(1,21);
+		ataque = pAtaque + aleatorio.nextInt(1,8);
+		defensa = pDefensa + aleatorio.nextInt(1,5);
 		
 	}
 	public void daAviso() 
@@ -46,15 +46,15 @@ public abstract class Pokemon extends Observable
 	public boolean danar(int pAtaque)
 	{
 		int dano = (pAtaque - defensa);
-		System.out.println(vida);
+		//System.out.println(vida);
 		vida = vida - dano;
 		if(vida < 0)
 		{
 			vida = 0;
 		}
-		System.out.println("Daño = " + dano);
+		//System.out.println("Daño = " + dano);
 		boolean vivo = estaVivo();
-		System.out.println(vida);
+		//System.out.println(vida);
 		setChanged();
 		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1});
 		return vivo;

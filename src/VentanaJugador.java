@@ -63,22 +63,6 @@ public class VentanaJugador extends JFrame implements Observer
 	private JPanel zonaNombreTipo;
 	private JLabel lblTipo;
 	*/
-
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaJugador frame = new VentanaJugador("Jugador");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-
 	//Create the frame.
 
 	public VentanaJugador(String nomVentana) {
