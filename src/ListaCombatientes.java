@@ -91,6 +91,7 @@ public class ListaCombatientes
 	
 	public void escogeCombatiente()
 	{
+		System.out.println("SE PASA TURNO");
 		Random rn = new Random();
 		if(arrayCombatientes.length == 1)
 		{
@@ -121,33 +122,23 @@ public class ListaCombatientes
 		Random rn = new Random();
 		Combatiente combee = null;
 		int idRandom = rn.nextInt(arrayCombatientes.length);
+		//System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
 		combee = arrayCombatientes[idRandom];
 		while ((idRandom == pId) || (combee == null))
 		{
 			idRandom = rn.nextInt(arrayCombatientes.length);
 			combee = arrayCombatientes[idRandom];
+			//System.out.println(combee.getId());
 		}
 		System.out.println("Bucle : pId = " + pId + " , combee = " + idRandom);
+		//System.out.println("Entrar escoger objetivo");
 		Pokemon poke = combee.escogerObjetivo();
+		//System.out.println("NaCli escoger objetivo");
 		return poke;
 	}
 	
 	public void seleccionado(int idJug, int idPoke) 
 	{
 		arrayCombatientes[idJug].atacaCon(idPoke);
-	}
-	public void haAcabado(int idTurnoActual) 
-	{
-		if (arrayCombatientes[idTurnoActual].getClass().getSimpleName() != "NPC")
-		{
-			System.out.println(arrayCombatientes[idTurnoActual].getClass().getSimpleName() + "nombreree");
-			boolean bool = arrayCombatientes[idTurnoActual].haAcabado();
-			if (bool)
-			{
-				arrayCombatientes[idTurnoActual].ponerAFalse();
-				ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
-			}
-		}
-		arrayCombatientes[idTurnoActual].ponerAFalse();
 	}
 }

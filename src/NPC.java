@@ -8,10 +8,18 @@ public class NPC extends Combatiente {
 	public NPC(String pNombre, int pId) {
 		super(pNombre, pId);
 	}
+
+	/*
+	public void inicializate(int i, int pId, int numPoke) {
+		// TODO Auto-generated method stub
+		
+	}
+	*/
 	
 	public void tuTurno()
 	{
 		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
+		usados = new boolean[arrayPokemon.length];
 		System.out.println(" ");
 		System.out.println(" ");
 		System.out.println("Turno NPC");
@@ -19,7 +27,6 @@ public class NPC extends Combatiente {
 		for (int i = 0; i < super.arrayPokemon.length; i++)
 		{
 			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i], super.getId());
-			//super.arrayUsados[i] = true;
 			System.out.println(" ");
 			System.out.println("Ataca el pokemon " + i);
 			while (!bool)
@@ -29,7 +36,6 @@ public class NPC extends Combatiente {
 				System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());
 			}
 		}
-		super.ponerAFalse();
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
 	}
 

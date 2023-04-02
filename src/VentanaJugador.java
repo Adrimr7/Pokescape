@@ -299,7 +299,7 @@ public class VentanaJugador extends JFrame implements Observer
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
-			System.out.println("Click : " + ListaCombatientes.getMiListaCombatientes().getCombatiente(idCombee).arrayUsados[jpoke.indexOf(e.getSource())]);
+			//System.out.println(jpoke.indexOf(e.getSource()));
 			ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
 
 			

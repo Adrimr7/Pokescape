@@ -14,25 +14,25 @@ public class CampoBatalla
 		}
 		return miCampoBatalla;
 	}
-	public boolean anadir(Pokemon poke, int idCombee)
+	public boolean anadir(Pokemon poke, int idAtacante)
 	{
 		boolean bool = false;
-		if (atacante == null && idCombee == idTurnoActual)
+		//System.out.println("Entramos al campo");
+		System.out.println(idAtacante);
+		if (atacante == null && idAtacante == idTurnoActual)
 		{ 
-			System.out.println("Añadimos pokemon de " + idCombee + " como combatiente");
+			System.out.println("Añadimos pokemon de " + idAtacante + " como combatiente");
 			atacante = poke;
+			//System.out.println("Añadimos atacante");
 			defensor = null;
 			bool = true;
 		}
-		else if (defensor == null && atacante != null && poke != null)
+		else if (defensor == null && atacante != null && atacante.getIdCombatiente()!=idAtacante)
 		{
-			if (poke.getIdPokemon() != atacante.getIdPokemon())
-			{
 				defensor = poke;
 				System.out.println("Añadimos defensor");
 				iniciarAtaque();
 				bool = true;
-			}
 		}
 		else
 		{
@@ -50,7 +50,6 @@ public class CampoBatalla
 		}
 		atacante = null;
 		defensor = null;
-		ListaCombatientes.getMiListaCombatientes().haAcabado(idTurnoActual);
 	}
 	
 	public void setTurno(int idTurno)
