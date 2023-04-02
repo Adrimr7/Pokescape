@@ -1,5 +1,7 @@
-public class Humano extends Combatiente {
+import java.util.Timer;
+import java.util.TimerTask;
 
+public class Humano extends Combatiente {
 	public Humano(String pNombre, int pId) {
 		super(pNombre, pId);
 	}
@@ -14,6 +16,8 @@ public class Humano extends Combatiente {
 	public void tuTurno()
 	{
 		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
+		System.out.println(" ");
+		System.out.println(" ");
 		System.out.println("Turno Humano");
 		
 		setChanged();

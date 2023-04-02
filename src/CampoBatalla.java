@@ -26,7 +26,7 @@ public class CampoBatalla
 			defensor = null;
 			bool = true;
 		}
-		else if (defensor == null && atacante != null)
+		else if (defensor == null && atacante != null && poke != null)
 		{
 			if (poke.getIdPokemon() != atacante.getIdPokemon())
 			{
@@ -52,6 +52,7 @@ public class CampoBatalla
 		}
 		atacante = null;
 		defensor = null;
+		ListaCombatientes.getMiListaCombatientes().haAcabado(idTurnoActual);
 	}
 	
 	public void setTurno(int idTurno)

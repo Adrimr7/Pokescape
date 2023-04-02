@@ -6,7 +6,7 @@ public abstract class Combatiente extends Observable
 	private String nombre;
 	private int id;
 	private boolean enPie;
-	
+	protected boolean[] arrayUsados;
 	public Combatiente(String pNombre, int pId)
 	{
 		nombre = pNombre;
@@ -18,6 +18,7 @@ public abstract class Combatiente extends Observable
 		// GUIA (8)
 		// GUIA : Pero que tenemos por aqui, no es difil ver que este luchador no hace mucho
 		arrayPokemon = new Pokemon[pNumPoke];
+		arrayUsados = new boolean[pNumPoke]; 
 		for (int i = 0; i < pNumPoke; i++)
 		{
 			// GUIA : A lo sumo, le pide al Pokefactory que le los pokemon
@@ -97,10 +98,31 @@ public abstract class Combatiente extends Observable
 	
 	public void atacaCon(int idPoke)
 	{
-		if(arrayPokemon[idPoke] != null)
+		if(arrayPokemon[idPoke] != null && !arrayUsados[idPoke])
 		{
-		CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
+			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
+			arrayUsados[idPoke] = true;
 		}
+	}
+	public boolean haAcabado()
+	{
+		boolean bool = false;
+		int i = 0; 
+		int j = 0;
+		while (i<arrayUsados.length)
+		{
+			if (arrayUsados[i])
+			{
+				j++;
+			}
+			i++;
+		}
+		bool = (j==i);
+		return bool;
+	}
+	public void ponerAFalse() 
+	{
+		arrayUsados = new boolean[arrayUsados.length];
 	}
 	
 }
