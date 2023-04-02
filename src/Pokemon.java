@@ -80,7 +80,7 @@ public abstract class Pokemon extends Observable
 	
 	public int getIdPokemon(){ return idPokemon; }
 	
-	public boolean estaVivo() {	return (vida>=0); }
+	public boolean estaVivo() {	return (vida>0); }
 	
 	public void setIdCombatiente(int pId){ idCombatiente = pId; }
 	

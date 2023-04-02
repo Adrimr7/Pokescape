@@ -39,6 +39,7 @@ public class VentanaJugador extends JFrame implements Observer
 	private ArrayList<JPokemon> jpoke;
 	private JLabel foto;
 	private int idCombee;
+	private JLabel lblNewLabel;
 	/*
 	private JPanel panelPokemon;
 	private JLabel lblNombrePokemon;
@@ -90,7 +91,7 @@ public class VentanaJugador extends JFrame implements Observer
 		contentPane.add(personaje, BorderLayout.WEST);
 		personaje.setLayout(new BoxLayout(personaje, BoxLayout.Y_AXIS));
 		
-		JLabel lblNewLabel = new JLabel("Japupp10");
+		lblNewLabel = new JLabel("Unown Promedio");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		personaje.add(lblNewLabel);
 		
@@ -112,10 +113,6 @@ public class VentanaJugador extends JFrame implements Observer
 			pokemons.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			
 			// GUIA : Como podemos ver el panel pokemon esta vacio, cosa que cambiara en un futuro cercano
-			
-			// ESPECTADOR : Porque?
-			
-			// GUIA : Buena pregunta espectador promedio
 			
 		}
 		return pokemons;
@@ -156,18 +153,7 @@ public class VentanaJugador extends JFrame implements Observer
 		
 		// GUIA : Y con esto acaba el tour, ya se que es una pena que solo llegue hasta el inicio del combate pero prometo que nos veremos mas adelantes
 		
-		// GUIA : *susurra* para cualquier donacion se agradece un bizum al 688892016
-		
-		
-		
-		//pokemons.add(new JPokemon(151, "Mew", "Psíquico", 200, 50));
-		//pokemons.add(new JPokemon(348, "Makuhita", "Lucha", 250, 100));
-		//pokemons.add(new JPokemon(591, "Amongus", "Hierba", 100, 200));
-		//pokemons.add(new JPokemon(222, "Corsola", "Agua", 10, 5));
-		
-		// hace un bucle con el numero de pokemon y va generando los siguientes pokemon
-		// pokemon vacios y les añade el que es el observer de cada pokemon.
-		// luego mas adelante 
+		// GUIA : *susurra* para cualquier donacion se agradece un bizum
 		
 		
 		
@@ -222,9 +208,9 @@ public class VentanaJugador extends JFrame implements Observer
 					URL url;
 					Icon imageIcon;
 					url = this.getClass().getResource("Spr_B2W2_Veteran_M.png");
+					lblNewLabel.setText("Maestro Pokemon");;
 					imageIcon = new ImageIcon(url);
 					foto.setIcon(imageIcon);
-					
 					
 				}	
 			}
@@ -301,16 +287,6 @@ public class VentanaJugador extends JFrame implements Observer
 		{
 			//System.out.println(jpoke.indexOf(e.getSource()));
 			ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
-
-			
-			/*
-			for(int i = 0; i < jpoke.length; i++)
-			{
-				if (e.getSource().equals(jpoke[i]))
-				{
-					System.out.println(i);
-				}
-			}*/
 		}
 
 

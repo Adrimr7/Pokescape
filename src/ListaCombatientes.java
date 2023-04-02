@@ -30,7 +30,7 @@ public class ListaCombatientes
     	for (int i = 0; i<numJugs; i++)
     	{
     		// GUIA : Creamos un nuevo humano
-    		arrayCombatientes[i] = new Humano("NombreHumano", i);		
+    		arrayCombatientes[i] = new Humano("Entrenador Humano " + i, i);		
     		// GUIA : Y le pedimos que se prepare, este se encargara de todo lo que necesite
     		// GUIA : Dicho esto, vamos a ver como funciona "inicializate" de la clase Combatiente
     		// GUIA : Antes de nada, cabe recalacar que Humano y NPC son dos clases que heredan de combatiente.
@@ -46,13 +46,10 @@ public class ListaCombatientes
 		// GUIA : Seguidme...
     	for (int i = 0; i<numBots; i++)
     	{
-    		
-    		arrayCombatientes[i + numJugs] = new NPC("NombreNPC", i + numJugs);
+    		arrayCombatientes[i + numJugs] = new NPC("Unown" + i + " (bot)", i + numJugs);
     		System.out.println("Bot : " + (i+numJugs));
     		arrayCombatientes[i + numJugs].inicializate(i, i+numJugs, numPoke);
     	}
-    	
-
 		
 	}
 	
@@ -69,6 +66,7 @@ public class ListaCombatientes
 	public boolean estanVivos() 
 	{
 		int j = 0;
+		boolean ret = false;
 		for(int i = 0; i < arrayCombatientes.length; i++) 
 		{
 			if(arrayCombatientes[i].estaVivo())
@@ -77,14 +75,12 @@ public class ListaCombatientes
 			}
 		}
 		
-		boolean ret = false;
-		
 		if(j > 1)
 		{
 			ret = true;
 		}
 		
-		return true;
+		return ret;
 	}
 	
 	public void escogeCombatiente()

@@ -44,7 +44,7 @@ public class CampoBatalla
 		{
 			System.out.println("No puedes añadir un atacante, no es tu turno"); //////////////////////////////////////////////////////////////////
 		}
-		else if(atacante.getIdCombatiente() == idAtacante)
+		else if(atacante!= null && atacante.getIdCombatiente() == idAtacante)
 		{
 			System.out.println("No puedes atacarte a ti mismo"); //////////////////////////////////////////////////////////////////
 		}

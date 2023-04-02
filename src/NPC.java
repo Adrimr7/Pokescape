@@ -9,12 +9,6 @@ public class NPC extends Combatiente {
 		super(pNombre, pId);
 	}
 
-	/*
-	public void inicializate(int i, int pId, int numPoke) {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
 	
 	public void tuTurno()
 	{
@@ -36,10 +30,6 @@ public class NPC extends Combatiente {
 		{
 			// Añadimos al campo de batalla el pokemon en posicion i para que ataque
 			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i], super.getId());
-			
-			
-			//System.out.println(" ");						//////////////////////////////////////////////////////////////////
-			//System.out.println("Ataca el pokemon " + i);	//////////////////////////////////////////////////////////////////
 			
 			
 			boolean bool = false;

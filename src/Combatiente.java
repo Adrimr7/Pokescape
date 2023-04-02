@@ -12,6 +12,7 @@ public abstract class Combatiente extends Observable
 	{
 		nombre = pNombre;
 		id = pId;
+		enPie = true;
 	}
 	
 	
@@ -34,6 +35,7 @@ public abstract class Combatiente extends Observable
 	
 	public void daAviso() 
 	{
+		System.out.println("Da aviso");
 		setChanged();
 		notifyObservers(new Object[] {0, id, nombre, arrayPokemon.length, id});
 		
@@ -41,10 +43,11 @@ public abstract class Combatiente extends Observable
 		{
 			arrayPokemon[i].daAviso();
 		}
-		
 	}
 	
 	
+
+
 	public Pokemon getPokemon(int i) { return arrayPokemon[i]; }
 	
 	public boolean estaVivo() { return enPie; }
@@ -63,19 +66,6 @@ public abstract class Combatiente extends Observable
 		Random rn = new Random();
 		return arrayPokemon[rn.nextInt(0,arrayPokemon.length)];
 	}
-	
-	/*
-	public void eliminarPokemon(Pokemon pPoke) 
-	{
-		for(int i = 0; i < arrayPokemon.length; i++) 
-		{
-			if (arrayPokemon[i] == pPoke) 
-			{
-				//Borrar pokemon???
-			}
-		}
-	}
-	 */
 	
 	public Pokemon escogerObjetivo()
 	{
