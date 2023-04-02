@@ -60,7 +60,7 @@ public class CampoBatalla
 		System.out.println("Iniciamos ataque"); //////////////////////////////////////////////////////////////////
 		
 		// Danamos al defensor con el ataque del atacante
-		boolean vivo = defensor.danar(atacante.getAtaque());
+		boolean vivo = defensor.danar(atacante.getAtaque(), atacante.getClass().getSimpleName());
 		
 		if (!vivo)
 		{

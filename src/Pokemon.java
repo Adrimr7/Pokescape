@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.stream.Stream;
 import java.util.Observable;
 public abstract class Pokemon extends Observable
 {
@@ -43,23 +44,34 @@ public abstract class Pokemon extends Observable
 		}
 	}
 	
-	public boolean danar(int pAtaque)
+	public boolean danar(int pAtaque, String pTipo)
 	{
-		int dano = (pAtaque - defensa);
-		//System.out.println(vida);
+		int dano;
+		if (esDebil(pTipo))
+		{
+			pAtaque = pAtaque * 2;
+		}
+		dano = (pAtaque - defensa);
 		vida = vida - dano;
 		if(vida < 0)
 		{
 			vida = 0;
 		}
-		//System.out.println("Daño = " + dano);
 		boolean vivo = estaVivo();
-		//System.out.println(vida);
 		setChanged();
 		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1});
 		return vivo;
 	}
 	
+	private boolean esDebil(String pTipo) 
+	{
+		boolean bool = false;
+		if (arrayDebilidades !=null)
+		{
+			bool = Stream.of(arrayDebilidades).anyMatch(tipo -> tipo.equals(pTipo));
+		}
+		return bool;
+	}
 	public int getAtaque(){ return ataque; }
 	
 	public int getDefensa() { return defensa; }
