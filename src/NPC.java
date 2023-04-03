@@ -29,20 +29,19 @@ public class NPC extends Combatiente {
 		for (int i = 0; i < super.arrayPokemon.length; i++)
 		{
 			// Añadimos al campo de batalla el pokemon en posicion i para que ataque
-			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i], super.getId());
-			
-			
-			boolean bool = false;
-			while (!bool)
+			if (arrayPokemon[i] != null)
 			{
-				// Buscamos aleatoriamente un pokemon al que atacar
-				Pokemon poke = ListaCombatientes.getMiListaCombatientes().escogerObjetivo(super.getId());
-				
-				// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
-				bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
-				
-				
-				System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());	//////////////////////////////////////////////////////////////////
+				CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i], super.getId());
+				boolean bool = false;
+				while (!bool) {
+					// Buscamos aleatoriamente un pokemon al que atacar
+					Pokemon poke = ListaCombatientes.getMiListaCombatientes().escogerObjetivo(super.getId());
+
+					// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
+					bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
+
+					System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());    //////////////////////////////////////////////////////////////////
+				}
 			}
 		}
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
