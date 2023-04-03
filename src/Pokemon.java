@@ -73,9 +73,10 @@ public abstract class Pokemon extends Observable
 		return bool;
 	}
 	public int getAtaque(){ return ataque; }
-	
+
+	/*
 	public int getDefensa() { return defensa; }
-	
+	*/
 	public int getIdCombatiente(){ return idCombatiente; }
 	
 	public int getIdPokemon(){ return idPokemon; }

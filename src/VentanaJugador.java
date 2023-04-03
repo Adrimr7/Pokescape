@@ -64,7 +64,6 @@ public class VentanaJugador extends JFrame implements Observer
 	private JPanel zonaNombreTipo;
 	private JLabel lblTipo;
 	*/
-	//Create the frame.
 
 	public VentanaJugador(String nomVentana) {
 		
@@ -220,72 +219,12 @@ public class VentanaJugador extends JFrame implements Observer
 
 	private class ControladorJugador implements MouseListener 
 	{
-		
-		
-		//private static ControladorJugador miControladorJugador;
 	
 		public ControladorJugador() {}
-	
-		/*
-		public static ControladorJugador getControladorJugador()
-		{
-			if(miControladorJugador == null) 
-			{
-				miControladorJugador = new ControladorJugador();
-			}
-			return miControladorJugador;
-		}
-		/*
-		public void mouseClicked(ActionEvent e) 
-		{
-			// GUIA : Como buena fuente de informacion, primero comprueba que esta cotillenado
-			
-			if (e.getSource().equals(btnNewButton))
-			{
-				// GUIA : Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
-				// GUIA : El objetivo del listener en este caso es que si se le da al boton, avise al modelo, en este caso a Pokescape para que comience el juego.
-				
-				// GUIA : Estos tres datos son los que nos interesa entonces se los guarda
-				String strb = textFieldBots.getText();
-				String strj = textFieldJugadores.getText();
-				String strp = textFieldPokemons.getText();
-				
-				int numb;
-				int numj;
-				int nump;
-				
-				//try 
-				//{
-					// GUIA : Como la vieja siempre dice, "El diablo es mas sabio por viejo que por diablo" y por tanto sabemos que la gente que usa aplicaciones no es muy lista
-					// GUIA : Por eso tenemos que comprobar que lo que nos han pasado es un numero y no un versiculo de la biblia
-					numb = Integer.parseInt(strb);
-					numj = Integer.parseInt(strj);
-					nump = Integer.parseInt(strp);
-				
-					System.out.println(numb + " " + numj + " " + nump);
-					// TODO ******************************
-					if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
-					else
-					{
-						System.out.println("Pasamos a Pokescape");
-						// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
-						Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
-						// GUIA : Siganme...
-						System.out.println("Aqui me quedo.");
-					}
-				//}
-				//catch(Exception ex) 
-				//{
-				//	System.out.println("Valores no validos");
-				//}	
-			}	
-		}
-		*/
 
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
-			//System.out.println(jpoke.indexOf(e.getSource()));
 			ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
 		}
 

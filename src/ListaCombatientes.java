@@ -62,7 +62,7 @@ public class ListaCombatientes
 			arrayCombatientes[i].daAviso();
 		}
 	}
-	
+	/*
 	public boolean estanVivos() 
 	{
 		int j = 0;
@@ -82,7 +82,7 @@ public class ListaCombatientes
 		
 		return ret;
 	}
-	
+	*/
 	public void escogeCombatiente()
 	{
 		System.out.println("Nuevo Turno");
@@ -103,12 +103,6 @@ public class ListaCombatientes
 			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
 			t.schedule(tt, 500);
 		}
-	}
-	
-	public Combatiente obtenerCombatienteAleatorio()
-	{
-		Random rn = new Random();
-		return arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)];
 	}
 	
 	public void debilitar(int pIdPokemon, int pIdCombatiente) 

@@ -60,13 +60,6 @@ public abstract class Combatiente extends Observable
 	// está vacío porque se sobreescribe en las clases herederas! (NPC y Humano)
 	public void tuTurno(){}
 	
-	
-	public Pokemon obtenerPokemonAleatorio()
-	{
-		Random rn = new Random();
-		return arrayPokemon[rn.nextInt(0,arrayPokemon.length)];
-	}
-	
 	public Pokemon escogerObjetivo()
 	{
 		Random rn = new Random();

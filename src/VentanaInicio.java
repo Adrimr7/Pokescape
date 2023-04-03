@@ -348,9 +348,6 @@ public class VentanaInicio extends JFrame implements Observer{
 					int numb;
 					int numj;
 					int nump;
-					
-					//try 
-					//{
 						// GUIA : Como la vieja siempre dice, "El diablo es mas sabio por viejo que por diablo" y por tanto sabemos que la gente que usa aplicaciones no es muy lista
 						// GUIA : Por eso tenemos que comprobar que lo que nos han pasado es un numero y no un versiculo de la biblia
 						numb = Integer.parseInt(strb);
@@ -363,16 +360,11 @@ public class VentanaInicio extends JFrame implements Observer{
 						else
 						{
 							System.out.println("Pasamos a Pokescape");
-							// GUIA : Tras comprobar todo es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
+							// GUIA : Tras comprobar to_do es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
 							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
 							// GUIA : Siganme...
 							System.out.println("Aqui me quedo.");
 						}
-					//}
-					//catch(Exception ex) 
-					//{
-					//	System.out.println("Valores no validos");
-					//}	
 				}	
 			}
 		}
@@ -381,7 +373,6 @@ public class VentanaInicio extends JFrame implements Observer{
 		@Override
 		public void update(Observable o, Object arg) 
 		{
-			// TODO Auto-generated method stub
 			// poner los observers de las ventanas y los pokemon
 			
 			// Stream de jugadores y de pokemon 
