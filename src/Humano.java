@@ -50,10 +50,12 @@ public class Humano extends Combatiente {
 		System.out.println("");
 	}
 	
-	public void pasaDeTurno()
+	public void clickGo()
 	{
-		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();	
+		pasaDeTurno();
 	}
+	
+
 	
 	
 	

@@ -86,6 +86,18 @@ public abstract class Combatiente extends Observable
 		}
 	}
 	
+	
 	public void finAtaque() {}
+	
+	
+	public void pasaDeTurno()
+	{
+		setChanged();
+		notifyObservers(new Object[] {2});
+		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();	
+	}
+	
+	
+	public void clickGo() {}
 	
 }

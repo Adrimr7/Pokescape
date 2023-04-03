@@ -29,6 +29,7 @@ public class JPokemon extends JPanel implements Observer
 	private JProgressBar barraAtaque;
 	private JProgressBar barraDefensa;
 	private int vidaMax;
+	private String nombreTipo;
 	
 	public JPokemon ()
 	{
@@ -42,8 +43,13 @@ public class JPokemon extends JPanel implements Observer
 				this.setMaximumSize(new Dimension(155, 240));
 				this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				
+				this.setBackground(new Color(201, 238, 250));
+				
+				
+				
 					// Panel cabezebra : Nombre / Tipo ////////////////////////////////////////////
 					zonaNombrePokemon = new JPanel();
+					zonaNombrePokemon.setOpaque(false);
 					zonaNombrePokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 						// Nombre
@@ -85,11 +91,13 @@ public class JPokemon extends JPanel implements Observer
 					// Zona Estadisticas //////////////////////////////////////////////////////////////////////////
 
 					estadisticas = new JPanel();
+					estadisticas.setOpaque(false);
 					estadisticas.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 					
 					
 						// Zona Nombres Estadisticas
 						panelNombresEstats = new JPanel();
+						panelNombresEstats.setOpaque(false);
 						panelNombresEstats.setLayout(new GridLayout(5, 1, 0, 0));
 						
 						panelNombresEstats.add(new JLabel("Ata."));
@@ -98,6 +106,7 @@ public class JPokemon extends JPanel implements Observer
 					estadisticas.add(panelNombresEstats);
 					
 						panelBarrasEstats = new JPanel();
+						panelBarrasEstats.setOpaque(false);
 						panelBarrasEstats.setLayout(new GridLayout(5, 1, 0, 0));
 						
 							barraAtaque = barraEstatt(150, new Color(255, 255, 0));
@@ -123,7 +132,11 @@ public class JPokemon extends JPanel implements Observer
 				url = this.getClass().getResource(pTipo + ".png");
 				imageIcon = new ImageIcon(url);
 				tipo.setIcon(imageIcon);
-
+				
+				nombreTipo = pTipo;
+				
+				actualizarColor();
+				
 				
 				url = this.getClass().getResource(pNumPokemon + ".png");
 				imageIcon = new ImageIcon(url);
@@ -136,6 +149,34 @@ public class JPokemon extends JPanel implements Observer
 				barraDefensa.setValue((int) (pDefensa*5));
 	}
 	
+	public void actualizarColor()
+	{
+		if(nombreTipo.equals("Agua"))
+		{
+			this.setBackground(new Color(201, 238, 250));
+		} 
+		else if(nombreTipo.equals("Planta"))
+		{
+			this.setBackground(new Color(201, 250, 211));
+		} 
+		else if(nombreTipo.equals("Fuego"))
+		{
+			this.setBackground(new Color(250, 219, 201));
+		} 
+		else if(nombreTipo.equals("Eléctrico"))
+		{
+			this.setBackground(new Color(250, 242, 201));
+		}
+		else
+		{
+			this.setBackground(Color.gray);
+		}
+	}
+	
+	public void apagar()
+	{
+		this.setBackground(new Color(225, 205, 249));
+	}
 	public void actualizarVida(int pVida)
 	{
 		//System.out.println("Vida max :" + vidaMax + "  "  + barraHp.getValue() + "  "   + (double) pVida/vidaMax);
@@ -173,6 +214,7 @@ public class JPokemon extends JPanel implements Observer
 
 				url = this.getClass().getResource(92 + ".png");
 				imageIcon = new ImageIcon(url);
+				this.apagar();
 				spritePokemon.setIcon(imageIcon);
 				
 				actualizarVida(0);

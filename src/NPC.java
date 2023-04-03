@@ -12,6 +12,8 @@ public class NPC extends Combatiente {
 	
 	public void tuTurno()
 	{
+		setChanged();
+		notifyObservers(new Object[] {1});
 		
 		// Avisa al campo de batalla de que le toca atacar
 		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
@@ -44,7 +46,15 @@ public class NPC extends Combatiente {
 				}
 			}
 		}
-		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
+		
+		Timer t = new Timer();
+		TimerTask tt = new TimerTask() {@Override public void run() {pasaDeTurno();}};
+		t.schedule(tt, 2000);
+
+		
+		
 	}
+	
+
 
 }

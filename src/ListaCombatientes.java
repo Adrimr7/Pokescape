@@ -91,17 +91,23 @@ public class ListaCombatientes
 		if(arrayCombatientes.length == 1)
 		{
 			// En medio segundo se le dara el turno al combatiente seleccionado
+			/*
 			Timer t = new Timer();
 			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[0].tuTurno();}};
 			t.schedule(tt, 500);
+			*/
+			arrayCombatientes[0].tuTurno();
 			
 		}
 		else
 		{
 			// En medio segundo se le dara el turno al combatiente seleccionado
+			/*
 			Timer t = new Timer();
 			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
 			t.schedule(tt, 500);
+			*/
+			arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();
 		}
 	}
 	

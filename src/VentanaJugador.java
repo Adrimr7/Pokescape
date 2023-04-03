@@ -19,6 +19,7 @@ import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.Icon;
@@ -40,6 +41,8 @@ public class VentanaJugador extends JFrame implements Observer
 	private JLabel foto;
 	private int idCombee;
 	private JLabel lblNewLabel;
+	private JLabel lblTurno;
+	private boolean turno;
 	/*
 	private JPanel panelPokemon;
 	private JLabel lblNombrePokemon;
@@ -81,14 +84,21 @@ public class VentanaJugador extends JFrame implements Observer
 		setBounds(100, 100, 155*numPokemon + 155, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		
+		contentPane.setBackground(new Color(220, 247, 255));
+		contentPane.setOpaque(true);
 
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel_1(), BorderLayout.CENTER);
 
 		JPanel personaje = new JPanel();
+		personaje.setOpaque(false);
 		contentPane.add(personaje, BorderLayout.WEST);
 		personaje.setLayout(new BoxLayout(personaje, BoxLayout.Y_AXIS));
+		
 		
 		lblNewLabel = new JLabel("Unown Promedio");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,6 +111,17 @@ public class VentanaJugador extends JFrame implements Observer
 		imageIcon = new ImageIcon(url);
 		foto.setIcon(imageIcon);
 		personaje.add(foto);
+	
+		lblTurno = new JLabel("  Wait ", SwingConstants.CENTER);
+		lblTurno.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTurno.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblTurno.setForeground(new Color(200, 247, 255));
+		
+		ControladorJugador cj = new ControladorJugador();
+		lblTurno.addMouseListener(cj);
+		
+		personaje.add(lblTurno);
+		
 		
 		// GUIA : Tras definir los diferentes apartados, el nombre, la imagen del jugador, el panel donde estaran los pokemon... empieza otra fiesta
 		// GUIA : La fiesta de pasar los datos de los pokemon a su respectivo lugar
@@ -109,6 +130,7 @@ public class VentanaJugador extends JFrame implements Observer
 	private JPanel getPanel_1() {
 		if (pokemons == null) {
 			pokemons = new JPanel();
+			pokemons.setOpaque(false);
 			pokemons.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			
 			// GUIA : Como podemos ver el panel pokemon esta vacio, cosa que cambiara en un futuro cercano
@@ -200,18 +222,41 @@ public class VentanaJugador extends JFrame implements Observer
 						jpoke.add(poketoMonsta);
 					}
 				} 
-				else 
+				else if(codigo == 1) 
 				{
 					//Mi turno
 					
-					URL url;
-					Icon imageIcon;
-					url = this.getClass().getResource("Spr_B2W2_Veteran_M.png");
-					lblNewLabel.setText("Maestro Pokemon");;
-					imageIcon = new ImageIcon(url);
-					foto.setIcon(imageIcon);
+					//URL url;
+					//Icon imageIcon;
+					//url = this.getClass().getResource("Spr_B2W2_Veteran_M.png");
+					//lblNewLabel.setText("Maestro Pokemon");;
+					//imageIcon = new ImageIcon(url);
+					//foto.setIcon(imageIcon);
+					//lblTurno.setOpaque(true);
+					lblTurno.setText("GO!!");
+					turno = true;
+								
 					
-				}	
+					contentPane.setBackground(new Color(200, 247, 255));
+					lblTurno.setForeground(new Color(99, 91, 255));
+					
+				}
+				else if(codigo == 2) 
+				{
+					//Fin turno
+					//lblTurno.setOpaque(false);
+					turno = false;
+					lblTurno.setText("Wait");
+					contentPane.setBackground(new Color(220, 247, 255));
+					lblTurno.setForeground(new Color(200, 247, 255));
+					//lblTurno.setBackground(Color.black);
+					/*
+					for(int i = 0; i < jpoke.size(); i++)
+					{
+						jpoke.get(i).actualizarColor();
+					}
+					*/
+				}
 			}
 		}
 	}
@@ -225,7 +270,17 @@ public class VentanaJugador extends JFrame implements Observer
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
-			ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
+			
+			if(e.getSource() == lblTurno && turno) 
+			{
+				ListaCombatientes.getMiListaCombatientes().getCombatiente(idCombee).clickGo();
+			}
+			else if(e.getSource() != lblTurno)
+			{
+				ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
+			}
+			
+			
 		}
 
 
