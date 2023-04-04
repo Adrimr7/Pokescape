@@ -122,35 +122,30 @@ public class JPokemon extends JPanel implements Observer
 	
 	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa, int pVida)
 	{
-		//Variables para añadir fotos
-				URL url;
-				Icon imageIcon;
+		//Variables para añadir imagenes
+		URL url;
+		Icon imageIcon;
+		
+		vidaMax = pVida;		
+		nombrePokemon.setText(pNombrePokemon);
+		//Obtenemos el recurso
+		url = this.getClass().getResource(pTipo + ".png");
+		imageIcon = new ImageIcon(url);
+		tipo.setIcon(imageIcon);
+			
+		nombreTipo = pTipo;
+		// llamamos a actualiza color 
+		actualizarColor();	
 				
-				vidaMax = pVida;
-				
-				nombrePokemon.setText(pNombrePokemon);
-	
-					
-				url = this.getClass().getResource(pTipo + ".png");
-				imageIcon = new ImageIcon(url);
-				tipo.setIcon(imageIcon);
-				
-				nombreTipo = pTipo;
-				
-				actualizarColor();
-				
-				
-				url = this.getClass().getResource(pNumPokemon + ".png");
-				imageIcon = new ImageIcon(url);
-				spritePokemon.setIcon(imageIcon);
-	
-				
-				barraHp.setValue(pVida);
+		url = this.getClass().getResource(pNumPokemon + ".png");
+		imageIcon = new ImageIcon(url);
+		spritePokemon.setIcon(imageIcon);
+			
+		barraHp.setValue(pVida);
 						
-				barraAtaque.setValue((int) (pAtaque*5));
-				barraDefensa.setValue((int) (pDefensa*5));
-	}
-	
+		barraAtaque.setValue((int) (pAtaque*5));
+		barraDefensa.setValue((int) (pDefensa*5));
+	}	
 	public void actualizarColor()
 	{
 		if(nombreTipo.equals("Agua"))
@@ -195,26 +190,21 @@ public class JPokemon extends JPanel implements Observer
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		// TODO Auto-generated method stub
 		Object[] lista = (Object[]) arg;
 		//nombre, vida, ataque, defensa
 		String nombre = (String) lista[0];
 		int vida = (int) lista[1];
-		//System.out.println("VIDA EN UPDATE ES DE" + vida);
 		int ataque = (int) lista[2];
 		int defensa = (int) lista[3];
 		int numPoke = (int) lista[4];
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
-		//System.out.println("TIPO DE UPDATE ES DE" + tipoUpdate);
 		if(tipoUpdate == 0) 
 		{
 			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);
 		}
 		else
 		{
-			
-			
 			if(vida <= 0)
 			{
 				URL url;
@@ -232,8 +222,6 @@ public class JPokemon extends JPanel implements Observer
 				actualizarVida(vida);
 			}
 		}
-		
-		
 	}
 
 	private JProgressBar barraEstatt(int stat, Color color) 

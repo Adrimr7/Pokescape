@@ -5,12 +5,7 @@ public class Humano extends Combatiente {
 		super(pNombre, pId);
 	}
 
-	/*
-	public void inicializate(int i, int i2, int numPoke) {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
+	
 	@Override
 	public void tuTurno()
 	{
@@ -38,10 +33,10 @@ public class Humano extends Combatiente {
 		}
 
 	}
-	
+	@Override
 	public void finAtaque()
 	{
-		System.out.print("El ataque ha acabado"); //////////////////////////////////////////////////////////////////
+		System.out.print("El ataque ha acabado");
 		if(numAtaques == numeroVivos()) 
 		{
 			System.out.println(" y paso mi turno");
@@ -50,16 +45,10 @@ public class Humano extends Combatiente {
 		System.out.println("");
 	}
 	
-	
+	@Override
 	public void clickGo()
 	{
 		pasaDeTurno();
 	}
 	
-
-	
-	
-	
-
-
 }

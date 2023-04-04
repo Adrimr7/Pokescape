@@ -9,6 +9,7 @@ public class CampoBatalla
 	
 	public static CampoBatalla getMiCampoBatalla()
 	{
+		// getter caracteristico del patron singleton
 		if (miCampoBatalla == null)
 		{
 			miCampoBatalla = new CampoBatalla();
@@ -18,13 +19,12 @@ public class CampoBatalla
 	
 	public boolean anadir(Pokemon poke, int idAtacante)
 	{
+		// este metodo anade un pokemon al campo de batalla, haciendo varias comprobaciones por el camino
 		boolean correcto = false;
-		
-		//System.out.println("Id combatiente atacante : " + idAtacante); //////////////////////////////////////////////////////////////////
 		
 		if (atacante == null && idAtacante == idTurnoActual && poke != null)
 		{ 
-			System.out.println("Añadimos pokemon de " + idAtacante + " como atacante"); //////////////////////////////////////////////////////////////////
+			System.out.println("Añadimos pokemon de " + idAtacante + " como atacante");
 			atacante = poke;
 			defensor = null;
 			correcto = true;
@@ -32,32 +32,32 @@ public class CampoBatalla
 		else if (defensor == null && atacante != null && atacante.getIdCombatiente() != idAtacante && poke != null)
 		{
 				defensor = poke;
-				System.out.println("Añadimos defensor"); //////////////////////////////////////////////////////////////////
+				System.out.println("Añadimos defensor"); 
 				iniciarAtaque();
 				correcto = true;
 		}
 		else if(poke == null)
 		{
-			System.out.println("No puedes añadir un pokemon nulo"); //////////////////////////////////////////////////////////////////
+			System.out.println("No puedes añadir un pokemon nulo"); 
 		}
 		else if(atacante == null && idAtacante != idTurnoActual)
 		{
-			System.out.println("No puedes añadir un atacante, no es tu turno"); //////////////////////////////////////////////////////////////////
+			System.out.println("No puedes añadir un atacante, no es tu turno"); 
 		}
 		else if(atacante!= null && atacante.getIdCombatiente() == idAtacante)
 		{
-			System.out.println("No puedes atacarte a ti mismo"); //////////////////////////////////////////////////////////////////
+			System.out.println("No puedes atacarte a ti mismo"); 
 		}
 		else 
 		{
-			System.out.println("Esta ocupado"); //////////////////////////////////////////////////////////////////
+			System.out.println("Esta ocupado"); 
 		}
 		return correcto;
 	}
 	
 	private void iniciarAtaque()
 	{
-		System.out.println("Iniciamos ataque"); //////////////////////////////////////////////////////////////////
+		System.out.println("Iniciamos ataque"); 
 		
 		// Danamos al defensor con el ataque del atacante
 		boolean vivo = defensor.danar(atacante.getAtaque(), atacante.getClass().getSimpleName());
@@ -69,7 +69,7 @@ public class CampoBatalla
 		}
 		atacante = null;
 		defensor = null;
-		
+		// avisar del fin del ataque
 		ListaCombatientes.getMiListaCombatientes().avisaFinAtaque(idTurnoActual);
 	}
 	

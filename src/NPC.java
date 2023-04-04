@@ -22,10 +22,9 @@ public class NPC extends Combatiente {
 		usados = new boolean[arrayPokemon.length];
 		
 		
-		System.out.println(" ");      					 	//////////////////////////////////////////////////////////////////
-		System.out.println(" ");							//////////////////////////////////////////////////////////////////
-		System.out.println("Turno NPC : " + super.nombre);	//////////////////////////////////////////////////////////////////
-		
+		System.out.println(" ");      					 	
+		System.out.println(" ");							
+		System.out.println("Turno NPC : " + super.nombre);
 		
 		
 		for (int i = 0; i < super.arrayPokemon.length; i++)
@@ -50,9 +49,6 @@ public class NPC extends Combatiente {
 		Timer t = new Timer();
 		TimerTask tt = new TimerTask() {@Override public void run() {pasaDeTurno();}};
 		t.schedule(tt, 2000);
-
-		
-		
 	}
 	
 

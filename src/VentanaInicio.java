@@ -311,13 +311,12 @@ public class VentanaInicio extends JFrame implements Observer{
 
 		static private class ControladorInicio implements ActionListener 
 		{
-			// GUIA (5)
-			// GUIA : Pues aqui estamos, en una MAE definida dentro de VentanaInicio 
+			// Pues aqui estamos, en una MAE definida dentro de VentanaInicio 
 			private static ControladorInicio miControladorInicio;
 		
 			private ControladorInicio() {}
 		
-			// GUIA : Como hemos visto antes lo que añade como ActionListener es esta clase, que como se ve en la cabezera lo implementa
+			// Como hemos visto antes lo que añade como ActionListener es esta clase, que como se ve en la cabecera lo implementa
 			public static ControladorInicio getControladorInicio()
 			{
 				if(miControladorInicio == null) 
@@ -327,44 +326,34 @@ public class VentanaInicio extends JFrame implements Observer{
 				return miControladorInicio;
 			}
 			
-			// GUIA : Pero la parte interesante esta aqui
-			// GUIA : En actionPerformed, este metodo propio de ActionListener lo mas parecido a la abuela del pueblo
-			// GUIA : Si antes hemos colocado a la vieja al lado de la plaza, este metodo hace que en cuanto note algo deje el periodico y se ponga a escuchar
+			// Pero la parte interesante esta aqui
+			// En actionPerformed, este metodo propio de ActionListener lo mas parecido a la abuela del pueblo
+			// Si antes hemos colocado a la vieja al lado de la plaza, este metodo hace que en cuanto note algo deje el periodico y se ponga a escuchar
 			
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				// GUIA : Como buena fuente de informacion, primero comprueba que esta cotillenado
 				if (e.getSource().equals(btnNewButton))
 				{
-					// GUIA : Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
-					// GUIA : El objetivo del listener en este caso es que si se le da al boton, avise al modelo, en este caso a Pokescape para que comience el juego.
+					// Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
+					// El objetivo del listener en este caso es que si se le da al boton, avise al modelo, en este caso a Pokescape para que comience el juego.
 					
-					// GUIA : Estos tres datos son los que nos interesa entonces se los guarda
+					// Estos tres datos son los que nos interesa entonces se los guarda
 					String strb = textFieldBots.getText();
 					String strj = textFieldJugadores.getText();
 					String strp = textFieldPokemons.getText();
-					
-					int numb;
-					int numj;
-					int nump;
-						// GUIA : Como la vieja siempre dice, "El diablo es mas sabio por viejo que por diablo" y por tanto sabemos que la gente que usa aplicaciones no es muy lista
-						// GUIA : Por eso tenemos que comprobar que lo que nos han pasado es un numero y no un versiculo de la biblia
-						numb = Integer.parseInt(strb);
-						numj = Integer.parseInt(strj);
-						nump = Integer.parseInt(strp);
-					
-						System.out.println(numb + " " + numj + " " + nump);
-						// TODO ******************************
-						if (numb>10 || numj>10 || nump>20 || (numb+numj)<2){System.out.println("Prueba con un valor mas bajo.");}
-						else
-						{
-							System.out.println("Pasamos a Pokescape");
-							// GUIA : Tras comprobar to_do es hora de comenzar la fiesta, por lo que nos volvemos a Pokescape, concretamente al metodod "iniciarCombate"
-							Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
-							// GUIA : Siganme...
-							System.out.println("Aqui me quedo.");
-						}
+					int numb = Integer.parseInt(strb);
+					int numj = Integer.parseInt(strj);
+					int nump = Integer.parseInt(strp);
+					System.out.println(numb + " " + numj + " " + nump);
+					if (numb>10 || numj>10 || nump>20 || (numb+numj)<2){System.out.println("Prueba con un valor mas bajo.");}
+					else
+					{
+						System.out.println("Pasamos a Pokescape");
+						// Volvemos a Pokescape, concretamente al metodo "iniciarCombate"
+						Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
+						System.out.println("Aqui me quedo.");
+					}
 				}	
 			}
 		}
@@ -373,21 +362,15 @@ public class VentanaInicio extends JFrame implements Observer{
 		@Override
 		public void update(Observable o, Object arg) 
 		{
-			// poner los observers de las ventanas y los pokemon
-			
-			// Stream de jugadores y de pokemon 
-
-			
-			// GUIA (11)
-			// GUIA : Bien, cuando Pokescape dice que algo ha pasado, este esta con la oreja puesta
+			// Bien, cuando Pokescape dice que algo ha pasado, este esta con la oreja puesta
 			
 			if (o instanceof Pokescape)
 			{
-				// GUIA : Y despues de comprobar que lo que ha recibido es de Pokescape
+				// Y despues de comprobar que lo que ha recibido es de Pokescape
 				if (arg instanceof Object[])
 				{
-					// GUIA : Y que es la informacion que nos interesa, se pone manos a la obra
-					// GUIA : Lo primero es tener bien repartiditos los datos
+					// Y que es la informacion que nos interesa, se pone manos a la obra
+					// Lo primero es tener bien repartidos los datos
 					Object[] lista = (Object[]) arg;
 					int numBots = (int) lista[0];
 					int numJugs = (int) lista[1];
@@ -395,19 +378,18 @@ public class VentanaInicio extends JFrame implements Observer{
 					
 					listaVentanas = new VentanaJugador[numJugs+numBots];
 					
-					// GUIA : Y lo segundo usarlos para algo
-					// GUIA : Como ya sabeis tenemos todos los combatientes y pokemon creados en el modelo, pero en el la vista
-					// GUIA : Entonces vamos a crear las diferentes ventanas para los combatientes
+					// Y lo segundo usarlos para algo
+					// Como ya sabeis tenemos todos los combatientes y pokemon creados en el modelo, pero en el la vista
+					// Entonces vamos a crear las diferentes ventanas para los combatientes
 					for (int i = 0; i< numBots+numJugs; i++)
 					{
 						listaVentanas[i] = new VentanaJugador("Jugador" + i);
 						
-						// GUIA : Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
+						// Al igual que con VentanaInicio y Pokescape, cada ventanaJugador estara observando a su correspondiente combatiente por si se quiere pasar informacion
 						ListaCombatientes.getMiListaCombatientes().getCombatiente(i).addObserver(listaVentanas[i]);
 
 						listaVentanas[i].setVisible(true);
-						// GUIA : Dicho esto vamos a ver como se crean las ventanas de VentanaJugador
-						// GUIA : Por aqui...
+						// Dicho esto vamos a ver como se crean las ventanas de VentanaJugador
 					}
 					
 					this.setVisible(false);

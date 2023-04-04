@@ -10,6 +10,7 @@ public abstract class Combatiente extends Observable
 	
 	public Combatiente(String pNombre, int pId)
 	{
+		// constructora
 		nombre = pNombre;
 		id = pId;
 		enPie = true;
@@ -18,14 +19,12 @@ public abstract class Combatiente extends Observable
 	
 	public void inicializate (int pNumComb, int pId, int pNumPoke)
 	{
-		// GUIA (8)
-		// GUIA : Crea la lista donde se guardaran los pokemon
+		// Crea la lista donde se guardaran los pokemon
 		arrayPokemon = new Pokemon[pNumPoke];
 		usados = new boolean[pNumPoke];
 		for (int i = 0; i < pNumPoke; i++)
 		{
-			// GUIA : Y le pide al Pokefactory que le los pokemon
-			// GUIA : Seguidme ...
+			// Le pide al Pokefactory que le los pokemon
 			arrayPokemon[i] = PokeFactory.getMiPokeFactory().createPokemon();
 			arrayPokemon[i].setIdPokemon(i);
 			arrayPokemon[i].setIdCombatiente(id);
@@ -35,12 +34,15 @@ public abstract class Combatiente extends Observable
 	
 	public void daAviso() 
 	{
+		// usamos este método para avisar a los pokemon y a los observers de los combatientes
+		// que tienen que actualizarse
 		System.out.println("Da aviso");
 		setChanged();
 		notifyObservers(new Object[] {0, id, nombre, arrayPokemon.length, id});
 		
 		for(int i = 0; i < arrayPokemon.length; i++) 
 		{
+			// dar aviso a cada pokemon
 			arrayPokemon[i].daAviso();
 		}
 	}
@@ -62,10 +64,9 @@ public abstract class Combatiente extends Observable
 	
 	public Pokemon escogerObjetivo()
 	{
+		// este método escoge un objetivo y lo devuelve hacia arriba, comprobando varias cosas antes
 		Random rn = new Random();
 		int idRandom = rn.nextInt(0,arrayPokemon.length);
-		
-		//while (!arrayPokemon[idRandom].estaVivo())
 		while (arrayPokemon[idRandom] == null)
 		{
 			idRandom = rn.nextInt(0,arrayPokemon.length);
@@ -76,6 +77,7 @@ public abstract class Combatiente extends Observable
 	
 	public void atacaCon(int idPoke)
 	{
+		// este método añade el pokemon al campo de batalla si no es nulo
 		if(arrayPokemon[idPoke] != null)
 		{
 			boolean rdo= CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);

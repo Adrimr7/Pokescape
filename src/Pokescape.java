@@ -8,10 +8,12 @@ public class Pokescape extends Observable
 	private static VentanaInicio frameInicio;
 	private static Pokescape miPokescape;
 	
-	public Pokescape(){}
+	// constructora privada característica del patrón singleton
+	private Pokescape(){}
 	
 	public static Pokescape getMiPokescape() 
 	{
+		// getter característico del patrón singleton
 		if (miPokescape == null)
 		{
 			miPokescape = new Pokescape();
@@ -24,25 +26,21 @@ public class Pokescape extends Observable
 		{
 			public void run()
 			{
-				// GUIA (1)
-				// GUIA : Bienvenidos a este tour por Pokescape, hoy, comprenderemos las maravillas informaticas que se esconden a plena vista
-				// GUIA : Para empezar tenemos el main, como no, el cual llama a crearPantallas(), un metodo que encontramos mas abajo.
-				// GUIA : Siganme ...
+				// el método main llama a crearPantallas, que vemos a continuación
 				crearPantallas();
 			}
 		});
 	}
     private static void crearPantallas() 
     {
-    	// GUIA (2)
-    	// GUIA : Bien, este metodo es una pequeña "excepcion" del MVC por que en algun lado hay que iniciar la parte de vista
+    	// este metodo es una pequeña "excepcion" del MVC por que en algun lado hay que iniciar la parte de vista
     	try 
     	{	
-    		// GUIA : Tratamos de crear la ventana inicial 
+    		// Tratamos de crear la ventana inicial 
     		frameInicio = new VentanaInicio();	//Generamos la pantalla del titulo
     		
-    		// GUIA : Y la añadimos como Observer de la clase en la que nos encontramos, esto es importante para el patron MVC y mas adelante veremos su uso, de momento
-    		// GUIA : vale con entender que "frameInicio" y "Pokescape" estan unidas en el patron MVC.
+    		// La añadimos como Observer de la clase en la que nos encontramos, esto es importante para el patron MVC y mas adelante veremos su use
+    		// Además, "frameInicio" y "Pokescape" estan unidas en el patron MVC.
     		
     		Pokescape.getMiPokescape().addObserver(frameInicio);
     		frameInicio.setVisible(true);		//Y la hacemos visible
@@ -54,30 +52,22 @@ public class Pokescape extends Observable
 			System.out.println("ERROR");
 		}
     	
-    	// GUIA : Ahora vamos a pasar al apartado de Vista, concretamente a "VentanaInicio"
-    	// GUIA : Siganme ...
+    	// Ahora pasamos al apartado de Vista, concretamente a "VentanaInicio"
+    	
     }
     public void iniciarCombate(int numBots, int numJugs, int numPokes)
     {
-    	// GUIA (6)  	
-      	// GUIA : Bueno bueno, parece ser que empieza la fiesta por que depues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de ListaCombatientes.
-    	// GUIA : Estad atentos por que mas adelante volveremos aqui
-    	// GUIA : Seguidme ...
+    	
+      	// Despues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de ListaCombatientes.
     	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
     	
-    	
-    	// GUIA (10)
-    	// GUIA : Bien, teniendo todo bien montadito, (a un euro la unidad), es hora de avisar a VentanaIncio
-    	// GUIA : Os acordais del previamente añadido Observer, pues es hora de que entre en juego
-    	// GUIA : El Observable y el Observer son una pareja, en este caso Pokescape y VentanaInicio
-    	// GUIA : Trabajan juntos pero sin que se vea. El Observable hace una seña, y el Observer la recibe.
-    	// GUIA : Es una forma de pasar informacion de forma "indirecta"
-    	// GUIA : Con setChanged() Pokespace dice que algo ha cambiado, como que lo deja caer
+    	// Avisamos a VentanaInicio, 
+    	// El Observable y el Observer son una pareja, en este caso Pokescape y VentanaInicio
+    	// El Observable hace una seña, y el Observer la recibe, es una forma de pasar informacion de forma "indirecta"
+    	// Con setChanged() Pokespace dice que algo ha cambiado
     	avisarInicio(numBots, numJugs, numPokes);
-		
-		
-		// GUIA (13 xd)
-		// GUIA : Una vez esten todas las ventanas de combatientes preparaddas, es hora de llenarlas
+
+		// Una vez esten todas las ventanas de combatientes preparadas, es hora de llenarlas
 		ListaCombatientes.getMiListaCombatientes().daAvisos();
 		
 		
@@ -91,12 +81,11 @@ public class Pokescape extends Observable
     	
    		setChanged();
    		
-   		// GUIA : Y luego da cierta informacion, pero no a nadie concteto, simplenete lo suelta al aire
+   		// Luego da cierta informacion 
     
 		notifyObservers(new Object[] {numBots, numJugs, numPokes});
 		
-		// GUIA : Eso si, nosotros sabemos quien lo va a recibir, en este caso, VentanaInicio con su metodo "update"
-		// GUIA : Siganme ...
+		// Esto lo recibirá VentanaInicio, y por tanto se podrá actualizar
     	
     }
     
