@@ -31,6 +31,7 @@ import javax.swing.SwingConstants;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 public class VentanaJugador extends JFrame implements Observer
 {
@@ -201,15 +202,68 @@ public class VentanaJugador extends JFrame implements Observer
 					setTitle(nombre);
 					setBounds(100, 100, 155*numPoke + 155, 240);
 					
+					String nom = "Spr_B2W2_";
+					String bre = "";
+					ArrayList<String> listaImagenes = new ArrayList<String>();
+					listaImagenes.add("Ace_Trainer_M");
+					listaImagenes.add("Alder");
+					listaImagenes.add("Artist");
+					listaImagenes.add("Backpacker_M");
+					listaImagenes.add("Benga");
+					listaImagenes.add("Biker");
+					listaImagenes.add("Black_Belt");
+					listaImagenes.add("Blaine");
+					listaImagenes.add("Brawly");
+					listaImagenes.add("Brock");
+					listaImagenes.add("Brycen");
+					listaImagenes.add("Bugsy");
+					listaImagenes.add("Burgh");
+					listaImagenes.add("Byron");
+					listaImagenes.add("Cheren");
+					listaImagenes.add("Chili");
+					listaImagenes.add("Chuck");
+					listaImagenes.add("Cilan");
+					listaImagenes.add("Clay");
+					listaImagenes.add("Clerk_M");
+					listaImagenes.add("Clerk_M_B");
+					listaImagenes.add("Colress");
+					listaImagenes.add("Crasher_Wake");
+					listaImagenes.add("Cyclist_M");
+					listaImagenes.add("Dancer");
+					listaImagenes.add("Depot_Agent");
+					listaImagenes.add("Doctor");
+					listaImagenes.add("Drayden");
+					listaImagenes.add("Emmet");
+					listaImagenes.add("Falkner");
+					listaImagenes.add("Fisherman");
+					listaImagenes.add("Gentleman");
 					
+					listaImagenes.add("Veteran_M");
+					listaImagenes.add("Janitor");
+					
+					Random rd = new Random();
+					int numeroFoto = rd.nextInt(0, listaImagenes.size());
+					bre = listaImagenes.get(numeroFoto);
+					
+					String nomBre = nom + bre;
+					if (nombre.contains("Humano"))
+					{
+						lblNewLabel.setText(bre + " (Humano)");
+					}
+					else
+					{
+						lblNewLabel.setText(bre + " (NPC)");
+					}
+					
+					URL url = this.getClass().getResource(nomBre + ".png");
+					Icon imageIcon = new ImageIcon(url);
+					foto.setIcon(imageIcon);
+						
+						
 					// GUIA : Y lo segundo usarlos para algo
 					// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador
 					// GUIA : Entonces vamos a crear los diferentes jpokemon para los combatientes
-					if (nombre.contains("Humano")){
-						lblNewLabel.setText("Entrenador Juan");
-						URL url = this.getClass().getResource("Spr_B2W2_Janitor.png");
-						Icon imageIcon = new ImageIcon(url);
-						foto.setIcon(imageIcon);};
+
 					jpoke = new ArrayList<JPokemon>();
 					for (int i = 0; i < numPoke; i++)
 					{

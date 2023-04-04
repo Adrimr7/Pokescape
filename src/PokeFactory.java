@@ -22,13 +22,11 @@ public class PokeFactory
 		Pokemon pk;
 		
 		int vida = 200;
-		int ataque = 30;
+		int ataque = 11;
 		int defensa = 3;
 		int numEvo = 0;
 		
-		//Para las pruebas :
-		
-		vida = 200;
+
 		
 		pk = new Planta("Bulbasaur", vida, ataque, defensa, numEvo);
 		pk.setNumPokemon(1);
