@@ -55,6 +55,12 @@ public class CampoBatalla
 		return correcto;
 	}
 	
+	public void finTurno()
+	{
+		atacante = null;
+		defensor = null;
+	}
+	
 	private void iniciarAtaque()
 	{
 		System.out.println("Iniciamos ataque"); 
@@ -67,8 +73,7 @@ public class CampoBatalla
 			// Si no ha sobrevivido al ataque, lo debilitamos (Se pone a null en su respectiva lista)
 			ListaCombatientes.getMiListaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
 		}
-		atacante = null;
-		defensor = null;
+		finTurno();
 		// avisar del fin del ataque
 		ListaCombatientes.getMiListaCombatientes().avisaFinAtaque(idTurnoActual);
 	}

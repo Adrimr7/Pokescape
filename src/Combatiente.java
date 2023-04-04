@@ -80,7 +80,7 @@ public abstract class Combatiente extends Observable
 		// este método añade el pokemon al campo de batalla si no es nulo
 		if(arrayPokemon[idPoke] != null)
 		{
-			boolean rdo= CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
+			boolean rdo = CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
 			
 			if (rdo)
 			{
@@ -95,8 +95,10 @@ public abstract class Combatiente extends Observable
 	
 	public void pasaDeTurno()
 	{
+		CampoBatalla.getMiCampoBatalla().finTurno();
 		setChanged();
 		notifyObservers(new Object[] {2});
+		
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();	
 	}
 	
