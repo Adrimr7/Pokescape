@@ -22,7 +22,7 @@ public class PokeFactory
 		Pokemon pk;
 		
 		int vida = 200;
-		int ataque = 11;
+		int ataque = 30;
 		int defensa = 3;
 		int numEvo = 0;
 		

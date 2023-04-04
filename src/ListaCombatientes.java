@@ -6,8 +6,9 @@ public class ListaCombatientes
 {
 	private static ListaCombatientes miListaCombatientes;
 	private Combatiente[] arrayCombatientes;
+	private int numCombatientes;
 	
-	private ListaCombatientes () {}
+	private ListaCombatientes() {}
 	
 	public static ListaCombatientes getMiListaCombatientes()
 	{
@@ -24,6 +25,7 @@ public class ListaCombatientes
 		// GUIA : Pues la historia continua en esta MAE que guardara a los diferentes luchadores
 		// GUIA : Para empezar, preparamos la lista, del tamaño exacto para los concursantes
 		arrayCombatientes = new Combatiente[numBots + numJugs];
+		numCombatientes = numBots + numJugs;
 		
 		// GUIA : Empezaremos por los humanos y luego los NPC
 		
@@ -85,35 +87,72 @@ public class ListaCombatientes
 	*/
 	public void escogeCombatiente()
 	{
-		System.out.println("Nuevo Turno");
-		Random rn = new Random();
-		
-		if(arrayCombatientes.length == 1)
-		{
-			// En medio segundo se le dara el turno al combatiente seleccionado
-			/*
-			Timer t = new Timer();
-			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[0].tuTurno();}};
-			t.schedule(tt, 500);
-			*/
-			arrayCombatientes[0].tuTurno();
-			
-		}
+		if(numCombatientes <= 1) {}
 		else
 		{
-			// En medio segundo se le dara el turno al combatiente seleccionado
-			/*
-			Timer t = new Timer();
-			TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
-			t.schedule(tt, 500);
-			*/
-			arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();
+			System.out.println("Nuevo Turno");
+			Random rn = new Random();
+			
+			if(arrayCombatientes.length == 1)
+			{
+				// En medio segundo se le dara el turno al combatiente seleccionado
+				/*
+				Timer t = new Timer();
+				TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[0].tuTurno();}};
+				t.schedule(tt, 500);
+				 */
+				arrayCombatientes[0].tuTurno();
+			
+			}
+			else
+			{
+				// En medio segundo se le dara el turno al combatiente seleccionado
+				/*
+				Timer t = new Timer();
+				TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
+				t.schedule(tt, 500);
+				 */
+				Combatiente combee = null;
+				while(combee == null)
+				{
+					combee = arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)];
+				}
+				combee.tuTurno();
+			}
 		}
 	}
 	
 	public void debilitar(int pIdPokemon, int pIdCombatiente) 
 	{	
+		boolean ret = false;
 		arrayCombatientes[pIdCombatiente].debilitar(pIdPokemon);
+		ret = (arrayCombatientes[pIdCombatiente].numeroVivos() == 0);
+		
+		if(ret)
+		{
+			debilitarJugador(pIdCombatiente);
+		}
+		
+	}
+	
+	public void debilitarJugador(int pIdCombatiente)
+	{
+		arrayCombatientes[pIdCombatiente].derrotado();
+		arrayCombatientes[pIdCombatiente] = null;
+		numCombatientes -= 1;
+		
+		if(numCombatientes <= 1)
+		{
+			int i = 0;
+			Combatiente ganador = null;
+			while(ganador == null && i < arrayCombatientes.length)
+			{
+				ganador = arrayCombatientes[i];
+				i++;
+			}
+			
+			ganador.hasGanado();
+		}
 	}
 	
 	public Pokemon escogerObjetivo(int pId)

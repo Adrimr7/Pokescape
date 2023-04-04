@@ -80,7 +80,8 @@ public abstract class Combatiente extends Observable
 		{
 			boolean rdo= CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
 			
-			if (rdo){
+			if (rdo)
+			{
 				usados[idPoke]=true;
 			}
 		}
@@ -95,6 +96,41 @@ public abstract class Combatiente extends Observable
 		setChanged();
 		notifyObservers(new Object[] {2});
 		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();	
+	}
+	
+	
+	public void derrotado()
+	{
+		System.out.println("");
+		System.out.println("Me he muerto (" + nombre + ")");
+		setChanged();
+		notifyObservers(new Object[] {3});
+	}
+	
+	
+	public int numeroVivos()
+	{
+		int ret = 0;
+		
+		for(int i = 0; i < arrayPokemon.length; i++)
+		{
+			if(arrayPokemon[i] != null)
+			{
+				ret++;
+			}
+		}
+		
+		return ret;
+	}
+	
+	public void hasGanado()
+	{
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("FIN / HE GANADO");
+		setChanged();
+		notifyObservers(new Object[] {4});
 	}
 	
 	

@@ -257,6 +257,17 @@ public class VentanaJugador extends JFrame implements Observer
 					}
 					*/
 				}
+				
+				else if(codigo == 3) 
+				{
+					this.setVisible(false);
+				}
+				
+				else if(codigo == 4) 
+				{
+					lblTurno.setText("Fin");
+					this.setTitle("Ganador");
+				}
 			}
 		}
 	}

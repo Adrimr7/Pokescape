@@ -42,13 +42,14 @@ public class Humano extends Combatiente {
 	public void finAtaque()
 	{
 		System.out.print("El ataque ha acabado"); //////////////////////////////////////////////////////////////////
-		if(numAtaques == usados.length) 
+		if(numAtaques == numeroVivos()) 
 		{
 			System.out.println(" y paso mi turno");
 			pasaDeTurno();
 		}
 		System.out.println("");
 	}
+	
 	
 	public void clickGo()
 	{

@@ -356,7 +356,7 @@ public class VentanaInicio extends JFrame implements Observer{
 					
 						System.out.println(numb + " " + numj + " " + nump);
 						// TODO ******************************
-						if (numb>10 || numj>10 || nump>20){System.out.println("Prueba con un valor mas bajo.");}
+						if (numb>10 || numj>10 || nump>20 || (numb+numj)<2){System.out.println("Prueba con un valor mas bajo.");}
 						else
 						{
 							System.out.println("Pasamos a Pokescape");

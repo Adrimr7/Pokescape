@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -181,6 +183,12 @@ public class JPokemon extends JPanel implements Observer
 	{
 		//System.out.println("Vida max :" + vidaMax + "  "  + barraHp.getValue() + "  "   + (double) pVida/vidaMax);
 		//System.out.println("Vida :" + pVida + "  " + (int) (barraHp.getValue() - (double) pVida/vidaMax));
+		barraHp.setForeground((Color.red));
+		Timer t = new Timer();
+		TimerTask tt = new TimerTask() {@Override public void run() {
+																	barraHp.setForeground(new Color(128, 255, 0));
+																	}};
+		t.schedule(tt, 200);
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
 	}
 

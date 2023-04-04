@@ -20,7 +20,7 @@ public class CampoBatalla
 	{
 		boolean correcto = false;
 		
-		System.out.println("Id combatiente atacante : " + idAtacante); //////////////////////////////////////////////////////////////////
+		//System.out.println("Id combatiente atacante : " + idAtacante); //////////////////////////////////////////////////////////////////
 		
 		if (atacante == null && idAtacante == idTurnoActual && poke != null)
 		{ 
@@ -36,7 +36,7 @@ public class CampoBatalla
 				iniciarAtaque();
 				correcto = true;
 		}
-		else if(poke != null)
+		else if(poke == null)
 		{
 			System.out.println("No puedes añadir un pokemon nulo"); //////////////////////////////////////////////////////////////////
 		}
