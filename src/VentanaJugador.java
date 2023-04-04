@@ -205,7 +205,11 @@ public class VentanaJugador extends JFrame implements Observer
 					// GUIA : Y lo segundo usarlos para algo
 					// GUIA : Como ya sabeis tenemos todos los pokemon en cada Jugador
 					// GUIA : Entonces vamos a crear los diferentes jpokemon para los combatientes
-					
+					if (nombre.contains("Humano")){
+						lblNewLabel.setText("Entrenador Juan");
+						URL url = this.getClass().getResource("Spr_B2W2_Janitor.png");
+						Icon imageIcon = new ImageIcon(url);
+						foto.setIcon(imageIcon);};
 					jpoke = new ArrayList<JPokemon>();
 					for (int i = 0; i < numPoke; i++)
 					{
