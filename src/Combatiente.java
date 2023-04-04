@@ -96,6 +96,7 @@ public abstract class Combatiente extends Observable
 	public void pasaDeTurno()
 	{
 		CampoBatalla.getMiCampoBatalla().finTurno();
+		
 		setChanged();
 		notifyObservers(new Object[] {2});
 		
