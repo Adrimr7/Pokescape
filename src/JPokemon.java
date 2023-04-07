@@ -243,11 +243,12 @@ public class JPokemon extends JPanel implements Observer
 		int numPoke = (int) lista[4];
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
+		int numEvoluciones = (int) lista[7];
 		if(tipoUpdate == 0) 
 		{
 			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);
 		}
-		else
+		else if (tipoUpdate==1)
 		{
 			if(vida <= 0)
 			{
@@ -266,6 +267,21 @@ public class JPokemon extends JPanel implements Observer
 				actualizarVida(vida);
 			}
 		}
+		else if (tipoUpdate==2) {
+			actualizarVida(vida);
+			evolucionar(ataque, defensa, numPoke, numEvoluciones);
+		}
+	}
+	
+	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int numEvoluciones) {
+		numAta.setText(Integer.toString(pAtaque));
+		numDef.setText(Integer.toString(pDefensa));
+		
+		URL url;
+		Icon imageIcon;
+		url = this.getClass().getResource(pNumPokemon+numEvoluciones + ".png");
+		imageIcon = new ImageIcon(url);
+		spritePokemon.setIcon(imageIcon);
 	}
 
 	private JProgressBar barraEstatt(int stat, Color color) 

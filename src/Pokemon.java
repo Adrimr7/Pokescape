@@ -12,6 +12,8 @@ public abstract class Pokemon extends Observable
 	protected int defensa;
 	protected int numEvoluciones; // TODO ****************
 								// boolean Evoluciona --> Pokemon evolucion (Y cuando llegue a mitad de la vida actual cambia de pokemon)
+	protected int vidaPrimeraEvol;
+	protected int vidaSegundaEvol;
 	protected String[] arrayDebilidades;
 	public Pokemon(String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones) 
 	{
@@ -20,12 +22,15 @@ public abstract class Pokemon extends Observable
 		vida = pVida + aleatorio.nextInt(1,21);
 		ataque = pAtaque + aleatorio.nextInt(1,8);
 		defensa = pDefensa + aleatorio.nextInt(1,5);
+		numEvoluciones=0;
+		vidaPrimeraEvol = vida/2;
+		vidaSegundaEvol = vida/5;
 		
 	}
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, numEvoluciones});
 		
 	}
 	public void setNumPokemon(int pNumPoke)
@@ -46,6 +51,7 @@ public abstract class Pokemon extends Observable
 	
 	public boolean danar(int pAtaque, String pTipo)
 	{
+		int tipoUpdate=1;
 		int dano;
 		if (esDebil(pTipo))
 		{
@@ -57,9 +63,13 @@ public abstract class Pokemon extends Observable
 		{
 			vida = 0;
 		}
+		else if ((vida<=vidaPrimeraEvol && numEvoluciones==0) || (vida<=vidaSegundaEvol && numEvoluciones==1)) {
+			evolucionar();
+			tipoUpdate=2;
+		}
 		boolean vivo = estaVivo();
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, numEvoluciones});
 		return vivo;
 	}
 	
@@ -87,7 +97,20 @@ public abstract class Pokemon extends Observable
 	
 	public void setIdPokemon(int pId){ idPokemon = pId;	}
 	
-
+	private void evolucionar() {
+		if (numEvoluciones==0) {
+			this.ataque+=5;
+			this.defensa+=3;
+			numEvoluciones++;
+			System.out.println("EVOLUCIÓN 1");
+		}
+		else if (numEvoluciones==1) {
+			this.ataque+=2;
+			this.defensa+=2;
+			numEvoluciones++;
+			System.out.println("EVOLUCIÓN 2");
+		}
+	}
 	
 
 	
