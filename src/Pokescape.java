@@ -58,8 +58,8 @@ public class Pokescape extends Observable
     public void iniciarCombate(int numBots, int numJugs, int numPokes)
     {
     	
-      	// Despues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de ListaCombatientes.
-    	ListaCombatientes.getMiListaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
+      	// Despues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de listaCombatientes.
+    	ListaCombatientes.getMilistaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
     	
     	// Avisamos a VentanaInicio, 
     	// El Observable y el Observer son una pareja, en este caso Pokescape y VentanaInicio
@@ -68,11 +68,11 @@ public class Pokescape extends Observable
     	avisarInicio(numBots, numJugs, numPokes);
 
 		// Una vez esten todas las ventanas de combatientes preparadas, es hora de llenarlas
-		ListaCombatientes.getMiListaCombatientes().daAvisos();
+		ListaCombatientes.getMilistaCombatientes().daAvisos();
 		
 		
 		// Con este metodo le damos turno a un combatiente aleatorio
-		ListaCombatientes.getMiListaCombatientes().escogeCombatiente();
+		ListaCombatientes.getMilistaCombatientes().escogeCombatiente();
 		
     }
     

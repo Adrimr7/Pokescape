@@ -36,7 +36,7 @@ public class NPC extends Combatiente {
 				boolean bool = false;
 				while (!bool) {
 					// Buscamos aleatoriamente un pokemon al que atacar
-					Pokemon poke = ListaCombatientes.getMiListaCombatientes().escogerObjetivo(super.getId());
+					Pokemon poke = ListaCombatientes.getMilistaCombatientes().escogerObjetivo(super.getId());
 
 					// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
 					bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());

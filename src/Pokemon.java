@@ -12,6 +12,8 @@ public abstract class Pokemon extends Observable
 	protected int defensa;
 	protected int numEvoluciones; // TODO ****************
 								// boolean Evoluciona --> Pokemon evolucion (Y cuando llegue a mitad de la vida actual cambia de pokemon)
+	protected int evolucionesHechas;
+	protected int vidaParaEvol;
 	protected int vidaPrimeraEvol;
 	protected int vidaSegundaEvol;
 	protected String[] arrayDebilidades;
@@ -22,15 +24,18 @@ public abstract class Pokemon extends Observable
 		vida = pVida + aleatorio.nextInt(1,21);
 		ataque = pAtaque + aleatorio.nextInt(1,8);
 		defensa = pDefensa + aleatorio.nextInt(1,5);
-		numEvoluciones=0;
-		vidaPrimeraEvol = vida/2;
-		vidaSegundaEvol = vida/5;
+		numEvoluciones=pNumEvoluciones;
+		evolucionesHechas=0;
+		
+		vidaParaEvol=vida/2;
+		//vidaPrimeraEvol = vida/2;
+		//vidaSegundaEvol = vida/5;
 		
 	}
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, numEvoluciones});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas});
 		
 	}
 	public void setNumPokemon(int pNumPoke)
@@ -63,13 +68,13 @@ public abstract class Pokemon extends Observable
 		{
 			vida = 0;
 		}
-		else if ((vida<=vidaPrimeraEvol && numEvoluciones==0) || (vida<=vidaSegundaEvol && numEvoluciones==1)) {
+		else if ((vida<=vidaParaEvol && numEvoluciones!=0)) {
 			evolucionar();
 			tipoUpdate=2;
 		}
 		boolean vivo = estaVivo();
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, numEvoluciones});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, evolucionesHechas});
 		return vivo;
 	}
 	
@@ -101,14 +106,45 @@ public abstract class Pokemon extends Observable
 		if (numEvoluciones==0) {
 			this.ataque+=5;
 			this.defensa+=3;
-			numEvoluciones++;
+			numEvoluciones--;
+			vidaParaEvol=vidaParaEvol*2/5;
 			System.out.println("EVOLUCIÓN 1");
 		}
 		else if (numEvoluciones==1) {
-			this.ataque+=2;
-			this.defensa+=2;
-			numEvoluciones++;
-			System.out.println("EVOLUCIÓN 2");
+			if (evolucionesHechas==0) {
+				this.ataque+=5;
+				this.defensa+=3;
+				numEvoluciones--;
+				vidaParaEvol=vidaParaEvol*2/5;
+				evolucionesHechas++;
+				System.out.println("EVOLUCIÓN 1");
+			}
+			else if (evolucionesHechas==1) {
+				this.ataque+=2;
+				this.defensa+=2;
+				numEvoluciones--;
+				vidaParaEvol=vidaParaEvol*2/5;
+				evolucionesHechas++;
+				System.out.println("EVOLUCIÓN 2");
+			}
+			
+		}
+		else if (numEvoluciones==2) {
+			if (evolucionesHechas==0) {
+				this.ataque+=5;
+				this.defensa+=3;
+				numEvoluciones--;
+				vidaParaEvol=vidaParaEvol*2/5;
+				evolucionesHechas++;
+				System.out.println("EVOLUCIÓN 1");
+			}
+			/*else if (evolucionesHechas==1) {
+				this.ataque+=2;
+				this.defensa+=2;
+				numEvoluciones--;
+				evolucionesHechas++;
+				System.out.println("EVOLUCIÓN 2");
+			}*/
 		}
 	}
 	

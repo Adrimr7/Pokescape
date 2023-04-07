@@ -71,11 +71,11 @@ public class CampoBatalla
 		if (!vivo)
 		{
 			// Si no ha sobrevivido al ataque, lo debilitamos (Se pone a null en su respectiva lista)
-			ListaCombatientes.getMiListaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
+			ListaCombatientes.getMilistaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
 		}
 		finTurno();
 		// avisar del fin del ataque
-		ListaCombatientes.getMiListaCombatientes().avisaFinAtaque(idTurnoActual);
+		ListaCombatientes.getMilistaCombatientes().avisaFinAtaque(idTurnoActual);
 	}
 	
 	public void setTurno(int idTurno) { idTurnoActual = idTurno; }

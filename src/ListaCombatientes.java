@@ -4,19 +4,19 @@ import java.util.TimerTask;
 
 public class ListaCombatientes 
 {
-	private static ListaCombatientes miListaCombatientes;
+	private static ListaCombatientes milistaCombatientes;
 	private Combatiente[] arrayCombatientes;
 	private int numCombatientes;
 	
 	private ListaCombatientes() {}
 	
-	public static ListaCombatientes getMiListaCombatientes()
+	public static ListaCombatientes getMilistaCombatientes()
 	{
-		if (miListaCombatientes == null)
+		if (milistaCombatientes == null)
 		{
-			miListaCombatientes = new ListaCombatientes();
+			milistaCombatientes = new ListaCombatientes();
 		}
-		return miListaCombatientes;
+		return milistaCombatientes;
 	}
 	
 	public void iniciarCombate(int numBots, int numJugs, int numPoke)

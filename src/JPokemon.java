@@ -243,7 +243,7 @@ public class JPokemon extends JPanel implements Observer
 		int numPoke = (int) lista[4];
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
-		int numEvoluciones = (int) lista[7];
+		int evolucionesHechas = (int) lista[7];
 		if(tipoUpdate == 0) 
 		{
 			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);
@@ -269,17 +269,19 @@ public class JPokemon extends JPanel implements Observer
 		}
 		else if (tipoUpdate==2) {
 			actualizarVida(vida);
-			evolucionar(ataque, defensa, numPoke, numEvoluciones);
+			evolucionar(ataque, defensa, numPoke, evolucionesHechas);
 		}
 	}
 	
-	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int numEvoluciones) {
+	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas) {
+		nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
+		
 		numAta.setText(Integer.toString(pAtaque));
 		numDef.setText(Integer.toString(pDefensa));
 		
 		URL url;
 		Icon imageIcon;
-		url = this.getClass().getResource(pNumPokemon+numEvoluciones + ".png");
+		url = this.getClass().getResource(pNumPokemon+evolucionesHechas + ".png");
 		imageIcon = new ImageIcon(url);
 		spritePokemon.setIcon(imageIcon);
 	}

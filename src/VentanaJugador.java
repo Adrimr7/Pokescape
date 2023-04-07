@@ -123,7 +123,7 @@ public class VentanaJugador extends JFrame implements Observer
 		// Estos paneles son de JPokemon, una clase expecial que implementa el JPanel y que debera generar  
 		
 		// Al igual que con el notifyObservers de Pokescape, el notifyObservers de cada Combatiente hara saltar el update de su respectiva ventana jugador
-		// Entonces es cuando sucede la magia, cada ventanaJugador accedera a su correspondiente Combatiente a traves de ListaCombatienes
+		// Entonces es cuando sucede la magia, cada ventanaJugador accedera a su correspondiente Combatiente a traves de listaCombatienes
 		// y generara tantos JPokemon como Pokemon tenga cada Combatiente
 		
 		// A la vez, ira asigando cada JPokemon como Observer de su correspondiente Pokemon, y entonces todo estar enlazado.
@@ -240,7 +240,7 @@ public class VentanaJugador extends JFrame implements Observer
 					{
 						JPokemon poketoMonsta = new JPokemon();
 						// Una vez creados hacemos que estos Jpokemon observen a sus respectivos pokemon de su combatiente
-						ListaCombatientes.getMiListaCombatientes().getCombatiente(numComb).getPokemon(i).addObserver(poketoMonsta);
+						ListaCombatientes.getMilistaCombatientes().getCombatiente(numComb).getPokemon(i).addObserver(poketoMonsta);
 						
 						// Y lo añadimos a la ventana actual
 						pokemons.add(poketoMonsta);
@@ -298,11 +298,11 @@ public class VentanaJugador extends JFrame implements Observer
 			
 			if(e.getSource() == lblTurno && turno) 
 			{
-				ListaCombatientes.getMiListaCombatientes().getCombatiente(idCombee).clickGo();
+				ListaCombatientes.getMilistaCombatientes().getCombatiente(idCombee).clickGo();
 			}
 			else if(e.getSource() != lblTurno)
 			{
-				ListaCombatientes.getMiListaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
+				ListaCombatientes.getMilistaCombatientes().seleccionado(idCombee, jpoke.indexOf(e.getSource()));
 			}
 			
 			
