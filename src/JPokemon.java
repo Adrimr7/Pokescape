@@ -1,7 +1,10 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
 public class JPokemon extends JPanel implements Observer
 {
@@ -24,7 +29,6 @@ public class JPokemon extends JPanel implements Observer
 	private JLabel nombrePokemon;
 	private JLabel tipo;
 	private JLabel spritePokemon;
-	private JProgressBar barraHp;
 	private JPanel estadisticas;
 	private JPanel panelNombresEstats;
 	private JPanel panelBarrasEstats;
@@ -32,6 +36,14 @@ public class JPokemon extends JPanel implements Observer
 	private JProgressBar barraDefensa;
 	private int vidaMax;
 	private String nombreTipo;
+	private JPanel panelNombresEstats_1;
+	private JLabel numAta;
+	private JLabel numDef;
+	private JPanel estadisticas_1;
+	private JPanel panelBarrasEstats_1;
+	private JPanel panelNombresEstats_3;
+	private JLabel vidaRest;
+	private JProgressBar barraHp;
 	
 	public JPokemon ()
 	{
@@ -78,16 +90,31 @@ public class JPokemon extends JPanel implements Observer
 					spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
 				
 				this.add(spritePokemon);
-				
 					
-					// Barra Vida //////////////////////////////////////////////////////////////////////////	
+					estadisticas_1 = new JPanel();
+					estadisticas_1.setOpaque(false);
+					add(estadisticas_1);
+					estadisticas_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+					
+					panelBarrasEstats_1 = new JPanel();
+					panelBarrasEstats_1.setOpaque(false);
+					estadisticas_1.add(panelBarrasEstats_1);
+					panelBarrasEstats_1.setLayout(new GridLayout(1, 1, 0, 0));
+					
 					barraHp = new JProgressBar();
-					barraHp.setForeground(new Color(128, 255, 0));
 					barraHp.setValue(100);
-					barraHp.setPreferredSize(new Dimension(150, 14));
-					barraHp.setMaximumSize(new Dimension(150, 14));
+					barraHp.setPreferredSize(new Dimension(110, 14));
+					barraHp.setMaximumSize(new Dimension(110, 14));
+					barraHp.setForeground(new Color(128, 255, 0));
+					panelBarrasEstats_1.add(barraHp);
 					
-				this.add(barraHp);
+					panelNombresEstats_3 = new JPanel();
+					panelNombresEstats_3.setOpaque(false);
+					estadisticas_1.add(panelNombresEstats_3);
+					panelNombresEstats_3.setLayout(new GridLayout(1, 1, 0, 0));
+					
+					vidaRest = new JLabel("Vida.");
+					panelNombresEstats_3.add(vidaRest);
 						
 					
 					// Zona Estadisticas //////////////////////////////////////////////////////////////////////////
@@ -118,6 +145,17 @@ public class JPokemon extends JPanel implements Observer
 				
 						estadisticas.add(panelBarrasEstats);
 				this.add(estadisticas);
+				
+				panelNombresEstats_1 = new JPanel();
+				panelNombresEstats_1.setOpaque(false);
+				estadisticas.add(panelNombresEstats_1);
+				panelNombresEstats_1.setLayout(new GridLayout(5, 1, 0, 0));
+				
+				numAta = new JLabel("Ata.");
+				panelNombresEstats_1.add(numAta);
+				
+				numDef = new JLabel("Def.");
+				panelNombresEstats_1.add(numDef);
 	}
 	
 	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa, int pVida)
@@ -145,6 +183,10 @@ public class JPokemon extends JPanel implements Observer
 						
 		barraAtaque.setValue((int) (pAtaque*5));
 		barraDefensa.setValue((int) (pDefensa*5));
+		
+		vidaRest.setText(Integer.toString(pVida));
+		numAta.setText(Integer.toString(pAtaque));
+		numDef.setText(Integer.toString(pDefensa));
 	}	
 	public void actualizarColor()
 	{
@@ -185,6 +227,7 @@ public class JPokemon extends JPanel implements Observer
 																	}};
 		t.schedule(tt, 200);
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
+		vidaRest.setText(Integer.toString(pVida*100/vidaMax));
 	}
 
 	@Override
@@ -229,8 +272,8 @@ public class JPokemon extends JPanel implements Observer
 		JProgressBar barra = new JProgressBar();
 		barra.setValue((int) (stat*5));
 		barra.setForeground(color);
-		barra.setPreferredSize(new Dimension(100, 14));
-		barra.setMaximumSize(new Dimension(100, 14));
+		barra.setPreferredSize(new Dimension(75, 14));
+		barra.setMaximumSize(new Dimension(75, 14));
 		return barra;
 	}
 	
