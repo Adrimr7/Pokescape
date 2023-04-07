@@ -102,6 +102,7 @@ public class JPokemon extends JPanel implements Observer
 					panelBarrasEstats_1.setLayout(new GridLayout(1, 1, 0, 0));
 					
 					barraHp = new JProgressBar();
+					barraHp.setToolTipText("");
 					barraHp.setValue(100);
 					barraHp.setPreferredSize(new Dimension(110, 14));
 					barraHp.setMaximumSize(new Dimension(110, 14));
@@ -227,7 +228,7 @@ public class JPokemon extends JPanel implements Observer
 																	}};
 		t.schedule(tt, 200);
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
-		vidaRest.setText(Integer.toString(pVida*100/vidaMax));
+		vidaRest.setText(Integer.toString(pVida));
 	}
 
 	@Override
