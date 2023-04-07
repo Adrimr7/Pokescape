@@ -278,6 +278,8 @@ public class JPokemon extends JPanel implements Observer
 		
 		numAta.setText(Integer.toString(pAtaque));
 		numDef.setText(Integer.toString(pDefensa));
+		barraAtaque.setValue((int) (pAtaque*5));
+		barraDefensa.setValue((int) (pDefensa*5));
 		
 		URL url;
 		Icon imageIcon;
