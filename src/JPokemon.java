@@ -276,10 +276,18 @@ public class JPokemon extends JPanel implements Observer
 	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas) {
 		nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
 		
-		numAta.setText(Integer.toString(pAtaque));
-		numDef.setText(Integer.toString(pDefensa));
-		barraAtaque.setValue((int) (pAtaque*5));
-		barraDefensa.setValue((int) (pDefensa*5));
+		//numAta.setText(Integer.toString(pAtaque));
+		//numDef.setText(Integer.toString(pDefensa));
+		int ata=0;
+		int def=0;
+		if (evolucionesHechas==1) {ata=5;def=3;}
+		else if (evolucionesHechas==2) {ata=7;def=5;}
+		
+		
+		numAta.setText(pAtaque-ata + "+" + ata);
+		numDef.setText(pDefensa-def + "+" + def);
+		barraAtaque.setValue((int) ((pAtaque)*5));
+		barraDefensa.setValue((int) ((pDefensa)*5));
 		
 		URL url;
 		Icon imageIcon;

@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.stream.Stream;
 import java.util.Observable;
-public abstract class Pokemon extends Observable
+public abstract class Pokemon extends Observable implements Cloneable
 {
 	protected int numPokemon;  // numero en pokedex
 	protected int idPokemon;   // id del pokemon
@@ -32,6 +32,13 @@ public abstract class Pokemon extends Observable
 		//vidaSegundaEvol = vida/5;
 		
 	}
+	@Override
+	public Pokemon clone() throws CloneNotSupportedException{
+		Pokemon rdo = (Pokemon)super.clone();
+		return rdo;
+	}
+	
+	
 	public void daAviso() 
 	{
 		setChanged();
@@ -96,6 +103,14 @@ public abstract class Pokemon extends Observable
 	
 	public int getIdPokemon(){ return idPokemon; }
 	
+	public String getNombre() {return nombre;}
+	
+	public int getNumEvoluciones() {return numEvoluciones;}
+	
+	public int getDefensa() {return defensa;}
+	
+	public int getVida() {return vida;}
+	
 	public boolean estaVivo() {	return (vida>0); }
 	
 	public void setIdCombatiente(int pId){ idCombatiente = pId; }
@@ -104,11 +119,11 @@ public abstract class Pokemon extends Observable
 	
 	private void evolucionar() {
 		if (numEvoluciones==0) {
-			this.ataque+=5;
+			/*this.ataque+=5;
 			this.defensa+=3;
 			numEvoluciones--;
 			vidaParaEvol=vidaParaEvol*2/5;
-			System.out.println("EVOLUCIÓN 1");
+			System.out.println("EVOLUCIÓN 1");*/
 		}
 		else if (numEvoluciones==1) {
 			if (evolucionesHechas==0) {
@@ -138,13 +153,6 @@ public abstract class Pokemon extends Observable
 				evolucionesHechas++;
 				System.out.println("EVOLUCIÓN 1");
 			}
-			/*else if (evolucionesHechas==1) {
-				this.ataque+=2;
-				this.defensa+=2;
-				numEvoluciones--;
-				evolucionesHechas++;
-				System.out.println("EVOLUCIÓN 2");
-			}*/
 		}
 	}
 	
