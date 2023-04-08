@@ -47,6 +47,7 @@ public class JPokemon extends JPanel implements Observer
 	
 	public JPokemon ()
 	{
+		setForeground(new Color(0, 0, 0));
 		//Variables para añadir fotos
 				URL url;
 				Icon imageIcon;
@@ -271,6 +272,13 @@ public class JPokemon extends JPanel implements Observer
 			actualizarVida(vida);
 			evolucionar(ataque, defensa, numPoke, evolucionesHechas);
 		}
+		else if (tipoUpdate==3) {
+			actualizarVida(vida);
+			euforia(ataque, defensa);
+		}
+		else if (tipoUpdate==4) {
+			quitarEuforia(ataque,defensa, evolucionesHechas);
+		}
 	}
 	
 	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas) {
@@ -294,6 +302,46 @@ public class JPokemon extends JPanel implements Observer
 		url = this.getClass().getResource(pNumPokemon+evolucionesHechas + ".png");
 		imageIcon = new ImageIcon(url);
 		spritePokemon.setIcon(imageIcon);
+	}
+	
+	public void euforia(int pAtaque, int pDefensa) {
+		
+		//numAta.setText(Integer.toString(pAtaque));
+		//numDef.setText(Integer.toString(pDefensa));
+				
+		numAta.setText(pAtaque-100 + "+" + 100);
+		numDef.setText(pDefensa-100 + "+" + 100);
+		barraAtaque.setValue((int) ((pAtaque)*5));
+		barraAtaque.setForeground(new Color(255, 85, 0));
+		barraDefensa.setValue((int) ((pDefensa)*5));
+		barraDefensa.setForeground(new Color(255, 85, 0));
+		
+	}
+	
+	public void quitarEuforia(int pAtaque, int pDefensa, int evolucionesHechas) {
+						
+		if (evolucionesHechas==0) {
+			numAta.setText(Integer.toString(pAtaque));
+			numDef.setText(Integer.toString(pDefensa));
+		}else {
+			int ata=0;
+			int def=0;
+			
+			if (evolucionesHechas==1) {ata=5;def=3;}
+			else if (evolucionesHechas==2) {ata=7;def=5;}
+				
+				
+			numAta.setText(pAtaque-ata + "+" + ata);
+			numDef.setText(pDefensa-def + "+" + def);
+		}
+		
+		
+		barraAtaque.setValue((int) ((pAtaque)*5));
+		barraAtaque.setForeground(new Color(255, 255, 0));
+		barraDefensa.setValue((int) ((pDefensa)*5));
+		barraDefensa.setForeground(new Color(255, 255, 0));
+		
+		
 	}
 
 	private JProgressBar barraEstatt(int stat, Color color) 

@@ -73,6 +73,11 @@ public class CampoBatalla
 			// Si no ha sobrevivido al ataque, lo debilitamos (Se pone a null en su respectiva lista)
 			ListaCombatientes.getMilistaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
 		}
+		
+		if (atacante.getEstado().getClass().getSimpleName().equals("EstadoEuforia")) {
+			atacante.changeState(new EstadoNormal());
+		}
+		
 		finTurno();
 		// avisar del fin del ataque
 		ListaCombatientes.getMilistaCombatientes().avisaFinAtaque(idTurnoActual);

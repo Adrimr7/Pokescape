@@ -14,9 +14,14 @@ public abstract class Pokemon extends Observable implements Cloneable
 								// boolean Evoluciona --> Pokemon evolucion (Y cuando llegue a mitad de la vida actual cambia de pokemon)
 	protected int evolucionesHechas;
 	protected int vidaParaEvol;
-	protected int vidaPrimeraEvol;
-	protected int vidaSegundaEvol;
+	//protected int vidaPrimeraEvol;
+	//protected int vidaSegundaEvol;
 	protected String[] arrayDebilidades;
+	
+	protected int ataquesParaEuforia;
+	protected int ataquesRecibidos;
+	protected EstadoPokemon estado;
+	
 	public Pokemon(String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones) 
 	{
 		nombre = pNombre;
@@ -30,6 +35,10 @@ public abstract class Pokemon extends Observable implements Cloneable
 		vidaParaEvol=vida/2;
 		//vidaPrimeraEvol = vida/2;
 		//vidaSegundaEvol = vida/5;
+		
+		ataquesParaEuforia = aleatorio.nextInt(3,8);
+		ataquesRecibidos=0;
+		estado = new EstadoNormal();
 		
 	}
 	@Override
@@ -70,20 +79,40 @@ public abstract class Pokemon extends Observable implements Cloneable
 			pAtaque = pAtaque * 2;
 		}
 		dano = (pAtaque - defensa);
-		vida = vida - dano;
-		if(vida < 0)
-		{
-			vida = 0;
+		
+		if (dano>0) {
+			vida = vida - dano;
+			if(vida < 0)
+			{
+				vida = 0;
+			}
+			else if ((vida<=vidaParaEvol && numEvoluciones!=0)) {
+				evolucionar();
+				tipoUpdate=2;
+			}
+			
+			
+			ataquesRecibidos++;
+			if (ataquesRecibidos==ataquesParaEuforia) {
+				tipoUpdate=3;
+				ataquesRecibidos=0;
+				Random aleatorio = new Random();
+				ataquesParaEuforia = aleatorio.nextInt(3,8);
+				this.changeState(new EstadoEuforia());
+				ataque=estado.getAtaque(ataque);
+				defensa=estado.getDefensa(defensa);
+				
+			}
+			
+			
+			boolean vivo = estaVivo();
+			setChanged();
+			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, evolucionesHechas});
+			return vivo;
 		}
-		else if ((vida<=vidaParaEvol && numEvoluciones!=0)) {
-			evolucionar();
-			tipoUpdate=2;
+		else {return estaVivo();}
 		}
-		boolean vivo = estaVivo();
-		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, evolucionesHechas});
-		return vivo;
-	}
+		
 	
 	private boolean esDebil(String pTipo) 
 	{
@@ -156,6 +185,23 @@ public abstract class Pokemon extends Observable implements Cloneable
 		}
 	}
 	
+	public void changeState(EstadoPokemon pEstado) {
+		estado=pEstado;
+		
+		if (pEstado.getClass().getSimpleName().equals("EstadoNormal")) {
+			ataque=estado.getAtaque(ataque);
+			defensa=estado.getDefensa(defensa);
+			
+			Random aleatorio = new Random();
+			ataquesParaEuforia = aleatorio.nextInt(3,8);
+			setChanged();
+			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 4, evolucionesHechas});
+		}
+	}
+	
+	public EstadoPokemon getEstado() {
+		return estado;
+	}
 
 	
 }
