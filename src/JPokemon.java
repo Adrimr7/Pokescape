@@ -218,10 +218,9 @@ public class JPokemon extends JPanel implements Observer
 	{
 		this.setBackground(new Color(225, 205, 249));
 	}
+	
 	public void actualizarVida(int pVida)
 	{
-		//System.out.println("Vida max :" + vidaMax + "  "  + barraHp.getValue() + "  "   + (double) pVida/vidaMax);
-		//System.out.println("Vida :" + pVida + "  " + (int) (barraHp.getValue() - (double) pVida/vidaMax));
 		barraHp.setForeground((Color.red));
 		Timer t = new Timer();
 		TimerTask tt = new TimerTask() {@Override public void run() {
@@ -245,6 +244,7 @@ public class JPokemon extends JPanel implements Observer
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
 		int evolucionesHechas = (int) lista[7];
+		
 		if(tipoUpdate == 0) 
 		{
 			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);
@@ -268,16 +268,19 @@ public class JPokemon extends JPanel implements Observer
 				actualizarVida(vida);
 			}
 		}
-		else if (tipoUpdate==2) {
+		else if (tipoUpdate==2) 
+		{
 			actualizarVida(vida);
 			evolucionar(ataque, defensa, numPoke, evolucionesHechas);
 		}
-		else if (tipoUpdate==3) {
+		else if (tipoUpdate==3) 
+		{
 			actualizarVida(vida);
 			euforia(ataque, defensa);
 		}
-		else if (tipoUpdate==4) {
-			quitarEuforia(ataque,defensa, evolucionesHechas);
+		else if (tipoUpdate==4) 
+		{
+			quitarEuforia(ataque, defensa, evolucionesHechas);
 		}
 	}
 	

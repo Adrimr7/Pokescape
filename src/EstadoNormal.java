@@ -1,9 +1,7 @@
 
 public class EstadoNormal implements EstadoPokemon {
 
-	public EstadoNormal() {
-		
-	}
+	public EstadoNormal() {}
 	
 	public int getAtaque(int pAtaque) {
 		return (pAtaque-100);
