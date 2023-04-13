@@ -85,27 +85,29 @@ public abstract class Pokemon extends Observable implements Cloneable
 			{
 				vida = 0;
 			}
-			else if (numEvoluciones != 0 && vida <= vidaParaEvol)
+			else
 			{
-				evolucionar();
-				tipoUpdate = 2;
-			}
+				if (numEvoluciones != 0 && vida <= vidaParaEvol)
+				{
+					evolucionar();
+					tipoUpdate = 2;
+				}
 			
-			ataquesRecibidos++;
+				ataquesRecibidos++;
 			
-			if (ataquesRecibidos >= ataquesParaEuforia) 
-			{
-				tipoUpdate = 3;
-				ataquesRecibidos = 0;
+				if (ataquesRecibidos >= ataquesParaEuforia) 
+				{
+					tipoUpdate = 3;
+					ataquesRecibidos = 0;
 				
-				Random aleatorio = new Random();
-				ataquesParaEuforia = aleatorio.nextInt(3,8);
+					Random aleatorio = new Random();
+					ataquesParaEuforia = aleatorio.nextInt(3,8);
 				
-				this.changeState(new EstadoEuforia());
-				ataque = estado.getAtaque(ataque);
-				defensa = estado.getDefensa(defensa);
+					this.changeState(new EstadoEuforia());
+					ataque = estado.getAtaque(ataque);
+					defensa = estado.getDefensa(defensa);
+				}
 			}
-			
 			boolean vivo = estaVivo();
 			setChanged();
 			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, evolucionesHechas});
@@ -193,8 +195,9 @@ public abstract class Pokemon extends Observable implements Cloneable
 		}
 	}
 	
-	public void changeState(EstadoPokemon pEstado) {
-		estado=pEstado;
+	public void changeState(EstadoPokemon pEstado) 
+	{
+		estado = pEstado;
 		
 		if (pEstado.getClass().getSimpleName().equals("EstadoNormal")) {
 			ataque=estado.getAtaque(ataque);
@@ -207,7 +210,8 @@ public abstract class Pokemon extends Observable implements Cloneable
 		}
 	}
 	
-	public EstadoPokemon getEstado() {
+	public EstadoPokemon getEstado() 
+	{
 		return estado;
 	}
 
