@@ -8,12 +8,16 @@ public abstract class Combatiente extends Observable
 	private boolean enPie;
 	protected boolean[] usados;
 	
+	protected boolean miTurno;
+	
 	public Combatiente(String pNombre, int pId)
 	{
 		// constructora
 		nombre = pNombre;
 		id = pId;
 		enPie = true;
+		
+		miTurno = false;
 	}
 	
 	
@@ -96,6 +100,7 @@ public abstract class Combatiente extends Observable
 	public void pasaDeTurno()
 	{
 		CampoBatalla.getMiCampoBatalla().finTurno();
+		miTurno = false;
 		
 		setChanged();
 		notifyObservers(new Object[] {2});
@@ -108,6 +113,9 @@ public abstract class Combatiente extends Observable
 	{
 		System.out.println("");
 		System.out.println("Me he muerto (" + nombre + ")");
+		
+		miTurno = false;
+		
 		setChanged();
 		notifyObservers(new Object[] {3});
 	}

@@ -9,6 +9,7 @@ public class Humano extends Combatiente {
 	@Override
 	public void tuTurno()
 	{
+		miTurno = true;
 		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
 		usados = new boolean[arrayPokemon.length];
 		numAtaques = 0;
@@ -21,7 +22,7 @@ public class Humano extends Combatiente {
 	@Override
 	public void atacaCon(int idPoke)
 	{	
-		if(arrayPokemon[idPoke] != null && usados[idPoke]==false)
+		if(arrayPokemon[idPoke] != null && usados[idPoke]==false && miTurno)
 		{
 			boolean rdo = CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
 			
@@ -30,6 +31,10 @@ public class Humano extends Combatiente {
 				usados[idPoke] = true;
 				numAtaques++;
 			}
+		}
+		else if(arrayPokemon[idPoke] != null && !miTurno)
+		{
+			CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[idPoke], id);
 		}
 
 	}
@@ -40,6 +45,7 @@ public class Humano extends Combatiente {
 		if(numAtaques == numeroVivos()) 
 		{
 			System.out.println(" y paso mi turno");
+			miTurno = false;
 			pasaDeTurno();
 		}
 		System.out.println("");
@@ -48,6 +54,7 @@ public class Humano extends Combatiente {
 	@Override
 	public void clickGo()
 	{
+		miTurno = false;
 		pasaDeTurno();
 	}
 	
