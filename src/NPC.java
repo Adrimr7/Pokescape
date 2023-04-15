@@ -145,7 +145,7 @@ public class NPC extends Combatiente {
 					Pokemon poke;
 					if (arrayPokemon[i].getEstado().getClass().getSimpleName().equals("EstadoEuforia"))
 					{
-						poke = ListaCombatientes.getMilistaCombatientes().escogerObjetivo(super.getId());
+						poke = elegirPokeEuforia(i);
 					}
 					else
 					{
@@ -163,4 +163,135 @@ public class NPC extends Combatiente {
 		TimerTask tt = new TimerTask() {@Override public void run() {pasaDeTurno();}};
 		t.schedule(tt, 2000);
 	}
+	
+	
+	private Pokemon elegirPokeEuforia(int pIdPokeAtacante)
+	{
+		// recorrer la lista de los combatientes
+		// dentro del while cuando se esté en la misma id que el NPC se salte ese jugador
+
+		boolean bool = false;
+		int i = 0;
+		int j = 0;
+		if (this.getId()==i)
+		{
+			i++;
+		}
+		Pokemon poke = ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getPokemon(0);
+		Pokemon pokeAct = poke;
+		// que el combatiente no este muerto y que el pokemon que no este muerto!
+		for (i = i; i < ListaCombatientes.getMilistaCombatientes().getNumCombatientes(); i++)
+		{
+			if (ListaCombatientes.getMilistaCombatientes() == null)
+			{
+				System.out.println("ListaComb vacía!");
+			}
+			else if (ListaCombatientes.getMilistaCombatientes().getCombatiente(i) == null || i == super.getId())
+			{
+				System.out.println("Combatiente muerto!");
+			}
+			else
+			{
+				for (j = 0; j<ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getLengthArrayPoke(); j++)
+				{
+					pokeAct = ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getPokemon(j);
+					if (pokeAct!= null && pokeAct.estaVivo())
+					{
+						poke = compararPokesEuforia(poke, pokeAct, pIdPokeAtacante);
+					}
+				}
+			}
+		}
+		return poke;
+	}
+	
+	private Pokemon compararPokesEuforia(Pokemon pPoke, Pokemon pPokeAct, int pIdPokeAtacante)
+	{
+		Pokemon pokeReturn = pPoke;
+		String tipo = arrayPokemon[pIdPokeAtacante].getClass().getSimpleName();
+		if (pPoke == null)
+		{
+			pokeReturn = pPokeAct;
+		}
+		else if (pPoke.getRestanteParaEuforia()==0) {
+			if (pPokeAct.getRestanteParaEuforia()!=1) {
+				pokeReturn = pPokeAct;
+			}
+			else if (pPokeAct.getRestanteParaEuforia()==1) {
+				//pPoke está en EUFORIA, ¿interesa a pPoke o a pPokeAct?
+				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
+					//Si matamos a pPokeAct atacamos
+					pokeReturn=pPokeAct;
+				}
+				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())){
+					pokeReturn=pPokeAct;
+				}
+			}
+		}
+		else if (pPoke.getRestanteParaEuforia()==1) {
+			if (pPokeAct.getRestanteParaEuforia()==1) {pokeReturn=compararPokesDemencial(pPoke, pPokeAct, pIdPokeAtacante);}
+			else if (!pPoke.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()<(pPoke.getVida()-pPoke.getDefensa())) {
+				//Si no matamos a pPoke preferimos perder el ataque
+				pokeReturn=pPokeAct;
+			}
+			else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2<(pPoke.getVida()-pPoke.getDefensa())){
+				pokeReturn=pPokeAct;
+			}
+			
+		else if (pPokeAct.getRestanteParaEuforia()==0) {
+			if (pPoke.getRestanteParaEuforia()==1) {
+				//pPoke está en EUFORIA, ¿interesa a pPoke o a pPokeAct?
+				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
+					//Si matamos a pPokeAct atacamos
+					pokeReturn=pPokeAct;
+				}
+				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
+					pokeReturn=pPokeAct;
+				}
+			}
+		}
+		else if (pPokeAct.getRestanteParaEuforia()==1) {
+			if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
+				//Si no matamos a pPoke preferimos perder el ataque
+				pokeReturn=pPokeAct;
+			}
+			else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
+				pokeReturn = pPokeAct;
+			}
+		}
+		else {
+			pokeReturn=compararPokesDemencial(pPoke, pPokeAct, pIdPokeAtacante);
+		}
+	}
+	return pokeReturn;
+	}
+	
+	
+	private Pokemon compararPokesDemencial(Pokemon pPoke, Pokemon pPokeAct, int pIdPokeAtacante)
+	{
+		Pokemon pokeReturn = pPoke;
+		String tipo = arrayPokemon[pIdPokeAtacante].getClass().getSimpleName();
+		int ataque = arrayPokemon[pIdPokeAtacante].getAtaque();
+		if (pPoke == null)
+		{
+			pokeReturn = pPokeAct;
+		}
+		else if ((pPoke.esDebil(tipo) && pPokeAct.esDebil(tipo)) || ((!pPoke.esDebil(tipo) && !pPokeAct.esDebil(tipo))))
+		{
+			if ((ataque*2)>=(pPokeAct.getVida()-pPokeAct.getDefensa()) && pPoke.getVida()<pPokeAct.getVida())
+			{
+				pokeReturn = pPokeAct;
+			}
+			else if ((ataque)>=(pPokeAct.getVida()-pPokeAct.getDefensa()) && pPoke.getVida()<pPokeAct.getVida()) {
+				pokeReturn = pPokeAct;
+			}
+		}
+		else if (pPoke.esDebil(tipo) && (!pPokeAct.esDebil(tipo)) && (ataque)>=(pPokeAct.getVida()-pPokeAct.getDefensa()))
+		{
+			pokeReturn = pPokeAct;
+		}
+		
+		return pokeReturn;
+	}
 }
+

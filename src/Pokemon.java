@@ -218,5 +218,9 @@ public abstract class Pokemon extends Observable implements Cloneable
 		return estado;
 	}
 
+	public int getRestanteParaEuforia() {
+		return (ataquesParaEuforia-ataquesRecibidos);
+	}
+
 	
 }
