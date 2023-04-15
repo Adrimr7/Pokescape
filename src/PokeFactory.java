@@ -5,7 +5,7 @@ import java.util.Random;
 public class PokeFactory 
 {
 	private static PokeFactory miPokeFactory;	
-	private HashMap<Integer,Pokemon> listaEfi = new HashMap<Integer,Pokemon>();
+	//private HashMap<Integer,Pokemon> listaEfi = new HashMap<Integer,Pokemon>();
 	
 	private HashMap<Integer,String> nomPokemon = new HashMap<Integer,String>();
 	private HashMap<Integer,String> tipoPokemon = new HashMap<Integer,String>();

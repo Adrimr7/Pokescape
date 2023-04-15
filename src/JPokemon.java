@@ -270,12 +270,12 @@ public class JPokemon extends JPanel implements Observer
 		}
 		else if (tipoUpdate==2) 
 		{
-			actualizarVida(vida);
+			//actualizarVida(vida);
 			evolucionar(ataque, defensa, numPoke, evolucionesHechas);
 		}
 		else if (tipoUpdate==3) 
 		{
-			actualizarVida(vida);
+			//actualizarVida(vida);
 			euforia(ataque, defensa);
 		}
 		else if (tipoUpdate==4) 

@@ -68,7 +68,6 @@ public abstract class Pokemon extends Observable implements Cloneable
 	
 	public boolean danar(int pAtaque, String pTipo)
 	{
-		int tipoUpdate = 1;
 		int dano;
 		
 		if (esDebil(pTipo))
@@ -90,14 +89,15 @@ public abstract class Pokemon extends Observable implements Cloneable
 				if (numEvoluciones != 0 && vida <= vidaParaEvol)
 				{
 					evolucionar();
-					tipoUpdate = 2;
+					setChanged();
+					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 2, evolucionesHechas});
+					
 				}
 			
 				ataquesRecibidos++;
 			
 				if (ataquesRecibidos >= ataquesParaEuforia) 
 				{
-					tipoUpdate = 3;
 					ataquesRecibidos = 0;
 				
 					Random aleatorio = new Random();
@@ -106,11 +106,14 @@ public abstract class Pokemon extends Observable implements Cloneable
 					this.changeState(new EstadoEuforia());
 					ataque = estado.getAtaque(ataque);
 					defensa = estado.getDefensa(defensa);
+					setChanged();
+					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 3, evolucionesHechas});
+					
 				}
 			}
 			boolean vivo = estaVivo();
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), tipoUpdate, evolucionesHechas});
+			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1, evolucionesHechas});
 			return vivo;
 		}
 		else 
