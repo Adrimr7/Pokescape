@@ -19,7 +19,7 @@ public class ListaCombatientes
 		return milistaCombatientes;
 	}
 	
-	public void iniciarCombate(int numBots, int numJugs, int numPoke)
+	public void iniciarCombate(int numBots, int numJugs, int numPoke, int nivel)
 	{
 		// GUIA (7)
 		// GUIA : Pues la historia continua en esta MAE que guardara a los diferentes luchadores
@@ -48,7 +48,7 @@ public class ListaCombatientes
 		// GUIA : Seguidme...
     	for (int i = 0; i<numBots; i++)
     	{
-    		arrayCombatientes[i + numJugs] = new NPC("Unown" + i + " (bot)", i + numJugs);
+    		arrayCombatientes[i + numJugs] = new NPC("Unown" + i + " (bot)", i + numJugs, nivel);
     		System.out.println("Bot : " + (i+numJugs));
     		arrayCombatientes[i + numJugs].inicializate(i, i+numJugs, numPoke);
     	}

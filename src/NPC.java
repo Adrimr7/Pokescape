@@ -6,30 +6,32 @@ import java.util.Timer;
 
 public class NPC extends Combatiente {
 
-	public NPC(String pNombre, int pId) {
+	private int nivel;
+	public NPC(String pNombre, int pId, int pNivel) {
 		super(pNombre, pId);
+		nivel=pNivel;
 	}
 
 	
-	public void tuTurno2()
+	public void tuTurno()
 	{
 		setChanged();
 		notifyObservers(new Object[] {1});
-		
+
 		miTurno = true;
-		
+
 		// Avisa al campo de batalla de que le toca atacar
 		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
-		
+
 		// Ponemos a false la lista de usados (aquellos pokemon que ya han atacado)
 		usados = new boolean[arrayPokemon.length];
-		
-		
-		System.out.println(" ");      					 	
-		System.out.println(" ");							
+
+
+		System.out.println(" ");
+		System.out.println(" ");
 		System.out.println("Turno NPC : " + super.nombre);
-		
-		
+
+
 		for (int i = 0; i < super.arrayPokemon.length; i++)
 		{
 			// Añadimos al campo de batalla el pokemon en posicion i para que ataque
@@ -39,12 +41,39 @@ public class NPC extends Combatiente {
 				boolean bool = false;
 				while (!bool) {
 					// Buscamos aleatoriamente un pokemon al que atacar
-					Pokemon poke = ListaCombatientes.getMilistaCombatientes().escogerObjetivo(super.getId());
+					Pokemon poke;
+					if (nivel==1) {
+						// Buscamos aleatoriamente un pokemon al que atacar
+						poke = ListaCombatientes.getMilistaCombatientes().escogerObjetivo(super.getId());
 
-					// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
-					bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
+						// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
+						bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
 
-					System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());    //////////////////////////////////////////////////////////////////
+						System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente()); 
+					}
+					else if (nivel==2) {
+						if (arrayPokemon[i].getEstado().getClass().getSimpleName().equals("EstadoEuforia"))
+						{
+							poke = elegirPokeEuforia(i);
+						}
+						else
+						{
+							poke = elegirPoke(i);
+						}
+						// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
+						bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
+
+						System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());
+					}
+					else {
+						poke = elegirPokeEuforia(i);
+						
+						// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
+						bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
+
+						System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());
+					}
+					
 				}
 			}
 		}
@@ -53,7 +82,8 @@ public class NPC extends Combatiente {
 		TimerTask tt = new TimerTask() {@Override public void run() {pasaDeTurno();}};
 		t.schedule(tt, 2000);
 	}
-
+	
+	
 	private Pokemon elegirPoke(int pIdPokeAtacante)
 	{
 		// recorrer la lista de los combatientes
@@ -66,6 +96,7 @@ public class NPC extends Combatiente {
 		{
 			i++;
 		}
+		
 		Pokemon poke = ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getPokemon(0);
 		Pokemon pokeAct = poke;
 		// que el combatiente no este muerto y que el pokemon que no este muerto!
@@ -114,55 +145,7 @@ public class NPC extends Combatiente {
 		}
 		return pokeReturn;
 	}
-	public void tuTurno()
-	{
-		setChanged();
-		notifyObservers(new Object[] {1});
-
-		miTurno = true;
-
-		// Avisa al campo de batalla de que le toca atacar
-		CampoBatalla.getMiCampoBatalla().setTurno(super.getId());
-
-		// Ponemos a false la lista de usados (aquellos pokemon que ya han atacado)
-		usados = new boolean[arrayPokemon.length];
-
-
-		System.out.println(" ");
-		System.out.println(" ");
-		System.out.println("Turno NPC : " + super.nombre);
-
-
-		for (int i = 0; i < super.arrayPokemon.length; i++)
-		{
-			// Añadimos al campo de batalla el pokemon en posicion i para que ataque
-			if (arrayPokemon[i] != null)
-			{
-				CampoBatalla.getMiCampoBatalla().anadir(arrayPokemon[i], super.getId());
-				boolean bool = false;
-				while (!bool) {
-					// Buscamos aleatoriamente un pokemon al que atacar
-					Pokemon poke;
-					if (arrayPokemon[i].getEstado().getClass().getSimpleName().equals("EstadoEuforia"))
-					{
-						poke = elegirPokeEuforia(i);
-					}
-					else
-					{
-						poke = elegirPoke(i);
-					}
-					// Y lo añadimos al campo de batalla, como la posicion de atacante esta ocupada, lo hara de defensor
-					bool = CampoBatalla.getMiCampoBatalla().anadir(poke, poke.getIdCombatiente());
-
-					System.out.println("Defiende el pokemon " + poke.getIdPokemon() + " de :" + poke.getIdCombatiente());
-				}
-			}
-		}
-		miTurno = false;
-		Timer t = new Timer();
-		TimerTask tt = new TimerTask() {@Override public void run() {pasaDeTurno();}};
-		t.schedule(tt, 2000);
-	}
+	
 	
 	
 	private Pokemon elegirPokeEuforia(int pIdPokeAtacante)
@@ -177,6 +160,7 @@ public class NPC extends Combatiente {
 		{
 			i++;
 		}
+		
 		Pokemon poke = ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getPokemon(0);
 		Pokemon pokeAct = poke;
 		// que el combatiente no este muerto y que el pokemon que no este muerto!
@@ -217,7 +201,7 @@ public class NPC extends Combatiente {
 			if (pPokeAct.getRestanteParaEuforia()!=1) {
 				pokeReturn = pPokeAct;
 			}
-			else if (pPokeAct.getRestanteParaEuforia()==1) {
+			else {
 				//pPoke está en EUFORIA, ¿interesa a pPoke o a pPokeAct?
 				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
 					//Si matamos a pPokeAct atacamos

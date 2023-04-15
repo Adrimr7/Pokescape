@@ -55,11 +55,11 @@ public class Pokescape extends Observable
     	// Ahora pasamos al apartado de Vista, concretamente a "VentanaInicio"
     	
     }
-    public void iniciarCombate(int numBots, int numJugs, int numPokes)
+    public void iniciarCombate(int numBots, int numJugs, int numPokes, int nivel)
     {
     	
       	// Despues del aviso del controlador nos vamos a "iniciarCombate" pero esta vez de listaCombatientes.
-    	ListaCombatientes.getMilistaCombatientes().iniciarCombate(numBots, numJugs, numPokes);
+    	ListaCombatientes.getMilistaCombatientes().iniciarCombate(numBots, numJugs, numPokes, nivel);
     	
     	// Avisamos a VentanaInicio, 
     	// El Observable y el Observer son una pareja, en este caso Pokescape y VentanaInicio

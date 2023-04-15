@@ -46,6 +46,8 @@ public class VentanaInicio extends JFrame implements Observer{
 	private static JTextField textFieldJugadores;
 	private static JTextField textFieldPokemons;
 	private static JButton btnNewButton;
+	private static JButton btnNewButton2;
+	private static JButton btnNewButton3;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -76,7 +78,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// GUIA : Gracias a esta funcion podemos darle el tamaño adecuado
-		setBounds(100, 100, 700, 260);
+		setBounds(100, 100, 650, 320);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -112,6 +114,8 @@ public class VentanaInicio extends JFrame implements Observer{
 			Botones.add(getLblLabelPokemons());
 			Botones.add(getTextPokemons());
 			Botones.add(getBtnNewButton());
+			Botones.add(getBtnNewButton2());
+			Botones.add(getBtnNewButton3());
 			Botones.add(getLblNewLabel());
 		}
 		return Botones;
@@ -143,7 +147,7 @@ public class VentanaInicio extends JFrame implements Observer{
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) 
 		{
-			btnNewButton = new JButton("Jugar");
+			btnNewButton = new JButton("Jugar Nivel Fácil");
 		}
 		btnNewButton.addActionListener(ControladorInicio.getControladorInicio());
 		return btnNewButton;
@@ -156,6 +160,25 @@ public class VentanaInicio extends JFrame implements Observer{
 		// GUIA : Siganme...
 		
 	}
+	
+	private JButton getBtnNewButton2() {
+		if (btnNewButton2 == null) 
+		{
+			btnNewButton2 = new JButton("Jugar Nivel Medio");
+		}
+		btnNewButton2.addActionListener(ControladorInicio.getControladorInicio());
+		return btnNewButton2;
+	}
+	
+	private JButton getBtnNewButton3() {
+		if (btnNewButton3 == null) 
+		{
+			btnNewButton3 = new JButton("Jugar Nivel Difícil");
+		}
+		btnNewButton3.addActionListener(ControladorInicio.getControladorInicio());
+		return btnNewButton3;
+	}
+	
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel();
@@ -333,8 +356,13 @@ public class VentanaInicio extends JFrame implements Observer{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				int nivel=1;
 				if (e.getSource().equals(btnNewButton))
-				{
+				{nivel=1;}
+				else if (e.getSource().equals(btnNewButton2))
+				{nivel=2;}
+				else if (e.getSource().equals(btnNewButton3))
+				{nivel=3;}
 					// Y si es aquello que nos interesa, en este caso el boton se poner a pedir informacion
 					// El objetivo del listener en este caso es que si se le da al boton, avise al modelo, en este caso a Pokescape para que comience el juego.
 					
@@ -351,12 +379,12 @@ public class VentanaInicio extends JFrame implements Observer{
 					{
 						System.out.println("Pasamos a Pokescape");
 						// Volvemos a Pokescape, concretamente al metodo "iniciarCombate"
-						Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump);
+						Pokescape.getMiPokescape().iniciarCombate(numb, numj, nump, nivel);
 						System.out.println("Aqui me quedo.");
 					}
 				}	
 			}
-		}
+		
 
 
 		@Override
