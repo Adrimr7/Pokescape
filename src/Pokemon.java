@@ -123,7 +123,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	}
 		
 	
-	private boolean esDebil(String pTipo) 
+	public boolean esDebil(String pTipo)
 	{
 		boolean bool = false;
 		if (arrayDebilidades !=null)

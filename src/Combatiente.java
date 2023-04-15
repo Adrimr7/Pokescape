@@ -148,5 +148,8 @@ public abstract class Combatiente extends Observable
 	
 	
 	public void clickGo() {}
-	
+	public int getLengthArrayPoke()
+	{
+		return arrayPokemon.length;
+	}
 }

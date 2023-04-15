@@ -186,4 +186,9 @@ public class ListaCombatientes
 	{
 		arrayCombatientes[idJug].finAtaque();
 	}
+
+	public int getNumCombatientes()
+	{
+		return arrayCombatientes.length;
+	}
 }
