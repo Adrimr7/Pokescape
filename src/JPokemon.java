@@ -48,6 +48,8 @@ public class JPokemon extends JPanel implements Observer
 	private JLabel lblEuf;
 	private JLabel numEuf;
 	
+	private boolean euforia;
+	
 	public JPokemon ()
 	{
 		setForeground(new Color(0, 0, 0));
@@ -242,7 +244,11 @@ public class JPokemon extends JPanel implements Observer
 		t.schedule(tt, 200);
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
 		vidaRest.setText(Integer.toString(pVida));
-		numEuf.setText(String.valueOf(pFaltaParaEuforia));
+		
+		if (!euforia) {
+			barraEuforia.setValue((int) (pFaltaParaEuforia*15));
+			numEuf.setText(String.valueOf(pFaltaParaEuforia));
+		}
 	}
 
 	@Override
@@ -328,7 +334,8 @@ public class JPokemon extends JPanel implements Observer
 		
 		//numAta.setText(Integer.toString(pAtaque));
 		//numDef.setText(Integer.toString(pDefensa));
-				
+		euforia=true;	
+		
 		numAta.setText(pAtaque-100 + "+" + 100);
 		numDef.setText(pDefensa-100 + "+" + 100);
 		numEuf.setText("0");
@@ -341,6 +348,8 @@ public class JPokemon extends JPanel implements Observer
 	}
 	
 	public void quitarEuforia(int pAtaque, int pDefensa, int evolucionesHechas, int pFaltaParaEuf) {
+		
+		euforia=false;
 		
 		numEuf.setText(String.valueOf(pFaltaParaEuf));
 		if (evolucionesHechas==0) {
