@@ -169,7 +169,7 @@ public class VentanaJugador extends JFrame implements Observer
 					
 				
 					setTitle(nombre);
-					setBounds(100, 100, 155*numPoke + 155, 240);
+					setBounds(100, 100, 155*numPoke + 155, 300);
 					
 					String nom = "Spr_B2W2_";
 					String bre = "";
@@ -215,7 +215,7 @@ public class VentanaJugador extends JFrame implements Observer
 					bre = listaImagenes.get(numeroFoto);
 					
 					String nomBre = nom + bre;
-					if (bre.length()>7) {setBounds(100, 100, 170*numPoke + 155 + (7*bre.length()-4), 240);}
+					if (bre.length()>7) {setBounds(100, 100, 170*numPoke + 155 + (7*bre.length()-4), 300);}
 					if (nombre.contains("Humano"))
 					{
 						lblNewLabel.setText(bre + " (Humano)");
