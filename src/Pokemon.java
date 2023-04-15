@@ -46,7 +46,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 		
 	}
 	public void setNumPokemon(int pNumPoke)
@@ -90,7 +90,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 				{
 					evolucionar();
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 2, evolucionesHechas});
+					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 					
 				}
 			
@@ -107,13 +107,13 @@ public abstract class Pokemon extends Observable implements Cloneable
 					ataque = estado.getAtaque(ataque);
 					defensa = estado.getDefensa(defensa);
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 3, evolucionesHechas});
+					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 					
 				}
 			}
 			boolean vivo = estaVivo();
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1, evolucionesHechas});
+			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 			return vivo;
 		}
 		else 
@@ -209,7 +209,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 			Random aleatorio = new Random();
 			ataquesParaEuforia = aleatorio.nextInt(3,8);
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 4, evolucionesHechas});
+			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 		}
 	}
 	

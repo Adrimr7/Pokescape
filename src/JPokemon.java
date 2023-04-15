@@ -34,6 +34,7 @@ public class JPokemon extends JPanel implements Observer
 	private JPanel panelBarrasEstats;
 	private JProgressBar barraAtaque;
 	private JProgressBar barraDefensa;
+	private JProgressBar barraEuforia;
 	private int vidaMax;
 	private String nombreTipo;
 	private JPanel panelNombresEstats_1;
@@ -44,6 +45,8 @@ public class JPokemon extends JPanel implements Observer
 	private JPanel panelNombresEstats_3;
 	private JLabel vidaRest;
 	private JProgressBar barraHp;
+	private JLabel lblEuf;
+	private JLabel numEuf;
 	
 	public JPokemon ()
 	{
@@ -136,6 +139,9 @@ public class JPokemon extends JPanel implements Observer
 					
 					estadisticas.add(panelNombresEstats);
 					
+					lblEuf = new JLabel("Euf.");
+					panelNombresEstats.add(lblEuf);
+					
 						panelBarrasEstats = new JPanel();
 						panelBarrasEstats.setOpaque(false);
 						panelBarrasEstats.setLayout(new GridLayout(5, 1, 0, 0));
@@ -144,6 +150,8 @@ public class JPokemon extends JPanel implements Observer
 							panelBarrasEstats.add(barraAtaque);
 							barraDefensa = barraEstatt(150, new Color(255, 255, 0));
 							panelBarrasEstats.add(barraDefensa);
+							barraEuforia = barraEstatt(150, new Color(255, 85, 0));
+							panelBarrasEstats.add(barraEuforia);
 				
 						estadisticas.add(panelBarrasEstats);
 				this.add(estadisticas);
@@ -158,9 +166,12 @@ public class JPokemon extends JPanel implements Observer
 				
 				numDef = new JLabel("Def.");
 				panelNombresEstats_1.add(numDef);
+				
+				numEuf = new JLabel("Euf.");
+				panelNombresEstats_1.add(numEuf);
 	}
 	
-	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa, int pVida)
+	public void actualizarDatos(int pNumPokemon, String pNombrePokemon, String pTipo, int pAtaque, int pDefensa, int pVida, int pFaltaParaEuf)
 	{
 		//Variables para añadir imagenes
 		URL url;
@@ -185,10 +196,12 @@ public class JPokemon extends JPanel implements Observer
 						
 		barraAtaque.setValue((int) (pAtaque*5));
 		barraDefensa.setValue((int) (pDefensa*5));
+		barraEuforia.setValue((int) (pFaltaParaEuf*15));
 		
 		vidaRest.setText(Integer.toString(pVida));
 		numAta.setText(Integer.toString(pAtaque));
 		numDef.setText(Integer.toString(pDefensa));
+		numEuf.setText(Integer.toString(pFaltaParaEuf));
 	}	
 	public void actualizarColor()
 	{
@@ -219,7 +232,7 @@ public class JPokemon extends JPanel implements Observer
 		this.setBackground(new Color(225, 205, 249));
 	}
 	
-	public void actualizarVida(int pVida)
+	public void actualizarVida(int pVida, int pFaltaParaEuforia)
 	{
 		barraHp.setForeground((Color.red));
 		Timer t = new Timer();
@@ -229,6 +242,7 @@ public class JPokemon extends JPanel implements Observer
 		t.schedule(tt, 200);
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
 		vidaRest.setText(Integer.toString(pVida));
+		numEuf.setText(String.valueOf(pFaltaParaEuforia));
 	}
 
 	@Override
@@ -244,10 +258,11 @@ public class JPokemon extends JPanel implements Observer
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
 		int evolucionesHechas = (int) lista[7];
+		int ataquesParaEuf = (int) lista[8];
 		
 		if(tipoUpdate == 0) 
 		{
-			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida);
+			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida, ataquesParaEuf);
 		}
 		else if (tipoUpdate==1)
 		{
@@ -261,30 +276,30 @@ public class JPokemon extends JPanel implements Observer
 				this.apagar();
 				spritePokemon.setIcon(imageIcon);
 				
-				actualizarVida(0);
+				actualizarVida(0, ataquesParaEuf);
 			}
 			else
 			{
-				actualizarVida(vida);
+				actualizarVida(vida, ataquesParaEuf);
 			}
 		}
 		else if (tipoUpdate==2) 
 		{
 			//actualizarVida(vida);
-			evolucionar(ataque, defensa, numPoke, evolucionesHechas);
+			evolucionar(ataque, defensa, numPoke, evolucionesHechas, ataquesParaEuf);
 		}
 		else if (tipoUpdate==3) 
 		{
 			//actualizarVida(vida);
-			euforia(ataque, defensa);
+			euforia(ataque, defensa, ataquesParaEuf);
 		}
 		else if (tipoUpdate==4) 
 		{
-			quitarEuforia(ataque, defensa, evolucionesHechas);
+			quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);
 		}
 	}
 	
-	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas) {
+	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, int pAtaquesParaEuforia) {
 		nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
 		
 		//numAta.setText(Integer.toString(pAtaque));
@@ -297,8 +312,10 @@ public class JPokemon extends JPanel implements Observer
 		
 		numAta.setText(pAtaque-ata + "+" + ata);
 		numDef.setText(pDefensa-def + "+" + def);
+		numEuf.setText(String.valueOf(pAtaquesParaEuforia));
 		barraAtaque.setValue((int) ((pAtaque)*5));
 		barraDefensa.setValue((int) ((pDefensa)*5));
+		barraEuforia.setValue((int) ((pAtaquesParaEuforia)*15));
 		
 		URL url;
 		Icon imageIcon;
@@ -307,22 +324,25 @@ public class JPokemon extends JPanel implements Observer
 		spritePokemon.setIcon(imageIcon);
 	}
 	
-	public void euforia(int pAtaque, int pDefensa) {
+	public void euforia(int pAtaque, int pDefensa, int pAtaquesPAraEuforia) {
 		
 		//numAta.setText(Integer.toString(pAtaque));
 		//numDef.setText(Integer.toString(pDefensa));
 				
 		numAta.setText(pAtaque-100 + "+" + 100);
 		numDef.setText(pDefensa-100 + "+" + 100);
+		numEuf.setText("0");
 		barraAtaque.setValue((int) ((pAtaque)*5));
 		barraAtaque.setForeground(new Color(255, 85, 0));
 		barraDefensa.setValue((int) ((pDefensa)*5));
 		barraDefensa.setForeground(new Color(255, 85, 0));
+		barraEuforia.setValue((int) 0);
 		
 	}
 	
-	public void quitarEuforia(int pAtaque, int pDefensa, int evolucionesHechas) {
-						
+	public void quitarEuforia(int pAtaque, int pDefensa, int evolucionesHechas, int pFaltaParaEuf) {
+		
+		numEuf.setText(String.valueOf(pFaltaParaEuf));
 		if (evolucionesHechas==0) {
 			numAta.setText(Integer.toString(pAtaque));
 			numDef.setText(Integer.toString(pDefensa));
@@ -343,6 +363,7 @@ public class JPokemon extends JPanel implements Observer
 		barraAtaque.setForeground(new Color(255, 255, 0));
 		barraDefensa.setValue((int) ((pDefensa)*5));
 		barraDefensa.setForeground(new Color(255, 255, 0));
+		barraEuforia.setValue((int) ((pFaltaParaEuf)*15));
 		
 		
 	}
