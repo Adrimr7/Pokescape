@@ -49,6 +49,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 		
 	}
+	
 	public void setNumPokemon(int pNumPoke)
 	{
 		numPokemon = pNumPoke;
@@ -122,7 +123,6 @@ public abstract class Pokemon extends Observable implements Cloneable
 		}
 	}
 		
-	
 	public boolean esDebil(String pTipo)
 	{
 		boolean bool = false;
@@ -220,6 +220,11 @@ public abstract class Pokemon extends Observable implements Cloneable
 
 	public int getRestanteParaEuforia() {
 		return (ataquesParaEuforia-ataquesRecibidos);
+	}
+	
+	public boolean getEuforiaActiva()
+	{
+		return estado.getClass().getSimpleName().equals("EstadoEuforia");
 	}
 
 	

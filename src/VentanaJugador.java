@@ -56,7 +56,7 @@ public class VentanaJugador extends JFrame implements Observer
 		// Cambiando esta variable cambia el tamaño de la ventana para cuadrar los pokemon
 		int numPokemon = 4;
 
-		setBounds(100, 100, 170*numPokemon + 155, 240);
+		setBounds(100, 100, 170*numPokemon + 155, 257);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -169,7 +169,7 @@ public class VentanaJugador extends JFrame implements Observer
 					
 				
 					setTitle(nombre);
-					setBounds(100, 100, 155*numPoke + 155, 300);
+					setBounds(100, 100, 155*numPoke + 155, 257);
 					
 					String nom = "Spr_B2W2_";
 					String bre = "";
@@ -215,7 +215,7 @@ public class VentanaJugador extends JFrame implements Observer
 					bre = listaImagenes.get(numeroFoto);
 					
 					String nomBre = nom + bre;
-					if (bre.length()>7) {setBounds(100, 100, 170*numPoke + 155 + (7*bre.length()-4), 300);}
+					if (bre.length()>7) {setBounds(100, 100, 170*numPoke + 155 + (5*bre.length()-7*5), 257);}
 					if (nombre.contains("Humano"))
 					{
 						lblNewLabel.setText(bre + " (Humano)");

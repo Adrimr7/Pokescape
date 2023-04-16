@@ -153,9 +153,9 @@ public class NPC extends Combatiente {
 		// recorrer la lista de los combatientes
 		// dentro del while cuando se esté en la misma id que el NPC se salte ese jugador
 
-		boolean bool = false;
+
 		int i = 0;
-		int j = 0;
+
 		if (this.getId()==i)
 		{
 			i++;
@@ -170,13 +170,17 @@ public class NPC extends Combatiente {
 			{
 				System.out.println("ListaComb vacía!");
 			}
-			else if (ListaCombatientes.getMilistaCombatientes().getCombatiente(i) == null || i == super.getId())
+			else if (ListaCombatientes.getMilistaCombatientes().getCombatiente(i) == null)
 			{
 				System.out.println("Combatiente muerto!");
 			}
-			else
+			else if(i == super.getId())
 			{
-				for (j = 0; j<ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getLengthArrayPoke(); j++)
+				System.out.println("No puedes atacarte a ti mismo");
+			}
+			else	//Se escoge el primer combatiente valido al que atacar
+			{
+				for (int j = 0; j<ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getLengthArrayPoke(); j++)
 				{
 					pokeAct = ListaCombatientes.getMilistaCombatientes().getCombatiente(i).getPokemon(j);
 					if (pokeAct!= null && pokeAct.estaVivo())
@@ -191,62 +195,82 @@ public class NPC extends Combatiente {
 	
 	private Pokemon compararPokesEuforia(Pokemon pPoke, Pokemon pPokeAct, int pIdPokeAtacante)
 	{
+		// Para simplificar la lectura de los comentarios nos referiremos a los pokemon como pPoke = 1, pPokeAct = 2
 		Pokemon pokeReturn = pPoke;
 		String tipo = arrayPokemon[pIdPokeAtacante].getClass().getSimpleName();
 		if (pPoke == null)
 		{
 			pokeReturn = pPokeAct;
 		}
-		else if (pPoke.getRestanteParaEuforia()==0) {
-			if (pPokeAct.getRestanteParaEuforia()!=1) {
+		
+		else if (pPoke.getEuforiaActiva()) 
+		{
+			if (pPokeAct.getRestanteParaEuforia()!=1) 
+			{
 				pokeReturn = pPokeAct;
 			}
 			else {
 				//pPoke está en EUFORIA, ¿interesa a pPoke o a pPokeAct?
-				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
+				if (!pPokeAct.esDebil(tipo) && (arrayPokemon[pIdPokeAtacante].getAtaque() - pPokeAct.getDefensa()) >= pPokeAct.getVida()) 
+				{
 					//Si matamos a pPokeAct atacamos
 					pokeReturn=pPokeAct;
 				}
-				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())){
+				else if ((arrayPokemon[pIdPokeAtacante].getAtaque()*2 - pPokeAct.getDefensa()) >= pPokeAct.getVida())
+				{
 					pokeReturn=pPokeAct;
 				}
 			}
 		}
-		else if (pPoke.getRestanteParaEuforia()==1) {
-			if (pPokeAct.getRestanteParaEuforia()==1) {pokeReturn=compararPokesDemencial(pPoke, pPokeAct, pIdPokeAtacante);}
-			else if (!pPoke.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()<(pPoke.getVida()-pPoke.getDefensa())) {
+		
+		else if (pPoke.getRestanteParaEuforia()==1) //Si a 1 le queda un ataque para entrar en euforia
+		{
+			if (pPokeAct.getRestanteParaEuforia()==1) //Si a 2 le queda un ataque para entrar en euforia
+			{
+				pokeReturn=compararPokesDemencial(pPoke, pPokeAct, pIdPokeAtacante);
+			}
+			else if (!pPoke.esDebil(tipo) && arrayPokemon[pIdPokeAtacante].getAtaque()<(pPoke.getVida()-pPoke.getDefensa())) //Si no matamos a 1 de un ataque
+			{
 				//Si no matamos a pPoke preferimos perder el ataque
 				pokeReturn=pPokeAct;
 			}
-			else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2<(pPoke.getVida()-pPoke.getDefensa())){
+			else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2<(pPoke.getVida()-pPoke.getDefensa())) //Si no matamos a 1 de un ataque
+			{
 				pokeReturn=pPokeAct;
 			}
-			
-		else if (pPokeAct.getRestanteParaEuforia()==0) {
-			if (pPoke.getRestanteParaEuforia()==1) {
-				//pPoke está en EUFORIA, ¿interesa a pPoke o a pPokeAct?
-				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
-					//Si matamos a pPokeAct atacamos
+			else if (pPokeAct.getEuforiaActiva()) // Si 2 esta en euforia
+			{
+				if (pPoke.getRestanteParaEuforia()==1) // Si 1 esta en euforia
+				{
+					//pPokeAct (2) está en EUFORIA, ¿interesa a pPoke o a pPokeAct?
+					if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) 
+					{
+						//Si matamos a pPokeAct atacamos
+						pokeReturn=pPokeAct;
+					}
+					else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) 
+					{
+						pokeReturn=pPokeAct;
+					}
+				}
+			}
+			else if (pPokeAct.getRestanteParaEuforia()==1) 
+			{
+				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) 
+				{
+					//Si no matamos a pPoke preferimos perder el ataque
 					pokeReturn=pPokeAct;
 				}
-				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
-					pokeReturn=pPokeAct;
+				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) 
+				{
+					pokeReturn = pPokeAct;
 				}
 			}
-		}
-		else if (pPokeAct.getRestanteParaEuforia()==1) {
-			if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
-				//Si no matamos a pPoke preferimos perder el ataque
-				pokeReturn=pPokeAct;
-			}
-			else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) {
-				pokeReturn = pPokeAct;
+			else
+			{
+				pokeReturn=compararPokesDemencial(pPoke, pPokeAct, pIdPokeAtacante);
 			}
 		}
-		else {
-			pokeReturn=compararPokesDemencial(pPoke, pPokeAct, pIdPokeAtacante);
-		}
-	}
 	return pokeReturn;
 	}
 	
