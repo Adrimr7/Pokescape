@@ -256,12 +256,12 @@ public class NPC extends Combatiente {
 			}
 			else if (pPokeAct.getRestanteParaEuforia()==1) 
 			{
-				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque()>=(pPokeAct.getVida()-pPokeAct.getDefensa())) 
+				if (!pPokeAct.esDebil(tipo)&& arrayPokemon[pIdPokeAtacante].getAtaque() - pPokeAct.getDefensa() >= pPokeAct.getVida()) 
 				{
 					//Si no matamos a pPoke preferimos perder el ataque
 					pokeReturn=pPokeAct;
 				}
-				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2>=(pPokeAct.getVida()-pPokeAct.getDefensa())) 
+				else if (arrayPokemon[pIdPokeAtacante].getAtaque()*2 - pPokeAct.getDefensa() >= pPokeAct.getVida()) 
 				{
 					pokeReturn = pPokeAct;
 				}
