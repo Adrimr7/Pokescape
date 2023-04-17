@@ -104,8 +104,11 @@ public abstract class Combatiente extends Observable
 		
 		setChanged();
 		notifyObservers(new Object[] {2});
-		
-		ListaCombatientes.getMilistaCombatientes().escogeCombatiente();	
+		if (!ListaCombatientes.getMilistaCombatientes().getFinPartida())
+		{
+			ListaCombatientes.getMilistaCombatientes().escogeCombatiente();		
+		}
+
 	}
 	
 	

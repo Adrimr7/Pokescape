@@ -7,7 +7,7 @@ public class ListaCombatientes
 	private static ListaCombatientes milistaCombatientes;
 	private Combatiente[] arrayCombatientes;
 	private int numCombatientes;
-	
+	private boolean finPartida;
 	private ListaCombatientes() {}
 	
 	public static ListaCombatientes getMilistaCombatientes()
@@ -152,9 +152,13 @@ public class ListaCombatientes
 			}
 			
 			ganador.hasGanado();
+			finPartida = true;
 		}
 	}
-	
+	public boolean getFinPartida()
+	{
+		return finPartida;
+	}
 	public Pokemon escogerObjetivo(int pId)
 	{
 		Random rn = new Random();

@@ -21,36 +21,43 @@ public class CampoBatalla
 	{
 		// este metodo anade un pokemon al campo de batalla, haciendo varias comprobaciones por el camino
 		boolean correcto = false;
-		
-		if (atacante == null && idAtacante == idTurnoActual && poke != null)
-		{ 
-			System.out.println("Añadimos pokemon de " + idAtacante + " como atacante");
-			atacante = poke;
-			defensor = null;
-			correcto = true;
-		}
-		else if (defensor == null && atacante != null && atacante.getIdCombatiente() != idAtacante && poke != null)
+		boolean fin = ListaCombatientes.getMilistaCombatientes().getFinPartida();
+		if (fin)
 		{
-				defensor = poke;
-				System.out.println("Añadimos defensor"); 
-				iniciarAtaque();
+			correcto = fin;
+		}
+		else
+		{
+			if (atacante == null && idAtacante == idTurnoActual && poke != null)
+			{	 
+				System.out.println("Añadimos pokemon de " + idAtacante + " como atacante");
+				atacante = poke;
+				defensor = null;
 				correcto = true;
-		}
-		else if(poke == null)
-		{
-			System.out.println("No puedes añadir un pokemon nulo"); 
-		}
-		else if(atacante == null && idAtacante != idTurnoActual)
-		{
-			System.out.println("No puedes añadir un atacante, no es tu turno"); 
-		}
-		else if(atacante!= null && atacante.getIdCombatiente() == idAtacante)
-		{
-			System.out.println("No puedes atacarte a ti mismo"); 
-		}
-		else 
-		{
-			System.out.println("Esta ocupado"); 
+			}
+			else if (defensor == null && atacante != null && atacante.getIdCombatiente() != idAtacante && poke != null)
+			{
+					defensor = poke;
+					System.out.println("Añadimos defensor"); 
+					iniciarAtaque();
+					correcto = true;
+			}
+			else if(poke == null)
+			{
+				System.out.println("No puedes añadir un pokemon nulo"); 
+			}
+			else if(atacante == null && idAtacante != idTurnoActual)
+			{
+				System.out.println("No puedes añadir un atacante, no es tu turno"); 
+			}
+			else if(atacante!= null && atacante.getIdCombatiente() == idAtacante)
+			{
+				System.out.println("No puedes atacarte a ti mismo"); 
+			}
+			else 
+			{
+				System.out.println("Esta ocupado"); 
+			}
 		}
 		return correcto;
 	}
