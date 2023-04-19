@@ -160,7 +160,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		else if (numEvoluciones == 1) 
 		{
 			if (evolucionesHechas == 0) 
-			{
+			{				
 				this.ataque += 5;
 				this.defensa += 3;
 				
@@ -171,7 +171,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 				System.out.println("EVOLUCIÓN 1");
 			}
 			else if (evolucionesHechas == 1) 
-			{
+			{				
 				this.ataque+=2;
 				this.defensa+=2;
 				
@@ -185,7 +185,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		else if (numEvoluciones == 2) 
 		{
 			if (evolucionesHechas == 0) 
-			{
+			{			
 				this.ataque += 5;
 				this.defensa += 3;
 				
@@ -202,15 +202,20 @@ public abstract class Pokemon extends Observable implements Cloneable
 	{
 		estado = pEstado;
 		
-		if (pEstado.getClass().getSimpleName().equals("EstadoNormal")) {
+		if (pEstado.getClass().getSimpleName().equals("EstadoNormal") && estado.getClass().getSimpleName().equals("EstadoEuforia")) {
+			
 			ataque=estado.getAtaque(ataque);
 			defensa=estado.getDefensa(defensa);
-			
 			Random aleatorio = new Random();
 			ataquesParaEuforia = aleatorio.nextInt(3,8);
 			setChanged();
 			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+		
 		}
+		
+		
+		
+		
 	}
 	
 	public EstadoPokemon getEstado() 
