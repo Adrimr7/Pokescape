@@ -9,8 +9,22 @@ public abstract class Pokemon extends Observable implements Cloneable
 	
 	protected String nombre;			// Nombre del pokemon
 	protected int vida;
-	protected int ataque;
-	protected int defensa;
+	protected int ataque;               // Ataque original del pokémon
+	protected int defensa;              // Defensa original del pokémon
+	protected EstadoPokemon estado;     // Estado del pokémon, patrón STATE
+	
+	/*
+	 * Los atributos "ataque" y "defensa" son los valores asignados al pokémon al inicio de la partida.
+	 * Sin embargo, los valores reales vendrán dados por el estado en el que se encuentre el pokémon, 
+	 * estado original (ninguna evolución), primera evolución, segunda evolución o euforia.
+	 
+	 * Por ello, se definen dos métodos obtAtaqueReal() y obtDefensaReal() para obtener el verdadero 
+	 * valor de ambos datos en función del estado del pokémon.
+	 * Estos métodos devuelven el valor de ataque y defensa del estado, es decir, estado.getAtaque()
+	 * y estado.getDefensa().
+	 
+	 * Para más información, consultar la clase EstadoPokemon.java
+	 */
 	
 	protected String[] arrayDebilidades;
 	
@@ -18,9 +32,8 @@ public abstract class Pokemon extends Observable implements Cloneable
 	protected int evolucionesHechas;	// Cuantas evoluciones lleva
 	protected int vidaParaEvol;			// Cuando evolucionara
 	
-	protected int ataquesParaEuforia;	
-	protected int ataquesRecibidos;
-	protected EstadoPokemon estado;
+	protected int ataquesParaEuforia;	// Ataque a recibir para cambiar al estado Euforia
+
 	
 	public Pokemon(String pNombre, int pVida, int pAtaque, int pDefensa, int pNumEvoluciones, int pNumPoke) 
 	{
@@ -35,18 +48,18 @@ public abstract class Pokemon extends Observable implements Cloneable
 		numEvoluciones = pNumEvoluciones;
 		evolucionesHechas = 0;
 		
-		vidaParaEvol = vida/2;
+		vidaParaEvol = vida/2;          // La primera evolución se realiza cuando la vida es inferior a la vida original
 		
 		ataquesParaEuforia = aleatorio.nextInt(3,8);
-		ataquesRecibidos = 0;
-		estado = new EstadoEvol0();
+		//ataquesRecibidos = 0;
+		estado = new EstadoEvol0();     // El pokémon comienza en el estado inicial, representado por EstadoEvol0
 		
 	}
 	
 	public void daAviso() 
 	{
 		setChanged();
-		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+		notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas, ataquesParaEuforia});
 		
 	}
 	
@@ -66,6 +79,20 @@ public abstract class Pokemon extends Observable implements Cloneable
 			return this.getClass().getSimpleName();
 		}
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * Métodos obtAtaqueReal() y obtDefensaReal() referentes al patrón STATE "EstadoPokemon"
+	 * y usados para conocer el ataque y defensa del pokémon en cada momento de la partida,
+	 * que dependerá del estado en el que se encuentre.
+	 
+	 * En consecuencia, cuando se quiera hacer uso del ataque o defensa del pokémon no se 
+	 * accederá a los atributos de "ataque" y "defensa" (getAtaque(), por ejemplo), sino 
+	 * a estos métodos que cogiendo como base los atributos anteriores, nos devolverán el 
+	 * valor real acorde al estado.
+	 
+	 */
+	
 	public int obtAtaqueReal()
 	{
 		return this.getEstado().getAtaque(ataque);
@@ -74,6 +101,8 @@ public abstract class Pokemon extends Observable implements Cloneable
 	{
 		return this.getEstado().getDefensa(defensa);
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////
+	
 	public boolean danar(int pAtaque, String pTipo)
 	{
 		int dano;
@@ -97,25 +126,22 @@ public abstract class Pokemon extends Observable implements Cloneable
 				{
 					evolucionar();
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, ataquesParaEuforia});
 				}
-				ataquesRecibidos++;
-				if (ataquesRecibidos >= ataquesParaEuforia) 
+				ataquesParaEuforia--;
+				if (ataquesParaEuforia==0) 
 				{
-					ataquesRecibidos = 0;
 					Random aleatorio = new Random();
 					ataquesParaEuforia = aleatorio.nextInt(3,8);
 					this.changeState(new EstadoEuforia());
-					//ataque = estado.getAtaque(ataque);
-					//defensa = estado.getDefensa(obtDefensaReal(defensa));
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia)});
 					
 				}
 			}
 			boolean vivo = estaVivo();
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 1, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 1, evolucionesHechas, (ataquesParaEuforia)});
 			return vivo;
 		}
 		else 
@@ -157,6 +183,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	{
 		return this.evolucionesHechas;
 	}
+	
 	private void evolucionar() 
 	{
 		if (numEvoluciones == 0) {}
@@ -165,19 +192,15 @@ public abstract class Pokemon extends Observable implements Cloneable
 		{
 			if (evolucionesHechas == 0) 
 			{				
-				//this.ataque += 5;
-				//this.defensa += 3;
 				changeState(new EstadoEvol1());
 				evolucionesHechas++;
 				numEvoluciones--;
-				vidaParaEvol = vidaParaEvol * 2/5;
+				vidaParaEvol = vidaParaEvol * 2/5; //Actualizamos la vida límite para la segunda evolución
 
 				System.out.println("EVOLUCIÓN 1");
 			}
 			else if (evolucionesHechas == 1) 
 			{				
-				//this.ataque+=2;
-				//this.defensa+=2;
 				changeState(new EstadoEvol2());
 				evolucionesHechas++;
 				numEvoluciones--;
@@ -189,47 +212,73 @@ public abstract class Pokemon extends Observable implements Cloneable
 		else if (numEvoluciones == 2) 
 		{
 			if (evolucionesHechas == 0) 
-			{			
-				//this.ataque += 5;
-				//this.defensa += 3;
+			{
 				changeState(new EstadoEvol1());
 				evolucionesHechas++;
 				numEvoluciones--;
-				vidaParaEvol = vidaParaEvol * 2/5;
+				vidaParaEvol = vidaParaEvol * 2/5; //Actualizamos la vida límite para la segunda evolución
 
 				System.out.println("EVOLUCIÓN 1");
 			}
 		}
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * El método changeState() nos permitirá cambiar el estado del pokémon a lo largo de la partida.
+	 
+	 * Esta función tiene su complejidad, puesto que antes de pasar a Euforia, tendremos que conocer 
+	 * la información real del pokémon. Téngase en cuenta que el pokémon pueder estar en Evol0, Evol1 
+	 * o en Evol2. En cualquiera de los tres casos, el incremento que deberá realizar la Euforia será
+	 * diferente.
+	 
+	 
+	 * Por ello, se comprueba si el estado al que cambiamos es Euforia (pEstado=Euforia). En este caso,
+	 * neceitamos obtener información de ambos estados. Es decir, en VISTA tendremos que mostrar la euforia,
+	 * pero esta euforia será en relación al estado que le precede. 
+	 * Para lograr este efecto, se avisa a la Vista antes de cambiar el estado, para no perder el estado
+	 * predecesor y poder indicarle a la interfaz gráfica la euforia correcta, que será:
+	 * 
+	 * pEstado.getAtaque(obtAtaqueReal())
+	 * 
+	 * Recordemos que pEstado es euforia y obtAtaqueReal() el valor sobre el que se debe aplicar la euforia.
+	 
+	 
+	 * Por otra parte, si el estado actual es Euforia (estado=Euforia), cambiamos al nuevo estado, establecemos
+	 * un nuevo número de defensas necesarias para entrar en euforia y notifyObservers cont tipo update 4.
+	 
+	 
+	 * Y en el último caso, en el que el estado Euforia no está implicado, cambiamos al estado nuevo, y notifyObservers
+	 * con tipo update 2.
+	 
+	 
+	 * Los tipos de update se tratan en el método update() de la clase JPokemon.java
+	 */
+	
 	public void changeState(EstadoPokemon pEstado) 
 	{
 		if (pEstado.getClass().getSimpleName().equals("EstadoEuforia"))
 		{
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, pEstado.getAtaque(obtAtaqueReal()), pEstado.getDefensa(obtDefensaReal()), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+			notifyObservers(new Object[] {nombre, vida, pEstado.getAtaque(obtAtaqueReal()), pEstado.getDefensa(obtDefensaReal()), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia)});
 			estado = pEstado;
 		}
-		else
+		else if (estado.getClass().getSimpleName().equals("EstadoEuforia"))
 		{
 			estado = pEstado;
 			Random aleatorio = new Random();
 			ataquesParaEuforia = aleatorio.nextInt(3,8);
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia)});
 		}
-		/*
-		if (pEstado.getClass().getSimpleName().equals("EstadoNormal"))
-		{
-			ataque=estado.getAtaque(ataque);
-			defensa=estado.getDefensa(defensa);
-			Random aleatorio = new Random();
-			ataquesParaEuforia = aleatorio.nextInt(3,8);
+		else {
+			estado = pEstado;
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia)});
+		
 		}
-		*/
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////
 	
 	public EstadoPokemon getEstado() 
 	{
@@ -237,7 +286,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	}
 
 	public int getRestanteParaEuforia() {
-		return (ataquesParaEuforia-ataquesRecibidos);
+		return ataquesParaEuforia;
 	}
 	
 	public boolean getEuforiaActiva()

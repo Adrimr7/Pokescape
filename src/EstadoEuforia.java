@@ -1,4 +1,3 @@
-
 public class EstadoEuforia implements EstadoPokemon {
 		
 	public EstadoEuforia()
@@ -15,3 +14,10 @@ public class EstadoEuforia implements EstadoPokemon {
 	}
 
 }
+
+/*EstadoEuforia del patrón STATE "EstadoPokemon"
+
+ * Es la euforia del pokémon, se aplica un +5 al ataque original
+ * y un +3 a la defensa original
+
+ */

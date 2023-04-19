@@ -1,4 +1,3 @@
-
 public class EstadoEvol1 implements EstadoPokemon {
 		
 	public EstadoEvol1()
@@ -15,3 +14,11 @@ public class EstadoEvol1 implements EstadoPokemon {
 	}
 
 }
+
+/*EstadoEvol1 del patrón STATE "EstadoPokemon"
+
+ * Es la primera evolución del pokémon, en caso de existir,
+ * se aplica un +5 al ataque original y un +3 a la defensa
+ * original
+
+ */
