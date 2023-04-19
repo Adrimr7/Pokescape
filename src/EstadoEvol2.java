@@ -1,16 +1,17 @@
 
 public class EstadoEvol2 implements EstadoPokemon {
 		
-	public EstadoEvol2() {
+	public EstadoEvol2()
+	{
 		
 	}
 	
 	public int getAtaque(int pAtaque) {
-		return (pAtaque+2);
+		return (pAtaque+7);
 	}
 	
 	public int getDefensa(int pDefensa) {
-		return (pDefensa+2);
+		return (pDefensa+5);
 	}
 
 }

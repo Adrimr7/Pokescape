@@ -1,7 +1,8 @@
 
 public class EstadoEuforia implements EstadoPokemon {
 		
-	public EstadoEuforia() {
+	public EstadoEuforia()
+	{
 		
 	}
 	

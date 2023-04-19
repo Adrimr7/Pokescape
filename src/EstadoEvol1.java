@@ -1,8 +1,9 @@
 
 public class EstadoEvol1 implements EstadoPokemon {
 		
-	public EstadoEvol1() {
-		
+	public EstadoEvol1()
+	{
+
 	}
 	
 	public int getAtaque(int pAtaque) {

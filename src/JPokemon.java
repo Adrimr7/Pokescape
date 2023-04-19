@@ -297,7 +297,7 @@ public class JPokemon extends JPanel implements Observer
 		else if (tipoUpdate==3) 
 		{
 			//actualizarVida(vida);
-			euforia(ataque, defensa, ataquesParaEuf);
+			euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);
 		}
 		else if (tipoUpdate==4) 
 		{
@@ -330,14 +330,17 @@ public class JPokemon extends JPanel implements Observer
 		spritePokemon.setIcon(imageIcon);
 	}
 	
-	public void euforia(int pAtaque, int pDefensa, int pAtaquesPAraEuforia) {
+	public void euforia(int pAtaque, int pDefensa, int pEvolucionesHechas, int pAtaquesParaEuforia) {
 		
 		//numAta.setText(Integer.toString(pAtaque));
 		//numDef.setText(Integer.toString(pDefensa));
-		euforia=true;	
-		
-		numAta.setText(pAtaque-100 + "+" + 100);
-		numDef.setText(pDefensa-100 + "+" + 100);
+		euforia=true;
+		int ata = 100;
+		int def = 100;
+		if (pEvolucionesHechas==1) {ata+=5;def+=3;}
+		else if (pEvolucionesHechas==2) {ata+=7;def+=5;}
+		numAta.setText(pAtaque-100 + "+" + ata);
+		numDef.setText(pDefensa-100 + "+" + def);
 		numEuf.setText("0");
 		barraAtaque.setValue((int) ((pAtaque)*5));
 		barraAtaque.setForeground(new Color(255, 85, 0));

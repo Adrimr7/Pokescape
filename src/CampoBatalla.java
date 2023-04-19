@@ -73,7 +73,7 @@ public class CampoBatalla
 		System.out.println("Iniciamos ataque"); 
 		
 		// Danamos al defensor con el ataque del atacante
-		boolean vivo = defensor.danar(atacante.getAtaque(), atacante.getClass().getSimpleName());
+		boolean vivo = defensor.danar(atacante.obtAtaqueReal(), atacante.getClass().getSimpleName());
 		
 		if (!vivo)
 		{
@@ -81,15 +81,19 @@ public class CampoBatalla
 			ListaCombatientes.getMilistaCombatientes().debilitar(defensor.getIdPokemon(), defensor.getIdCombatiente());
 		}
 		
-		if (atacante.getEstado().getClass().getSimpleName().equals("EstadoEuforia")) {
-			atacante.changeState(new EstadoNormal());
+		if (atacante.getEstado().getClass().getSimpleName().equals("EstadoEuforia"))
+		{
+			EstadoPokemon estadoSiguiente = new EstadoEvol0();
+			if (atacante.getEvolucionesHechas()==1){estadoSiguiente= new EstadoEvol1();}
+			else if(atacante.getEvolucionesHechas()==2){estadoSiguiente= new EstadoEvol2();}
+			atacante.changeState(estadoSiguiente);
 		}
 		
 		finTurno();
 		// avisar del fin del ataque
 		ListaCombatientes.getMilistaCombatientes().avisaFinAtaque(idTurnoActual);
 	}
-	
+
 	public void setTurno(int idTurno) { idTurnoActual = idTurno; }
 	
 }

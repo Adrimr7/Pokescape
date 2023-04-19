@@ -39,7 +39,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		
 		ataquesParaEuforia = aleatorio.nextInt(3,8);
 		ataquesRecibidos = 0;
-		estado = new EstadoNormal();
+		estado = new EstadoEvol0();
 		
 	}
 	
@@ -66,17 +66,23 @@ public abstract class Pokemon extends Observable implements Cloneable
 			return this.getClass().getSimpleName();
 		}
 	}
-	
+	public int obtAtaqueReal()
+	{
+		return this.getEstado().getAtaque(ataque);
+	}
+	public int obtDefensaReal()
+	{
+		return this.getEstado().getDefensa(defensa);
+	}
 	public boolean danar(int pAtaque, String pTipo)
 	{
 		int dano;
-		
 		if (esDebil(pTipo))
 		{
 			pAtaque = pAtaque * 2;
 		}
-		dano = (pAtaque - defensa);
-		
+		dano = (pAtaque - obtDefensaReal());
+
 		if (dano >= 0) 
 		{
 			vida = vida - dano;
@@ -91,30 +97,25 @@ public abstract class Pokemon extends Observable implements Cloneable
 				{
 					evolucionar();
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
-					
+					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 				}
-			
 				ataquesRecibidos++;
-			
 				if (ataquesRecibidos >= ataquesParaEuforia) 
 				{
 					ataquesRecibidos = 0;
-				
 					Random aleatorio = new Random();
 					ataquesParaEuforia = aleatorio.nextInt(3,8);
-				
 					this.changeState(new EstadoEuforia());
-					ataque = estado.getAtaque(ataque);
-					defensa = estado.getDefensa(defensa);
+					//ataque = estado.getAtaque(ataque);
+					//defensa = estado.getDefensa(obtDefensaReal(defensa));
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 					
 				}
 			}
 			boolean vivo = estaVivo();
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 1, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 1, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
 			return vivo;
 		}
 		else 
@@ -152,7 +153,10 @@ public abstract class Pokemon extends Observable implements Cloneable
 	public void setIdCombatiente(int pId){ idCombatiente = pId; }
 	
 	public void setIdPokemon(int pId){ idPokemon = pId;	}
-	
+	public int getEvolucionesHechas()
+	{
+		return this.evolucionesHechas;
+	}
 	private void evolucionar() 
 	{
 		if (numEvoluciones == 0) {}
@@ -161,9 +165,9 @@ public abstract class Pokemon extends Observable implements Cloneable
 		{
 			if (evolucionesHechas == 0) 
 			{				
-				this.ataque += 5;
-				this.defensa += 3;
-				
+				//this.ataque += 5;
+				//this.defensa += 3;
+				changeState(new EstadoEvol1());
 				evolucionesHechas++;
 				numEvoluciones--;
 				vidaParaEvol = vidaParaEvol * 2/5;
@@ -172,9 +176,9 @@ public abstract class Pokemon extends Observable implements Cloneable
 			}
 			else if (evolucionesHechas == 1) 
 			{				
-				this.ataque+=2;
-				this.defensa+=2;
-				
+				//this.ataque+=2;
+				//this.defensa+=2;
+				changeState(new EstadoEvol2());
 				evolucionesHechas++;
 				numEvoluciones--;
 				vidaParaEvol = 0;
@@ -186,9 +190,9 @@ public abstract class Pokemon extends Observable implements Cloneable
 		{
 			if (evolucionesHechas == 0) 
 			{			
-				this.ataque += 5;
-				this.defensa += 3;
-				
+				//this.ataque += 5;
+				//this.defensa += 3;
+				changeState(new EstadoEvol1());
 				evolucionesHechas++;
 				numEvoluciones--;
 				vidaParaEvol = vidaParaEvol * 2/5;
@@ -200,22 +204,31 @@ public abstract class Pokemon extends Observable implements Cloneable
 	
 	public void changeState(EstadoPokemon pEstado) 
 	{
-		estado = pEstado;
-		
-		if (pEstado.getClass().getSimpleName().equals("EstadoNormal") && estado.getClass().getSimpleName().equals("EstadoEuforia")) {
-			
+		if (pEstado.getClass().getSimpleName().equals("EstadoEuforia"))
+		{
+			setChanged();
+			notifyObservers(new Object[] {nombre, vida, pEstado.getAtaque(obtAtaqueReal()), pEstado.getDefensa(obtDefensaReal()), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+			estado = pEstado;
+		}
+		else
+		{
+			estado = pEstado;
+			Random aleatorio = new Random();
+			ataquesParaEuforia = aleatorio.nextInt(3,8);
+			setChanged();
+			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
+		}
+		/*
+		if (pEstado.getClass().getSimpleName().equals("EstadoNormal"))
+		{
 			ataque=estado.getAtaque(ataque);
 			defensa=estado.getDefensa(defensa);
 			Random aleatorio = new Random();
 			ataquesParaEuforia = aleatorio.nextInt(3,8);
 			setChanged();
 			notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia-ataquesRecibidos)});
-		
 		}
-		
-		
-		
-		
+		*/
 	}
 	
 	public EstadoPokemon getEstado() 
