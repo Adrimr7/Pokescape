@@ -255,7 +255,7 @@ public class JPokemon extends JPanel implements Observer
 	{
 		Object[] lista = (Object[]) arg;
 		//nombre, vida, ataque, defensa
-		String nombre = (String) lista[0];
+		/*String nombre = (String) lista[0];
 		int vida = (int) lista[1];
 		int ataque = (int) lista[2];
 		int defensa = (int) lista[3];
@@ -263,11 +263,26 @@ public class JPokemon extends JPanel implements Observer
 		String pTipo = (String) lista[5];
 		int tipoUpdate = (int) lista[6];
 		int evolucionesHechas = (int) lista[7];
-		int ataquesParaEuf = (int) lista[8];
+		int ataquesParaEuf = (int) lista[8];*/
 		
-		if(tipoUpdate == 0) {actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida, ataquesParaEuf);}
+		int tipoUpdate = (int) lista[0];
+		
+		if(tipoUpdate == 0) 
+		{
+			String nombre = (String) lista[1];
+			int vida = (int) lista[2];
+			int ataque = (int) lista[3];
+			int defensa = (int) lista[4];
+			int numPoke = (int) lista[5];
+			String pTipo = (String) lista[6];
+			int ataquesParaEuf = (int) lista[7];
+			
+			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida, ataquesParaEuf);}
 		else if (tipoUpdate==1)
 		{
+			int vida = (int) lista[1];
+			int ataquesParaEuf = (int) lista[2];
+			
 			if(vida <= 0)
 			{
 				URL url;
@@ -283,11 +298,31 @@ public class JPokemon extends JPanel implements Observer
 			else{actualizarVida(vida, ataquesParaEuf);}
 		}
 		else if (tipoUpdate==2) {
-			String evolName= (String) lista[9];
+			
+			int ataque = (int) lista[1];
+			int defensa = (int) lista[2];
+			int numPoke = (int) lista[3];
+			int ataquesParaEuf = (int) lista[4];
+			int evolucionesHechas = (int) lista[5];
+			String evolName= (String) lista[6];
 			evolucionar(ataque, defensa, numPoke, evolucionesHechas, evolName, ataquesParaEuf);
 		}
-		else if (tipoUpdate==3) {euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
-		else if (tipoUpdate==4) {quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
+		else if (tipoUpdate==3) {
+			
+			int ataque = (int) lista[1];
+			int defensa = (int) lista[2];
+			int evolucionesHechas = (int) lista[3];
+			int ataquesParaEuf = (int) lista[4];
+			
+			euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
+		else if (tipoUpdate==4) {
+			
+			int ataque = (int) lista[1];
+			int defensa = (int) lista[2];
+			int evolucionesHechas = (int) lista[3];
+			int ataquesParaEuf = (int) lista[4];
+			
+			quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
 	}
 	
 	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, String pEvolName, int pAtaquesParaEuforia) {
