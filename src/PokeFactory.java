@@ -323,6 +323,16 @@ public class PokeFactory
 			
 		}
 		
+		if (evoPoke!=0) {
+			int cont=0;
+			while (evoPoke!=0) {
+				poke.setEvolNames(cont,nomPokemon.get(numPoke+cont));
+				cont++;
+				evoPoke--;
+			}
+		}
+		
+		
 		return poke;
 				
 	}

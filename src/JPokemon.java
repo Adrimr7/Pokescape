@@ -282,15 +282,20 @@ public class JPokemon extends JPanel implements Observer
 			}
 			else{actualizarVida(vida, ataquesParaEuf);}
 		}
-		else if (tipoUpdate==2) {evolucionar(ataque, defensa, numPoke, evolucionesHechas, ataquesParaEuf);}
+		else if (tipoUpdate==2) {
+			String evolName= (String) lista[9];
+			evolucionar(ataque, defensa, numPoke, evolucionesHechas, evolName, ataquesParaEuf);
+		}
 		else if (tipoUpdate==3) {euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
 		else if (tipoUpdate==4) {quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
 	}
 	
-	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, int pAtaquesParaEuforia) {
+	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, String pEvolName, int pAtaquesParaEuforia) {
 		
 		//Obtener el nombre de la evolución, DEPENDENCIA CON POKEFACTORY!!!!!
-		nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
+		//nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
+		
+		nombrePokemon.setText(pEvolName);
 		
 		int ata=0;
 		int def=0;

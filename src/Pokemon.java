@@ -31,6 +31,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	protected int numEvoluciones;		// Cuantas veces mas puede evolucionar
 	protected int evolucionesHechas;	// Cuantas evoluciones lleva
 	protected int vidaParaEvol;			// Cuando evolucionara
+	protected String[] nombresEvoluciones;
 	
 	protected int ataquesParaEuforia;	// Ataque a recibir para cambiar al estado Euforia
 
@@ -47,8 +48,8 @@ public abstract class Pokemon extends Observable implements Cloneable
 		
 		numEvoluciones = pNumEvoluciones;
 		evolucionesHechas = 0;
-		
 		vidaParaEvol = vida/2;          // La primera evolución se realiza cuando la vida es inferior a la vida original
+		nombresEvoluciones = new String[pNumEvoluciones];
 		
 		ataquesParaEuforia = aleatorio.nextInt(3,8);
 		//ataquesRecibidos = 0;
@@ -66,6 +67,10 @@ public abstract class Pokemon extends Observable implements Cloneable
 	public void setNumPokemon(int pNumPoke)
 	{
 		numPokemon = pNumPoke;
+	}
+	
+	public void setEvolNames(int pInt, String pName) {
+		nombresEvoluciones[pInt]=pName;
 	}
 	
 	private String obtenerClase()
@@ -126,7 +131,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 				{
 					evolucionar();
 					setChanged();
-					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, ataquesParaEuforia});
+					notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, ataquesParaEuforia, nombresEvoluciones[evolucionesHechas-1]});
 				}
 				ataquesParaEuforia--;
 				if (ataquesParaEuforia==0) 
@@ -274,7 +279,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		else {
 			estado = pEstado;
 			setChanged();
-			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia)});
+			notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia), nombresEvoluciones[evolucionesHechas]});
 		
 		}
 	}
