@@ -1,8 +1,6 @@
 import java.awt.EventQueue;
-import java.util.ArrayList;
 import java.util.Observable;
 
-import javax.swing.JFrame;
 public class Pokescape extends Observable
 {
 	private static VentanaInicio frameInicio;

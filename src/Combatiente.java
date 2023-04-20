@@ -50,13 +50,8 @@ public abstract class Combatiente extends Observable
 			arrayPokemon[i].daAviso();
 		}
 	}
-	
-	
-
 
 	public Pokemon getPokemon(int i) { return arrayPokemon[i]; }
-	
-	public boolean estaVivo() { return enPie; }
 	
 	public int getId() { return id; }
 	

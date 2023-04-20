@@ -1,33 +1,18 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-//import VentanaInicio.ControladorInicio;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
-
 import javax.swing.JLabel;
-import javax.swing.JProgressBar;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -307,33 +292,16 @@ public class VentanaJugador extends JFrame implements Observer
 			
 			
 		}
-
+		@Override
+		public void mousePressed(MouseEvent e) {}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-	
-		}
-
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseExited(MouseEvent e) {}
 	}
 }

@@ -288,7 +288,6 @@ public class PokeFactory
 		 
 		 */
 		
-		
 		int vida = 200;
 		int ataque = 11;
 		int defensa = 3;
@@ -300,8 +299,7 @@ public class PokeFactory
 		String nombrePoke = nomPokemon.get(numPoke);
 		String tipoPoke = tipoPokemon.get(numPoke);
 		int	evoPoke = evoPokemon.get(numPoke);
-		
-		
+
 		if(tipoPoke.equals("Planta"))
 		{
 			poke = new Planta(nombrePoke, vida, ataque, defensa, evoPoke, numPoke);
@@ -322,7 +320,6 @@ public class PokeFactory
 			poke = new Electrico(nombrePoke, vida, ataque, defensa, evoPoke, numPoke);
 			
 		}
-		
 		if (evoPoke!=0) {
 			int cont=0;
 			while (evoPoke!=0) {
@@ -331,12 +328,6 @@ public class PokeFactory
 				evoPoke--;
 			}
 		}
-		
-		
 		return poke;
-				
 	}
-	
-	//Método para obtener desde JPokemon el nombre de la evolución
-	public String getEvolName(int pIdPoke) {return nomPokemon.get(pIdPoke);}
 }

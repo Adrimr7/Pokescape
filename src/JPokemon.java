@@ -1,25 +1,18 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-//import java.awt.GridBagConstraints;
-//import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-//import java.awt.Insets;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-//import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-//import javax.swing.JRadioButton;
-//import javax.swing.SwingConstants;
 
 public class JPokemon extends JPanel implements Observer
 {
@@ -63,10 +56,8 @@ public class JPokemon extends JPanel implements Observer
 				this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				
 				this.setBackground(new Color(201, 238, 250));
-				
-				
-				
-					// Panel cabezebra : Nombre / Tipo ////////////////////////////////////////////
+
+					// Panel cabecera : Nombre / Tipo //
 					zonaNombrePokemon = new JPanel();
 					zonaNombrePokemon.setOpaque(false);
 					zonaNombrePokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -87,7 +78,7 @@ public class JPokemon extends JPanel implements Observer
 			   this.add(zonaNombrePokemon);
 				
 				
-					// Imagen pokemon //////////////////////////////////////////////////////////////////////////		
+					// Imagen pokemon //
 					spritePokemon = new JLabel();
 					url = this.getClass().getResource(134 + ".png");
 					imageIcon = new ImageIcon(url);
@@ -123,7 +114,7 @@ public class JPokemon extends JPanel implements Observer
 					panelNombresEstats_3.add(vidaRest);
 						
 					
-					// Zona Estadisticas //////////////////////////////////////////////////////////////////////////
+					// Zona Estadisticas //
 
 					estadisticas = new JPanel();
 					estadisticas.setOpaque(false);
@@ -186,7 +177,6 @@ public class JPokemon extends JPanel implements Observer
 		tipo.setIcon(imageIcon);
 			
 		nombreTipo = pTipo;
-		// llamamos a actualiza color 
 		actualizarColor();	
 				
 		url = this.getClass().getResource(pNumPokemon + ".png");
@@ -228,11 +218,6 @@ public class JPokemon extends JPanel implements Observer
 		}
 	}
 	
-	public void apagar()
-	{
-		this.setBackground(new Color(225, 205, 249));
-	}
-	
 	public void actualizarVida(int pVida, int pFaltaParaEuforia)
 	{
 		barraHp.setForeground((Color.red));
@@ -254,19 +239,7 @@ public class JPokemon extends JPanel implements Observer
 	public void update(Observable o, Object arg) 
 	{
 		Object[] lista = (Object[]) arg;
-		//nombre, vida, ataque, defensa
-		/*String nombre = (String) lista[0];
-		int vida = (int) lista[1];
-		int ataque = (int) lista[2];
-		int defensa = (int) lista[3];
-		int numPoke = (int) lista[4];
-		String pTipo = (String) lista[5];
-		int tipoUpdate = (int) lista[6];
-		int evolucionesHechas = (int) lista[7];
-		int ataquesParaEuf = (int) lista[8];*/
-		
 		int tipoUpdate = (int) lista[0];
-		
 		if(tipoUpdate == 0) 
 		{
 			String nombre = (String) lista[1];
@@ -287,18 +260,19 @@ public class JPokemon extends JPanel implements Observer
 			{
 				URL url;
 				Icon imageIcon;
-
 				url = this.getClass().getResource(92 + ".png");
 				imageIcon = new ImageIcon(url);
-				this.apagar();
+				this.setBackground(new Color(225, 205, 249));
 				spritePokemon.setIcon(imageIcon);
-				
 				actualizarVida(0, ataquesParaEuf);
 			}
-			else{actualizarVida(vida, ataquesParaEuf);}
+			else
+			{
+				actualizarVida(vida, ataquesParaEuf);
+			}
 		}
-		else if (tipoUpdate==2) {
-			
+		else if (tipoUpdate==2)
+		{
 			int ataque = (int) lista[1];
 			int defensa = (int) lista[2];
 			int numPoke = (int) lista[3];
@@ -307,28 +281,26 @@ public class JPokemon extends JPanel implements Observer
 			String evolName= (String) lista[6];
 			evolucionar(ataque, defensa, numPoke, evolucionesHechas, evolName, ataquesParaEuf);
 		}
-		else if (tipoUpdate==3) {
-			
+		else if (tipoUpdate==3)
+		{
 			int ataque = (int) lista[1];
 			int defensa = (int) lista[2];
 			int evolucionesHechas = (int) lista[3];
 			int ataquesParaEuf = (int) lista[4];
-			
-			euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
-		else if (tipoUpdate==4) {
-			
+			euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);
+		}
+		else if (tipoUpdate==4)
+		{
 			int ataque = (int) lista[1];
 			int defensa = (int) lista[2];
 			int evolucionesHechas = (int) lista[3];
 			int ataquesParaEuf = (int) lista[4];
-			
-			quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
+			quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);
+		}
 	}
 	
-	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, String pEvolName, int pAtaquesParaEuforia) {
-		
-		//Obtener el nombre de la evolución, DEPENDENCIA CON POKEFACTORY!!!!!
-		//nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
+	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, String pEvolName, int pAtaquesParaEuforia)
+	{
 		
 		nombrePokemon.setText(pEvolName);
 		
@@ -336,8 +308,7 @@ public class JPokemon extends JPanel implements Observer
 		int def=0;
 		if (evolucionesHechas==1) {ata=5;def=3;}
 		else if (evolucionesHechas==2) {ata=7;def=5;}
-		
-		
+
 		numAta.setText(pAtaque-ata + "+" + ata);
 		numDef.setText(pDefensa-def + "+" + def);
 		numEuf.setText(String.valueOf(pAtaquesParaEuforia));
@@ -387,13 +358,11 @@ public class JPokemon extends JPanel implements Observer
 			numDef.setText(pDefensa-def + "+" + def);
 		}
 		
-		
 		barraAtaque.setValue((int) ((pAtaque)*5));
 		barraAtaque.setForeground(new Color(255, 255, 0));
 		barraDefensa.setValue((int) ((pDefensa)*5));
 		barraDefensa.setForeground(new Color(255, 255, 0));
 		barraEuforia.setValue((int) ((pFaltaParaEuf)*15));
-		
 		
 	}
 
@@ -406,7 +375,4 @@ public class JPokemon extends JPanel implements Observer
 		barra.setMaximumSize(new Dimension(75, 14));
 		return barra;
 	}
-	
-	
-	
 }

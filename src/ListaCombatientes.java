@@ -1,6 +1,4 @@
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ListaCombatientes 
 {
@@ -64,27 +62,7 @@ public class ListaCombatientes
 			arrayCombatientes[i].daAviso();
 		}
 	}
-	/*
-	public boolean estanVivos() 
-	{
-		int j = 0;
-		boolean ret = false;
-		for(int i = 0; i < arrayCombatientes.length; i++) 
-		{
-			if(arrayCombatientes[i].estaVivo())
-			{
-				j++;
-			}
-		}
-		
-		if(j > 1)
-		{
-			ret = true;
-		}
-		
-		return ret;
-	}
-	*/
+
 	public void escogeCombatiente()
 	{
 		if(numCombatientes <= 1) {}
@@ -95,23 +73,11 @@ public class ListaCombatientes
 			
 			if(arrayCombatientes.length == 1)
 			{
-				// En medio segundo se le dara el turno al combatiente seleccionado
-				/*
-				Timer t = new Timer();
-				TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[0].tuTurno();}};
-				t.schedule(tt, 500);
-				 */
 				arrayCombatientes[0].tuTurno();
 			
 			}
 			else
 			{
-				// En medio segundo se le dara el turno al combatiente seleccionado
-				/*
-				Timer t = new Timer();
-				TimerTask tt = new TimerTask() {@Override public void run() {arrayCombatientes[rn.nextInt(0,arrayCombatientes.length)].tuTurno();}};
-				t.schedule(tt, 500);
-				 */
 				Combatiente combee = null;
 				while(combee == null)
 				{

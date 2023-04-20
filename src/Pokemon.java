@@ -52,38 +52,26 @@ public abstract class Pokemon extends Observable implements Cloneable
 		nombresEvoluciones = new String[pNumEvoluciones];
 		
 		ataquesParaEuforia = aleatorio.nextInt(3,8);
-		//ataquesRecibidos = 0;
 		estado = new EstadoEvol0();     // El pokémon comienza en el estado inicial, representado por EstadoEvol0
 		
 	}
 	
 	public void daAviso() 
 	{
-		setChanged();
-		//notifyObservers(new Object[] {nombre, vida, ataque, defensa, numPokemon, obtenerClase(), 0, evolucionesHechas, ataquesParaEuforia});
-		notifyObservers(new Object[] {0, nombre, vida, ataque, defensa, numPokemon, obtenerClase(), ataquesParaEuforia});
-		
-	}
-	
-	public void setNumPokemon(int pNumPoke)
-	{
-		numPokemon = pNumPoke;
-	}
-	
-	public void setEvolNames(int pInt, String pName) {
-		nombresEvoluciones[pInt]=pName;
-	}
-	
-	private String obtenerClase()
-	{
+		String str = getClass().getSimpleName();
 		if((String) this.getClass().getSimpleName() == "Electrico")
 		{
-			return "Eléctrico";
+			str = "Eléctrico";
 		}
-		else
-		{
-			return this.getClass().getSimpleName();
-		}
+		setChanged();
+		notifyObservers(new Object[] {0, nombre, vida, ataque, defensa, numPokemon, str, ataquesParaEuforia});
+		
+	}
+
+	
+	public void setEvolNames(int pInt, String pName)
+	{
+		nombresEvoluciones[pInt]=pName;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +95,6 @@ public abstract class Pokemon extends Observable implements Cloneable
 	{
 		return this.getEstado().getDefensa(defensa);
 	}
-	///////////////////////////////////////////////////////////////////////////////////////////
 	
 	public boolean danar(int pAtaque, String pTipo)
 	{
@@ -132,7 +119,6 @@ public abstract class Pokemon extends Observable implements Cloneable
 				{
 					evolucionar();
 					setChanged();
-					//notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, ataquesParaEuforia, nombresEvoluciones[evolucionesHechas-1]});
 					notifyObservers(new Object[] {2, obtAtaqueReal(), obtDefensaReal(), numPokemon, ataquesParaEuforia, evolucionesHechas, nombresEvoluciones[evolucionesHechas-1]});
 				
 				}
@@ -143,14 +129,12 @@ public abstract class Pokemon extends Observable implements Cloneable
 					ataquesParaEuforia = aleatorio.nextInt(3,8);
 					this.changeState(new EstadoEuforia());
 					setChanged();
-					//notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia)});
 					notifyObservers(new Object[] {3, obtAtaqueReal(), obtDefensaReal(), evolucionesHechas, (ataquesParaEuforia)});
 					
 				}
 			}
 			boolean vivo = estaVivo();
 			setChanged();
-			//notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 1, evolucionesHechas, (ataquesParaEuforia)});
 			notifyObservers(new Object[] {1, vida, (ataquesParaEuforia)});
 			
 			return vivo;
@@ -176,10 +160,6 @@ public abstract class Pokemon extends Observable implements Cloneable
 	public int getIdCombatiente(){ return idCombatiente; }
 	
 	public int getIdPokemon(){ return idPokemon; }
-	
-	public String getNombre() { return nombre;}
-	
-	public int getNumEvoluciones() { return numEvoluciones;}
 	
 	public int getDefensa() { return defensa;}
 	
@@ -234,7 +214,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		}
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////
+
 	/*
 	 * El método changeState() nos permitirá cambiar el estado del pokémon a lo largo de la partida.
 	 
@@ -271,9 +251,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 		if (pEstado.getClass().getSimpleName().equals("EstadoEuforia"))
 		{
 			setChanged();
-			//notifyObservers(new Object[] {nombre, vida, pEstado.getAtaque(obtAtaqueReal()), pEstado.getDefensa(obtDefensaReal()), numPokemon, obtenerClase(), 3, evolucionesHechas, (ataquesParaEuforia)});
 			notifyObservers(new Object[] {3, obtAtaqueReal(), obtDefensaReal(), evolucionesHechas, (ataquesParaEuforia)});
-			
 			estado = pEstado;
 		}
 		else if (estado.getClass().getSimpleName().equals("EstadoEuforia"))
@@ -282,19 +260,16 @@ public abstract class Pokemon extends Observable implements Cloneable
 			Random aleatorio = new Random();
 			ataquesParaEuforia = aleatorio.nextInt(3,8);
 			setChanged();
-			//notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 4, evolucionesHechas, (ataquesParaEuforia)});
 			notifyObservers(new Object[] {4, obtAtaqueReal(), obtDefensaReal(), evolucionesHechas, (ataquesParaEuforia)});
 			
 		}
 		else {
 			estado = pEstado;
 			setChanged();
-			//notifyObservers(new Object[] {nombre, vida, obtAtaqueReal(), obtDefensaReal(), numPokemon, obtenerClase(), 2, evolucionesHechas, (ataquesParaEuforia), nombresEvoluciones[evolucionesHechas]});
 			notifyObservers(new Object[] {2, obtAtaqueReal(), obtDefensaReal(), numPokemon, ataquesParaEuforia, evolucionesHechas, nombresEvoluciones[evolucionesHechas]});
 			
 		}
 	}
-	///////////////////////////////////////////////////////////////////////////////////////////
 	
 	public EstadoPokemon getEstado() 
 	{

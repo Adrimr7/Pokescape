@@ -1,6 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.TimerTask;
 import java.util.Timer;
 
@@ -11,7 +8,6 @@ public class NPC extends Combatiente {
 		super(pNombre, pId);
 		nivel=pNivel;
 	}
-
 	
 	public void tuTurno()
 	{
@@ -26,11 +22,9 @@ public class NPC extends Combatiente {
 		// Ponemos a false la lista de usados (aquellos pokemon que ya han atacado)
 		usados = new boolean[arrayPokemon.length];
 
-
 		System.out.println(" ");
 		System.out.println(" ");
 		System.out.println("Turno NPC : " + super.nombre);
-
 
 		int i = 0;
 		while(i < super.arrayPokemon.length && !ListaCombatientes.getMilistaCombatientes().getFinPartida())
