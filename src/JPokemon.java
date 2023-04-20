@@ -1,10 +1,10 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+//import java.awt.GridBagConstraints;
+//import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
+//import java.awt.Insets;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,12 +14,12 @@ import java.util.TimerTask;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
+//import javax.swing.JRadioButton;
+//import javax.swing.SwingConstants;
 
 public class JPokemon extends JPanel implements Observer
 {
@@ -48,7 +48,6 @@ public class JPokemon extends JPanel implements Observer
 	private JLabel lblEuf;
 	private JLabel numEuf;
 	
-	private boolean euforia;
 	
 	public JPokemon ()
 	{
@@ -245,7 +244,7 @@ public class JPokemon extends JPanel implements Observer
 		barraHp.setValue((int) (double) (pVida*100/vidaMax));
 		vidaRest.setText(Integer.toString(pVida));
 		
-		if (!euforia) {
+		if (pFaltaParaEuforia!=0) {
 			barraEuforia.setValue((int) (pFaltaParaEuforia*15));
 			numEuf.setText(String.valueOf(pFaltaParaEuforia));
 		}
@@ -266,10 +265,7 @@ public class JPokemon extends JPanel implements Observer
 		int evolucionesHechas = (int) lista[7];
 		int ataquesParaEuf = (int) lista[8];
 		
-		if(tipoUpdate == 0) 
-		{
-			actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida, ataquesParaEuf);
-		}
+		if(tipoUpdate == 0) {actualizarDatos(numPoke, nombre, pTipo, ataque, defensa, vida, ataquesParaEuf);}
 		else if (tipoUpdate==1)
 		{
 			if(vida <= 0)
@@ -284,32 +280,18 @@ public class JPokemon extends JPanel implements Observer
 				
 				actualizarVida(0, ataquesParaEuf);
 			}
-			else
-			{
-				actualizarVida(vida, ataquesParaEuf);
-			}
+			else{actualizarVida(vida, ataquesParaEuf);}
 		}
-		else if (tipoUpdate==2) 
-		{
-			//actualizarVida(vida);
-			evolucionar(ataque, defensa, numPoke, evolucionesHechas, ataquesParaEuf);
-		}
-		else if (tipoUpdate==3) 
-		{
-			//actualizarVida(vida);
-			euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);
-		}
-		else if (tipoUpdate==4) 
-		{
-			quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);
-		}
+		else if (tipoUpdate==2) {evolucionar(ataque, defensa, numPoke, evolucionesHechas, ataquesParaEuf);}
+		else if (tipoUpdate==3) {euforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
+		else if (tipoUpdate==4) {quitarEuforia(ataque, defensa, evolucionesHechas, ataquesParaEuf);}
 	}
 	
 	public void evolucionar(int pAtaque, int pDefensa, int pNumPokemon, int evolucionesHechas, int pAtaquesParaEuforia) {
+		
+		//Obtener el nombre de la evolución, DEPENDENCIA CON POKEFACTORY!!!!!
 		nombrePokemon.setText(PokeFactory.getMiPokeFactory().getEvolName(pNumPokemon+evolucionesHechas));
 		
-		//numAta.setText(Integer.toString(pAtaque));
-		//numDef.setText(Integer.toString(pDefensa));
 		int ata=0;
 		int def=0;
 		if (evolucionesHechas==1) {ata=5;def=3;}
@@ -332,9 +314,6 @@ public class JPokemon extends JPanel implements Observer
 	
 	public void euforia(int pAtaque, int pDefensa, int pEvolucionesHechas, int pAtaquesParaEuforia) {
 		
-		//numAta.setText(Integer.toString(pAtaque));
-		//numDef.setText(Integer.toString(pDefensa));
-		euforia=true;
 		int ata = 100;
 		int def = 100;
 		if (pEvolucionesHechas==1) {ata+=5;def+=3;}
@@ -351,9 +330,7 @@ public class JPokemon extends JPanel implements Observer
 	}
 	
 	public void quitarEuforia(int pAtaque, int pDefensa, int evolucionesHechas, int pFaltaParaEuf) {
-		
-		euforia=false;
-		
+				
 		numEuf.setText(String.valueOf(pFaltaParaEuf));
 		if (evolucionesHechas==0) {
 			numAta.setText(Integer.toString(pAtaque));
