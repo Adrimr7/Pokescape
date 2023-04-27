@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -81,12 +82,14 @@ public class JPokemon extends JPanel implements Observer
 						
 						
 			   this.add(zonaNombrePokemon);
-			   
+			   /*
 			   		zonaSpritePokemon = new JPanel();
-			   		zonaSpritePokemon.setOpaque(false);
+			   		//zonaSpritePokemon.setOpaque(false);
 			   		zonaSpritePokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			   		//zonaSpritePokemon.setLayout(null);
+			   		
 					
-			   			/*
+			   			
 						separadorIzquierda = new JLabel("");
 					
 						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,20 +99,27 @@ public class JPokemon extends JPanel implements Observer
 					
 						int alto = 105;
 						//			^ : Para que haga de pilar y que podamos cambiar el tamaño del pokemon sin afectar a la altura general
-						int ancho = 22;
+						int ancho = 10;
 						
 
-						separadorIzquierda.setPreferredSize(new Dimension(ancho, alto));
+						//separadorIzquierda.setPreferredSize(new Dimension(ancho, alto));
+						//separadorIzquierda.setBounds(0, 50, 10, 105);
 						//separadorIzquierda.setMaximumSize(new Dimension(ancho, alto));
-			   			 */
+			   			 
 				
 						// Imagen pokemon //
 						spritePokemon = new JLabel();
 						url = this.getClass().getResource(134 + ".png");
 						imageIcon = new ImageIcon(url);
 						spritePokemon.setIcon(imageIcon);
-						spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
-						/*
+						//spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
+						Dimension size = spritePokemon.getPreferredSize();
+						spritePokemon.setBounds(20, 0, size.width, size.height);
+						//System.out.println(size.height);
+						
+						zonaSpritePokemon.setSize(new Dimension(size.width, 500));
+						
+						
 						separadorDerecha = new JLabel("D");
 					
 						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +129,7 @@ public class JPokemon extends JPanel implements Observer
 					
 						separadorDerecha.setPreferredSize(new Dimension(ancho, alto));
 						//separadorDerecha.setMaximumSize(new Dimension(ancho, alto));
-						*/
+					
 						
 						//zonaSpritePokemon.add(separadorIzquierda);
 						zonaSpritePokemon.add(spritePokemon);
@@ -127,7 +137,18 @@ public class JPokemon extends JPanel implements Observer
 				
 				//this.add(spritePokemon);
 				this.add(zonaSpritePokemon);
-					
+				*/
+			   
+			   			// Imagen pokemon //
+						spritePokemon = new JLabel();
+						url = this.getClass().getResource(134 + ".png");
+						imageIcon = new ImageIcon(url);
+						spritePokemon.setIcon(imageIcon);
+						spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
+				
+				this.add(spritePokemon);
+				
+				
 					estadisticas_1 = new JPanel();
 					estadisticas_1.setOpaque(false);
 					estadisticas_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -282,7 +303,7 @@ setMaximumSize(width, height);
 		{
 			tamIzq = 10;
 			tamDer = 34;
-			spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT - mov);
+			//spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT - mov);
 
 		}
 		else if(pCont < 3)
@@ -291,14 +312,14 @@ setMaximumSize(width, height);
 			{
 				tamIzq = 34;
 				tamDer = 10;
-				spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT + mov);
+				//spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT + mov);
 				//System.out.println("********************************" + "Entra" + "******************************************");
 			}
 			else
 			{
 				tamIzq = 10;
 				tamDer = 34;
-				spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT - mov);
+				//spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT - mov);
 			}
 		}
 		else //pCont == 3
@@ -306,11 +327,15 @@ setMaximumSize(width, height);
 			tamIzq = 22;
 			tamDer = 22;
 			sig = false;
-			spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
+			//spritePokemon.setAlignmentX(this.CENTER_ALIGNMENT);
 			//System.out.println("********************************" + "Entra" + "******************************************");
 		
 		}
 		/*
+		zonaSpritePokemon.remove(separadorIzquierda);
+		zonaSpritePokemon.remove(spritePokemon);
+		//zonaSpritePokemon.remove(separadorDerecha);
+		
 		System.out.println("******************************** IZQ : " + tamIzq + "******************************************");
 		//separadorIzquierda.setMinimumSize(new Dimension(tamIzq, 105));
 		separadorIzquierda.setSize(new Dimension(tamIzq, 105));
@@ -320,6 +345,12 @@ setMaximumSize(width, height);
 		//separadorDerecha.setMinimumSize(new Dimension(tamDer, 105));
 		separadorDerecha.setSize(new Dimension(tamDer, 105));
 		//separadorDerecha.setMaximumSize(new Dimension(tamDer, 105));
+		
+		zonaSpritePokemon.add(separadorIzquierda);
+		zonaSpritePokemon.add(spritePokemon);
+		//zonaSpritePokemon.add(separadorDerecha);
+		
+		
 		*/
 		if (sig)
 		{
@@ -398,9 +429,9 @@ setMaximumSize(width, height);
 			{
 				actualizarVida(vida, ataquesParaEuf);
 				
-				/*
+				
 				temblar(0, true); 
-				*/
+				
 			}
 		}
 		else if (tipoUpdate==2)
