@@ -83,10 +83,7 @@ public class CampoBatalla
 		
 		if (atacante.getEstado().getClass().getSimpleName().equals("EstadoEuforia"))
 		{
-			EstadoPokemon estadoSiguiente = new EstadoEvol0();
-			if (atacante.getEvolucionesHechas()==1){estadoSiguiente= new EstadoEvol1();}
-			else if(atacante.getEvolucionesHechas()==2){estadoSiguiente= new EstadoEvol2();}
-			atacante.changeState(estadoSiguiente);
+			atacante.quitarEuforia();
 		}
 		
 		finTurno();

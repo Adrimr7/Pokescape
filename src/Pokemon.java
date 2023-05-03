@@ -284,6 +284,13 @@ public abstract class Pokemon extends Observable implements Cloneable
 	{
 		return estado.getClass().getSimpleName().equals("EstadoEuforia");
 	}
+	
+	public void quitarEuforia() {
+		EstadoPokemon estadoSiguiente = new EstadoEvol0();
+		if (getEvolucionesHechas()==1){estadoSiguiente= new EstadoEvol1();}
+		else if(getEvolucionesHechas()==2){estadoSiguiente= new EstadoEvol2();}
+		changeState(estadoSiguiente);
+	}
 
 	
 }
