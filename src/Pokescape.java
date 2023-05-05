@@ -86,7 +86,7 @@ public class Pokescape extends Observable
 		// Esto lo recibirá VentanaInicio, y por tanto se podrá actualizar
     	
     }
-    
+
 
 
 }

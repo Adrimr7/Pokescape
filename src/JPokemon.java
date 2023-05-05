@@ -57,8 +57,8 @@ public class JPokemon extends JPanel implements Observer
 				
 				// Panel general pokemon
 				//pokemon = new JPanel();
-				this.setPreferredSize(new Dimension(155, 240));
-				this.setMaximumSize(new Dimension(155, 240));
+				this.setPreferredSize(new Dimension(165, 240));
+				this.setMaximumSize(new Dimension(165, 240));
 				this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				
 				this.setBackground(new Color(201, 238, 250));

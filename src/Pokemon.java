@@ -71,7 +71,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	
 	public void setEvolNames(int pInt, String pName)
 	{
-		nombresEvoluciones[pInt]=pName;
+		nombresEvoluciones[pInt] = pName;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////

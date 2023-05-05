@@ -320,12 +320,14 @@ public class PokeFactory
 			poke = new Electrico(nombrePoke, vida, ataque, defensa, evoPoke, numPoke);
 			
 		}
-		if (evoPoke!=0) {
-			int cont=0;
-			while (evoPoke!=0) {
-				poke.setEvolNames(cont,nomPokemon.get(numPoke+cont));
+		if (evoPoke != 0) 
+		{
+			int cont = 0;
+			while (cont < evoPoke) 
+			{
+				poke.setEvolNames(cont, nomPokemon.get(numPoke + cont + 1));
+				System.out.println(nomPokemon.get(numPoke+cont+1));
 				cont++;
-				evoPoke--;
 			}
 		}
 		return poke;

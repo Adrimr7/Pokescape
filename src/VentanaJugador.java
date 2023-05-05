@@ -200,7 +200,9 @@ public class VentanaJugador extends JFrame implements Observer
 					bre = listaImagenes.get(numeroFoto);
 					
 					String nomBre = nom + bre;
-					if (bre.length()>7) {setBounds(100, 100, 170*numPoke + 155 + (5*bre.length()-7*5), 257);}
+					//if (bre.length()>7) {
+						setBounds(100, 100, 172*numPoke + 130 + (5*bre.length()), 257);
+						//}
 					if (nombre.contains("Humano"))
 					{
 						lblNewLabel.setText(bre + " (Humano)");
