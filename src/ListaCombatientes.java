@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class ListaCombatientes 
@@ -40,6 +41,7 @@ public class ListaCombatientes
     	
     	}
     	
+    	
 		// GUIA (10)
 		// GUIA : Bien, quedando explicado como nacen los pokemon volveremos directamnte a iniciarCombate de Pokescape
 		// GUIA : Daremos por enseñado como se crean los NPC, por que son lo mismo que los humanos 
@@ -57,10 +59,21 @@ public class ListaCombatientes
 	
 	public void daAvisos() 
 	{
+
+		// ****************************************************************************************
+		// ************************************************************************************
+		// ********************************************************************************
+		Arrays.stream(arrayCombatientes).forEach((Combatiente c)-> c.daAviso());
+		/*
 		for(int i = 0; i < arrayCombatientes.length; i++) 
 		{
 			arrayCombatientes[i].daAviso();
 		}
+		
+		*/
+		// ********************************************************************************
+		// ************************************************************************************
+		// ****************************************************************************************
 	}
 
 	public void escogeCombatiente()

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Random;
 public abstract class Combatiente extends Observable 
@@ -26,6 +27,8 @@ public abstract class Combatiente extends Observable
 		// Crea la lista donde se guardaran los pokemon
 		arrayPokemon = new Pokemon[pNumPoke];
 		usados = new boolean[pNumPoke];
+		
+		
 		for (int i = 0; i < pNumPoke; i++)
 		{
 			// Le pide al Pokefactory que le los pokemon
@@ -44,11 +47,22 @@ public abstract class Combatiente extends Observable
 		setChanged();
 		notifyObservers(new Object[] {0, id, nombre, arrayPokemon.length, id});
 		
+		
+		// ****************************************************************************************
+		// ************************************************************************************
+		// ********************************************************************************
+		Arrays.stream(arrayPokemon).forEach((Pokemon p)-> p.daAviso());
+		/*
 		for(int i = 0; i < arrayPokemon.length; i++) 
 		{
 			// dar aviso a cada pokemon
 			arrayPokemon[i].daAviso();
 		}
+		*/
+		// ********************************************************************************
+		// ************************************************************************************
+		// ****************************************************************************************
+		
 	}
 
 	public Pokemon getPokemon(int i) { return arrayPokemon[i]; }
@@ -121,6 +135,13 @@ public abstract class Combatiente extends Observable
 	
 	public int numeroVivos()
 	{
+		
+		// ****************************************************************************************
+		// ************************************************************************************
+		// ********************************************************************************
+		int ret = (int) Arrays.stream(arrayPokemon).filter((Pokemon p)-> p != null).count();
+		
+		/*
 		int ret = 0;
 		
 		for(int i = 0; i < arrayPokemon.length; i++)
@@ -130,6 +151,10 @@ public abstract class Combatiente extends Observable
 				ret++;
 			}
 		}
+		*/
+		// ********************************************************************************
+		// ************************************************************************************
+		// ****************************************************************************************
 		
 		return ret;
 	}

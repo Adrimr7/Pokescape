@@ -170,6 +170,7 @@ public abstract class Pokemon extends Observable implements Cloneable
 	public void setIdCombatiente(int pId){ idCombatiente = pId; }
 	
 	public void setIdPokemon(int pId){ idPokemon = pId;	}
+	
 	public int getEvolucionesHechas()
 	{
 		return this.evolucionesHechas;

@@ -68,7 +68,6 @@ public class Pokescape extends Observable
 		// Una vez esten todas las ventanas de combatientes preparadas, es hora de llenarlas
 		ListaCombatientes.getMilistaCombatientes().daAvisos();
 		
-		
 		// Con este metodo le damos turno a un combatiente aleatorio
 		ListaCombatientes.getMilistaCombatientes().escogeCombatiente();
 		
