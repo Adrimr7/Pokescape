@@ -175,7 +175,17 @@ public class VentanaInicio extends JFrame implements Observer{
 				@Override
 				public void mouseClicked(MouseEvent e) 
 				{
-					JOptionPane.showMessageDialog(null, "Stunfisk ._.");
+					//JOptionPane.showMessageDialog(null, "Stunfisk <._.>");
+					JOptionPane.showMessageDialog(null, "Stunfisk <._.> \n \n"
+							+ "      ·  Escoge cuantos pokemon usaras, el numero de bots y jugadores, y un nivel adecuado para ti \n\n"
+							+ "      ·  Cuando el combate comience, espera tu turno y ataca con sabiduria. \n\n"
+							+ "      ·  Con solo tocar un pokemon, se prepara para atacar, y el siguiente sera su objetivo. \n\n"
+							+ "      ·  Pero ten cuidado con tus ataques, no vayas a despertar la furia de un contrincante. \n\n"
+							+ "      ·  Ten paciencia y aprende las debilidades de tu enemigo, por que como un dia un Stunkfisk de \n"
+							+ "         Galar dijo : \n\n"
+							+ "         'Conoce a tu oponente, conócete a ti mismo y no pondrás en peligro tu victoria'\n"
+							+ "                                                                                                             - Stunkfisk de Galar\n "
+							);
 				}
 			}
 										);
