@@ -9,9 +9,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -166,6 +170,15 @@ public class VentanaInicio extends JFrame implements Observer{
 			url = this.getClass().getResource("618.png");
 			imageIcon = new ImageIcon(url);
 			lblNewLabel.setIcon(imageIcon);
+			lblNewLabel.addMouseListener(new MouseAdapter() 
+			{
+				@Override
+				public void mouseClicked(MouseEvent e) 
+				{
+					JOptionPane.showMessageDialog(null, "Stunfisk ._.");
+				}
+			}
+										);
 		}
 		return lblNewLabel;
 	}
@@ -333,6 +346,7 @@ public class VentanaInicio extends JFrame implements Observer{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				
 				int nivel=1;
 				if (e.getSource().equals(btnNewButton))
 				{nivel=1;}
