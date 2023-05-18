@@ -61,7 +61,7 @@ public class VentanaInicio extends JFrame implements Observer{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// GUIA : Gracias a esta funcion podemos darle el tamaño adecuado
-		setBounds(100, 100, 650, 320);
+		setBounds(100, 100, 730, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -99,6 +99,8 @@ public class VentanaInicio extends JFrame implements Observer{
 			Botones.add(getBtnNewButton());
 			Botones.add(getBtnNewButton2());
 			Botones.add(getBtnNewButton3());
+			Botones.add(new JLabel("¿Necesitas ayuda?"));
+			Botones.add(new JLabel("Habla con stunkfisk"));
 			Botones.add(getLblNewLabel());
 		}
 		return Botones;
